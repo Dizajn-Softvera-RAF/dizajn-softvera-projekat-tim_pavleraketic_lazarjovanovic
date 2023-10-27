@@ -1,10 +1,13 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
+import lombok.Getter;
+import lombok.Setter;
 import raf.dsw.classycraft.app.controller.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;
-
+@Getter
+@Setter
 
 public class MainFrame extends JFrame {
     private static MainFrame instance;
@@ -59,7 +62,4 @@ public class MainFrame extends JFrame {
         return instance;
     }
 
-    public ActionManager getActionManager() {
-        return actionManager;
-    }
 }
