@@ -17,6 +17,12 @@ public class AboutUsView extends JFrame {
         setSize(screenWidth/2,screenHeight/2);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("About Us");
+        setTitle("AboutUs");
+
+
+
+
+
+
     }
 }
