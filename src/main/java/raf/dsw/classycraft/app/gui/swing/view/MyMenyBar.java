@@ -12,7 +12,7 @@ public class MyMenyBar extends JMenuBar {
         add(fileMenu);
 
         JMenu aboutUs = new JMenu("Edit");
-        aboutUs.add(MainFrame.getInstance().getActionManager().getAboutUsSection());
+        aboutUs.add(MainFrame.getInstance().getActionManager().getAboutUsAction());
         add(aboutUs);
 
     }

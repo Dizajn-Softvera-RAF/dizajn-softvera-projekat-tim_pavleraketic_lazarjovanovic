@@ -8,11 +8,11 @@ import lombok.Setter;
 public class ActionManager {
 
     private ExitAction exitAction;
-    private AboutUsSection aboutUsSection;
+    private AboutUsAction aboutUsAction;
 
     public ActionManager() {
         this.exitAction = new ExitAction();
-        this.aboutUsSection = new AboutUsSection();
+        this.aboutUsAction = new AboutUsAction();
     }
 
 }
