@@ -1,6 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
-import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
+import raf.dsw.classycraft.app.controller.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;

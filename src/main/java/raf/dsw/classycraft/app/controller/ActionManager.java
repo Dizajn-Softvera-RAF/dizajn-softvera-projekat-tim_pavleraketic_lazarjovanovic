@@ -1,6 +1,4 @@
-package raf.dsw.classycraft.app.gui.swing.controller;
-
-import raf.dsw.classycraft.app.gui.swing.view.AboutUsView;
+package raf.dsw.classycraft.app.controller;
 
 
 public class ActionManager {
@@ -10,6 +8,7 @@ public class ActionManager {
 
     public ActionManager() {
         this.exitAction = new ExitAction();
+        this.aboutUsSection = new AboutUsSection();
     }
 
 

@@ -1,4 +1,4 @@
-package raf.dsw.classycraft.app.gui.swing.controller;
+package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.gui.swing.view.AboutUsView;
 
