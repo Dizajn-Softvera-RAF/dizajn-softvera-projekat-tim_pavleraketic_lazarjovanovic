@@ -2,18 +2,29 @@ package raf.dsw.classycraft.app.gui.swing.view;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.classycraft.app.controller.ActionManager;
+import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
+import raf.dsw.classycraft.app.gui.swing.message.EventType;
+import raf.dsw.classycraft.app.gui.swing.message.Message;
+import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
+import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+
 @Getter
 @Setter
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Subscriber {
     private static MainFrame instance;
     private ActionManager actionManager;
+    private MessageGenerator msgGen;
 
 
+    public MainFrame(MessageGenerator msgGen) {
+        this.msgGen = msgGen;
+        msgGen.addSubscriber(this);
+    }
     private MainFrame(){
 
     }
@@ -50,6 +61,9 @@ public class MainFrame extends JFrame {
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
 
+
+
+
     }
 
     public static MainFrame getInstance()
@@ -60,6 +74,32 @@ public class MainFrame extends JFrame {
             instance.initialize();
         }
         return instance;
+    }
+
+    @Override
+    public void update(Object notification) {
+        Message msg = (Message) notification;
+
+        for (EventType eventType: EventType.values()){
+            if (eventType.equals(msg.getEventType())){
+                JOptionPane.showMessageDialog(instance, msg.getText(), msg.getEventType().toString(), JOptionPane.WARNING_MESSAGE);
+            }
+        }
+
+    }
+    @Override
+    public void addSubscriber(Subscriber subscriber) {
+
+    }
+
+    @Override
+    public void removeSubscriber(Subscriber subscriber) {
+
+    }
+
+    @Override
+    public void notifySubscribers(Object notification) throws IOException {
+
     }
 
 }
