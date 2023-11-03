@@ -2,9 +2,11 @@ package raf.dsw.classycraft.app.gui.swing.message;
 
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
+import java.time.LocalDateTime;
+
 import static raf.dsw.classycraft.app.gui.swing.message.EventType.*;
 
-public class MessageGeneratorImplementation implements MessageGenerator{
+public class MessageGeneratorImplementation extends MessageGenerator{
     private Message message;
 
     @Override
@@ -52,7 +54,7 @@ public class MessageGeneratorImplementation implements MessageGenerator{
     }
 
     private void createMessage(String tekst, EventType eventType) {
-        this.message = new Message(tekst, eventType);
+        this.message = new Message(tekst, eventType,message.getLocalDateTime());
         notifySubscribers(this);
     }
 }

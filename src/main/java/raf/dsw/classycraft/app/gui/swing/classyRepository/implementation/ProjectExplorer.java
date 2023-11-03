@@ -13,7 +13,7 @@ public class ProjectExplorer extends ClassyNodeComposite {
 
 
     @Override
-    public void add(ClassyNode child) {
+    public void addChild(ClassyNode child) {
         if(child != null && child instanceof Project)
         {
             Project project = (Project) child;
@@ -26,7 +26,7 @@ public class ProjectExplorer extends ClassyNodeComposite {
     }
 
     @Override
-    public void remove(ClassyNode child) {
+    public void removeChild(ClassyNode child) {
         Project project = (Project) child;
         if(this.getChildren().contains(project))
         {

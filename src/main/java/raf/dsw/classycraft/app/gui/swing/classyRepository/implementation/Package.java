@@ -24,7 +24,7 @@ public class Package extends ClassyNodeComposite {
     }
 
     @Override
-    public void add(ClassyNode child) {
+    public void addChild(ClassyNode child) {
         if (child != null && child instanceof Diagram) {
             Diagram project = (Diagram) child;
             if (!this.getChildren().contains(project)) {
@@ -34,7 +34,7 @@ public class Package extends ClassyNodeComposite {
     }
 
     @Override
-    public void remove(ClassyNode child) {
+    public void removeChild(ClassyNode child) {
         Diagram diagram = (Diagram) child;
         if (this.getChildren().contains(diagram)) {
             this.getChildren().remove(diagram);

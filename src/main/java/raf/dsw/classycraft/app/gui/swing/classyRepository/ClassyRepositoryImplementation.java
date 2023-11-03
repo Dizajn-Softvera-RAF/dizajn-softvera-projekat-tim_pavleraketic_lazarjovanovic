@@ -9,7 +9,7 @@ public class ClassyRepositoryImplementation implements ClassyRepository {
     private ProjectExplorer projectExplorer;
 
     public ClassyRepositoryImplementation() {
-        projectExplorer = new ProjectExplorer(projectExplorer.getName());
+        projectExplorer = new ProjectExplorer("ProjectExplorer");
     }
 
     @Override
