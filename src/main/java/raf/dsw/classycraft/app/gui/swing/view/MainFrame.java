@@ -10,7 +10,6 @@ import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 @Getter
 @Setter
@@ -18,11 +17,11 @@ import java.io.IOException;
 public class MainFrame extends JFrame implements Subscriber {
     private static MainFrame instance;
     private ActionManager actionManager;
-    private MessageGenerator msgGen;
+    private MessageGenerator messageGenerator;
 
 
     public MainFrame(MessageGenerator msgGen) {
-        this.msgGen = msgGen;
+        this.messageGenerator = msgGen;
         msgGen.addSubscriber(this);
     }
     private MainFrame(){

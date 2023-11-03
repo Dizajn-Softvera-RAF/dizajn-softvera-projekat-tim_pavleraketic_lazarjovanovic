@@ -28,11 +28,11 @@ public class FileLogger implements Logger {
         }
     }
 
+
     @Override
     public void update(Object notification) {
         Message message = (Message) notification;
-        Date date = new Date();
-        String error = "("+date+") "+ ((Message) notification).toString();
+        String error = message.toString();
         log(error);
 
     }

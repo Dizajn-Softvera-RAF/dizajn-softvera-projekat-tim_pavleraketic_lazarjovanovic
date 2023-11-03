@@ -21,6 +21,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return text+" ["+eventType+"]";
+        return "["+eventType+"]" + " [" + localDateTime + "] " + text;
     }
 }

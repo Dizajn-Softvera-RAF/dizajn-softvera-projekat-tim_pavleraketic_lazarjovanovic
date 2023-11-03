@@ -1,8 +1,9 @@
 package raf.dsw.classycraft.app.gui.swing.message;
 
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
-import java.time.LocalDateTime;
+import javax.swing.*;
 
 import static raf.dsw.classycraft.app.gui.swing.message.EventType.*;
 
@@ -14,7 +15,7 @@ public class MessageGeneratorImplementation extends MessageGenerator{
         if (ERROR.equals(eventType)) {
             createMessage("Greška: ", eventType);
         } else if (CANNOT_DELETE_PROJECT_EXPLORER.equals(eventType)) {
-            createMessage("Ne može da se obriše Project Explorer!", eventType);
+            createMessage("Project Explorer ne moze bit obrisan!", eventType);
         } else if (CANNOT_ADD_CHILD.equals(eventType)) {
             createMessage("Ne može da se doda na ovu komponentu", eventType);
         } else if (MUST_INSERT_NAME.equals(eventType)) {
@@ -32,6 +33,7 @@ public class MessageGeneratorImplementation extends MessageGenerator{
         }
 
     }
+
 
     @Override
     public void addSubscriber(Subscriber subscriber) {

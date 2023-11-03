@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.Date;
 
 public class ConsoleLogger implements Logger {
-    private MessageGenerator messageGenerator;
-    private Message message;
 
 
     @Override
@@ -17,11 +15,12 @@ public class ConsoleLogger implements Logger {
         System.out.println(greska);
     }
 
+
     @Override
     public void update(Object notification) {
-        Date date = new Date();
-        String error ="["+ message.getEventType() + "] "  + "["+date+"] "+ ((Message) notification).toString();
-        log(error);
+        Message message = (Message) notification;
+        String greska = message.toString();
+        this.log(greska);
     }
 
 }
