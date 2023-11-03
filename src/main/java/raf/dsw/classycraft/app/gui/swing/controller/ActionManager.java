@@ -1,4 +1,4 @@
-package raf.dsw.classycraft.app.controller;
+package raf.dsw.classycraft.app.gui.swing.controller;
 
 import lombok.Getter;
 import lombok.Setter;
