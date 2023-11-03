@@ -23,9 +23,9 @@ public abstract class ClassyNodeComposite extends ClassyNode {
         this.children = children;
     }
 
-    public abstract void add(ClassyNode child);
+    public abstract void addChild(ClassyNode child);
 
-    public abstract void remove(ClassyNode child);
+    public abstract void removeChild(ClassyNode child);
 
     public ClassyNode getByName(String name)
     {

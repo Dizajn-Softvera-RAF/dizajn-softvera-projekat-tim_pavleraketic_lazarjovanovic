@@ -24,7 +24,7 @@ public class Project extends ClassyNodeComposite {
     }
 
     @Override
-    public void add(ClassyNode child) {
+    public void addChild(ClassyNode child) {
         if(child != null && child instanceof Package)
         {
             Package aPackage = (Package) child;
@@ -36,7 +36,7 @@ public class Project extends ClassyNodeComposite {
     }
 
     @Override
-    public void remove(ClassyNode child) {
+    public void removeChild(ClassyNode child) {
         Package aPackage = (Package) child;
         if(this.getChildren().contains(aPackage))
         {

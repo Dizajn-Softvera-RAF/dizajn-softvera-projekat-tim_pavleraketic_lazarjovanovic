@@ -61,9 +61,6 @@ public class MainFrame extends JFrame implements Subscriber {
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
 
-
-
-
     }
 
     public static MainFrame getInstance()
@@ -85,21 +82,6 @@ public class MainFrame extends JFrame implements Subscriber {
                 JOptionPane.showMessageDialog(instance, msg.getText(), msg.getEventType().toString(), JOptionPane.WARNING_MESSAGE);
             }
         }
-
-    }
-    @Override
-    public void addSubscriber(Subscriber subscriber) {
-
-    }
-
-    @Override
-    public void removeSubscriber(Subscriber subscriber) {
-
-    }
-
-    @Override
-    public void notifySubscribers(Object notification) throws IOException {
-
     }
 
 }

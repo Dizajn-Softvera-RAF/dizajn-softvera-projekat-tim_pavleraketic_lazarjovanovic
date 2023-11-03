@@ -10,16 +10,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
-public class FileLogger implements LoggerFactory {
+public class FileLogger implements Logger {
     private MessageGenerator messageGenerator;
 
-    public FileLogger(MessageGenerator messageGenerator) {
-        this.messageGenerator = messageGenerator;
-        this.messageGenerator.addSubscriber(this);
-    }
     @Override
     public void log(String greska) {
-        File file = new File("log.txt");
+        File file = new File("/resources/log.txt");
         try {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(file, true);
@@ -38,21 +34,6 @@ public class FileLogger implements LoggerFactory {
         Date date = new Date();
         String error = "("+date+") "+ ((Message) notification).toString();
         log(error);
-
-    }
-
-    @Override
-    public void addSubscriber(Subscriber subscriber) {
-
-    }
-
-    @Override
-    public void removeSubscriber(Subscriber subscriber) {
-
-    }
-
-    @Override
-    public void notifySubscribers(Object notification) throws IOException {
 
     }
 
