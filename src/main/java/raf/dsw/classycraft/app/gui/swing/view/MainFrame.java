@@ -2,11 +2,14 @@ package raf.dsw.classycraft.app.gui.swing.view;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.message.Message;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +19,14 @@ import java.awt.*;
 
 public class MainFrame extends JFrame implements Subscriber {
     private static MainFrame instance;
+
+    private JMenuBar menu;
+    private JToolBar toolBar;
+
     private ActionManager actionManager;
     private MessageGenerator messageGenerator;
+
+    private ClassyTree classyTree;
 
 
     public MainFrame(MessageGenerator msgGen) {
@@ -30,6 +39,7 @@ public class MainFrame extends JFrame implements Subscriber {
 
     private void initialize(){
         actionManager=new ActionManager();
+        classyTree = new ClassyTreeImplementation();
         initializeGUI();
     }
 
@@ -43,11 +53,12 @@ public class MainFrame extends JFrame implements Subscriber {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("ClassyCrafT");
 
-        MyMenyBar menu = new MyMenyBar();
+        menu = new MyMenyBar();
         setJMenuBar(menu);
 
-        MyToolBar toolBar = new MyToolBar();
+        toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
+
 
         //dodavanje prozora i Linije za splitovanje ta dva dela
         JPanel desktop = new JPanel();
@@ -60,6 +71,17 @@ public class MainFrame extends JFrame implements Subscriber {
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
 
+
+        /**JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
+         *
+         * JScrollPane scroll=new JScrollPane(projectExplorer);
+        scroll.setMinimumSize(new Dimension(200,150));
+
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        getContentPane().add(split,BorderLayout.CENTER);
+        split.setDividerLocation(250);
+        split.setOneTouchExpandable(true);
+        **/
     }
 
     public static MainFrame getInstance()

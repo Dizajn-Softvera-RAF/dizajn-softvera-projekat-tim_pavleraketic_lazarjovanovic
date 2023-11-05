@@ -17,10 +17,8 @@ public class Project extends ClassyNodeComposite {
     protected String filePath;
     //protected boolean changed = true;
 
-    public Project(String name, ClassyNode parent) throws IOException {
+    public Project(String name, ClassyNode parent) {
         super(name, parent);
-        setName(name+counter);
-        counter++;
     }
 
     @Override

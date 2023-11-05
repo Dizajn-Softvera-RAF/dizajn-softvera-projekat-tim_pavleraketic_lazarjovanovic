@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.core;
 
+import lombok.Getter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.ClassyRepositoryImplementation;
 import raf.dsw.classycraft.app.gui.swing.logger.ConsoleLogger;
 import raf.dsw.classycraft.app.gui.swing.logger.FileLogger;
@@ -7,7 +8,7 @@ import raf.dsw.classycraft.app.gui.swing.logger.LoggerFactory;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
-
+@Getter
 
 public class ApplicationFramework {
 

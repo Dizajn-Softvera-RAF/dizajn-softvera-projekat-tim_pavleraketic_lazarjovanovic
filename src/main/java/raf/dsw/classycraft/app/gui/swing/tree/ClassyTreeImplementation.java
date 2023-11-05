@@ -45,11 +45,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     private ClassyNode createChild(ClassyNode parent){
         if (parent instanceof ProjectExplorer) {
-            try {
                 return  new Project("Project" +new Random().nextInt(100), parent);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
         return null;
     }

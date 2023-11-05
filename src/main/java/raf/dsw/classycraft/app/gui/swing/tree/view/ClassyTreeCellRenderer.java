@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.tree.view;
 
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
@@ -17,10 +18,13 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
         URL imageURL = null;
 
         if (((ClassyTreeItem)value).getClassyNode() instanceof ProjectExplorer) {
-            imageURL = getClass().getResource("/images/");
+            imageURL = getClass().getResource("/images/projectExplorer.png");
         }
         else if (((ClassyTreeItem)value).getClassyNode() instanceof Project) {
-            imageURL = getClass().getResource("/images/");
+            imageURL = getClass().getResource("/images/project.png");
+        }
+        else if (((ClassyTreeItem)value).getClassyNode() instanceof Package) {
+            imageURL = getClass().getResource("/images/package.png");
         }
 
         Icon icon = null;
