@@ -30,8 +30,8 @@ public class Diagram extends ClassyLeaf {
 
     public Diagram(String name, ClassyNode parent) throws IOException {
         super(name, parent);
-        setName(name+counter);
-        counter++;
+        //setName(name + counter);
+        //counter++;
     }
 
     @Override

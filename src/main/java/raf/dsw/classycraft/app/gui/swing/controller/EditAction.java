@@ -8,21 +8,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-public class NewProjectAction extends AbscractClassyAction{
+public class EditAction extends AbscractClassyAction{
 
-    public NewProjectAction() {
+    public EditAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(
-                KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/plus.png"));
-        putValue(NAME, "New Project");
-        putValue(SHORT_DESCRIPTION, "New Project");
+                KeyEvent.VK_E, ActionEvent.CTRL_MASK));
+        putValue(SMALL_ICON, loadIcon("/images/edit.png"));
+        putValue(NAME, "Rename");
+        putValue(SHORT_DESCRIPTION, "Rename");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         try {
-            MainFrame.getInstance().getClassyTree().addChild(selected);
+            MainFrame.getInstance().getClassyTree().getSelectedNode().setName(e.getActionCommand());
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
