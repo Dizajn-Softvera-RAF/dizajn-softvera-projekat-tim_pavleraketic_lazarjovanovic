@@ -30,10 +30,10 @@ public class ApplicationFramework {
     }
 
     public void initialize(Gui gui, ClassyRepository classyRepository){
-        MainFrame.getInstance().setVisible(true);
-
         this.gui = gui;
         this.classyRepository = classyRepository;
+
+        MainFrame.getInstance().setVisible(true);
 
         LoggerFactory loggerFactory = new LoggerFactory();
         loggerFactory.createLogger("file");

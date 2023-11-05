@@ -66,22 +66,23 @@ public class MainFrame extends JFrame implements Subscriber {
         JPanel left = new JPanel();
         left.setBackground(Color.WHITE);
 
+        /*
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left,desktop);
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
+*/
 
+        JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
 
-        /**JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
-         *
-         * JScrollPane scroll=new JScrollPane(projectExplorer);
+        JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
 
         JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
-        **/
+
     }
 
     public static MainFrame getInstance()

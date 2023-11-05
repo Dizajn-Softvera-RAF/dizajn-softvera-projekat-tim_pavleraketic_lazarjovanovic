@@ -16,7 +16,7 @@ public class ClassyRepositoryImplementation implements ClassyRepository {
 
     @Override
     public ProjectExplorer getProjectExplorer() {
-        return getProjectExplorer();
+        return projectExplorer;
     }
 
     @Override
