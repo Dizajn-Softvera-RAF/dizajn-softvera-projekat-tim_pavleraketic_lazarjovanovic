@@ -7,12 +7,14 @@ import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.message.Message;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
+import raf.dsw.classycraft.app.gui.swing.message.MessageGeneratorImplementation;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 @Getter
 @Setter
@@ -29,17 +31,18 @@ public class MainFrame extends JFrame implements Subscriber {
     private ClassyTree classyTree;
 
 
-    public MainFrame(MessageGenerator msgGen) {
-        this.messageGenerator = msgGen;
-        msgGen.addSubscriber(this);
+    public MainFrame(MessageGenerator messageGenerator) {
+        this.messageGenerator = messageGenerator;
+        messageGenerator.addSubscriber(MainFrame.getInstance());
     }
     private MainFrame(){
 
     }
 
     private void initialize(){
-        actionManager=new ActionManager();
-        classyTree = new ClassyTreeImplementation();
+
+        this.actionManager=new ActionManager();
+        this.classyTree = new ClassyTreeImplementation();
         initializeGUI();
     }
 
