@@ -27,11 +27,13 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
             imageURL = getClass().getResource("/images/package.png");
         }
 
-        Icon icon = null;
+        ImageIcon icon = null;
         if (imageURL != null)
             icon = new ImageIcon(imageURL);
+            Image image = icon.getImage();
+            Image modImage = image.getScaledInstance(16,16,Image.SCALE_SMOOTH);
+            icon = new ImageIcon(modImage);
         setIcon(icon);
-
         return this;
     }
 

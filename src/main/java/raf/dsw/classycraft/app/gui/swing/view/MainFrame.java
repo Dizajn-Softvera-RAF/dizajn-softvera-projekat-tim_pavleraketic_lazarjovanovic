@@ -66,12 +66,6 @@ public class MainFrame extends JFrame implements Subscriber {
         JPanel left = new JPanel();
         left.setBackground(Color.WHITE);
 
-        /*
-        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,left,desktop);
-        getContentPane().add(split,BorderLayout.CENTER);
-        split.setDividerLocation(250);
-        split.setOneTouchExpandable(true);
-*/
 
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
 
