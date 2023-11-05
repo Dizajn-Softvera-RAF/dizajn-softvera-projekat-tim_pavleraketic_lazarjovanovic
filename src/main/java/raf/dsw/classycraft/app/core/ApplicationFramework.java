@@ -12,6 +12,8 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 public class ApplicationFramework {
 
     private static ApplicationFramework instance;
+    protected Gui gui;
+    protected ClassyRepository classyRepository;
     private MessageGenerator messageGenerator;
     private ConsoleLogger consoleLogger;
     private FileLogger fileLogger;
@@ -22,9 +24,16 @@ public class ApplicationFramework {
 
     }
 
-    public void initialize(){
+    public void run(){
+        this.gui.start();
+    }
+
+    public void initialize(Gui gui, ClassyRepository classyRepository){
         MainFrame.getInstance().setVisible(true);
-        ClassyRepository classyRepository = new ClassyRepositoryImplementation();
+
+        this.gui = gui;
+        this.classyRepository = classyRepository;
+
         LoggerFactory loggerFactory = new LoggerFactory();
         loggerFactory.createLogger("file");
         loggerFactory.createLogger("console");
