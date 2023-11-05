@@ -1,16 +1,23 @@
 package raf.dsw.classycraft.app.core;
 
+import lombok.Getter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.ClassyRepositoryImplementation;
+import raf.dsw.classycraft.app.gui.swing.logger.ConsoleLogger;
 import raf.dsw.classycraft.app.gui.swing.logger.FileLogger;
 import raf.dsw.classycraft.app.gui.swing.logger.LoggerFactory;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
+@Getter
+
 public class ApplicationFramework {
 
     private static ApplicationFramework instance;
-    private FileLogger fileLogger;
+    protected Gui gui;
+    protected ClassyRepository classyRepository;
     private MessageGenerator messageGenerator;
+    private ConsoleLogger consoleLogger;
+    private FileLogger fileLogger;
 
     //buduca polja za model celog projekta
 
@@ -18,9 +25,16 @@ public class ApplicationFramework {
 
     }
 
-    public void initialize(){
+    public void run(){
+        this.gui.start();
+    }
+
+    public void initialize(Gui gui, ClassyRepository classyRepository){
+        this.gui = gui;
+        this.classyRepository = classyRepository;
+
         MainFrame.getInstance().setVisible(true);
-        ClassyRepository classyRepository = new ClassyRepositoryImplementation();
+
         LoggerFactory loggerFactory = new LoggerFactory();
         loggerFactory.createLogger("file");
         loggerFactory.createLogger("console");

@@ -9,10 +9,12 @@ public class ActionManager {
 
     private ExitAction exitAction;
     private AboutUsAction aboutUsAction;
+    private NewProjectAction newProjectAction;
 
     public ActionManager() {
         this.exitAction = new ExitAction();
         this.aboutUsAction = new AboutUsAction();
+        this.newProjectAction = new NewProjectAction();
     }
 
 }

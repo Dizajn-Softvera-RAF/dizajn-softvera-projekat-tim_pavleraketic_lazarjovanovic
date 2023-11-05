@@ -24,11 +24,6 @@ public abstract class ClassyNode implements Publisher {
         this.subs = new ArrayList<>();
     }
 
-    /**public ClassyNodeComposite getParent() {
-            return (ClassyNodeComposite) parent;
-    }
-     **/
-
     @Override
         public boolean equals(Object obj) {
             if(obj != null && obj instanceof ClassyNode)

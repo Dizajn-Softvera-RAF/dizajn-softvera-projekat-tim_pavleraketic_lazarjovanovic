@@ -22,7 +22,6 @@ public class ProjectExplorer extends ClassyNodeComposite {
                 this.getChildren().add(project);
             }
         }
-
     }
 
     @Override
