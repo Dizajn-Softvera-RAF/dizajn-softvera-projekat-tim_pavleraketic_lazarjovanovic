@@ -23,6 +23,14 @@ public abstract class ClassyNodeComposite extends ClassyNode {
         this.children = children;
     }
 
+    public List<ClassyNode> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<ClassyNode> children) {
+        this.children = children;
+    }
+
     public abstract void addChild(ClassyNode child);
 
     public abstract void removeChild(ClassyNode child);

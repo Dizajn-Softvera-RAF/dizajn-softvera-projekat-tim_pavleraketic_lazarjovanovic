@@ -26,4 +26,10 @@ public class ClassyTreeItem extends DefaultMutableTreeNode {
         this.classyNode.setName(name);
     }
 
+    public ClassyNode getClassyNode() {
+        return classyNode;
+    }
+
+
+
 }

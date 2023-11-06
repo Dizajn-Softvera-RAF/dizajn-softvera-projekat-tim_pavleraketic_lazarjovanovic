@@ -37,7 +37,7 @@ public class MessageGeneratorImplementation extends MessageGenerator{
 
     @Override
     public void addSubscriber(Subscriber subscriber) {
-        if (subscriber == null  && subscribers.contains(subscriber)) return;
+        if (subscriber == null && subscribers.contains(subscriber)) return;
         subscribers.add(subscriber);
     }
 
@@ -56,7 +56,7 @@ public class MessageGeneratorImplementation extends MessageGenerator{
     }
 
     private void createMessage(String tekst, EventType eventType) {
-        this.message = new Message(tekst, eventType,message.getLocalDateTime());
+        this.message = new Message(tekst, eventType);
         notifySubscribers(this);
     }
 }

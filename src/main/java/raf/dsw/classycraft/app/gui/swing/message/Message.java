@@ -13,14 +13,14 @@ public class Message {
     private EventType eventType;
     private LocalDateTime localDateTime;
 
-    public Message(String text, EventType eventType,LocalDateTime localDateTime) {
+    public Message(String text, EventType eventType) {
         this.text = text;
         this.eventType = eventType;
-        this.localDateTime = localDateTime;
+        this.localDateTime = LocalDateTime.now();
     }
 
     @Override
     public String toString() {
-        return "["+eventType+"]" + " [" + localDateTime + "] " + text;
+        return "["+eventType+"]" + " ["+localDateTime+"] " + text;
     }
 }

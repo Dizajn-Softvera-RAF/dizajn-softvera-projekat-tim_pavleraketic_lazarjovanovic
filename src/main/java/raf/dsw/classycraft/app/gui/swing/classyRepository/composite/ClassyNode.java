@@ -17,6 +17,19 @@ public abstract class ClassyNode implements Publisher {
         private String name;
         private ClassyNode parent;
 
+
+    public ClassyNode getParent() {
+        return parent;
+    }
+
+    public ClassyNodeComposite getParent(int x) {
+        return (ClassyNodeComposite) parent;
+    }
+
+    public void setParent(ClassyNode parent) {
+        this.parent = parent;
+    }
+
     public ClassyNode(String name, ClassyNode parent)
     {
         this.name = name;
