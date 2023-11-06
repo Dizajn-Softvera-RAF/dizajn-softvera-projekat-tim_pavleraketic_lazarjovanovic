@@ -10,16 +10,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
-public class FileLogger implements Logger {
-    private MessageGenerator messageGenerator;
+public class FileLogger implements Logger  {
+
+
 
     @Override
     public void log(String greska) {
-        File file = new File("/resources/log.txt");
+        File file = new File("log.txt");
+        //kako u resources da bude log.txt
         try {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(file, true);
             fileWriter.write(greska);
+            fileWriter.write("\n");
             fileWriter.close();
         } catch (FileNotFoundException e){
             System.out.println("Filenotfound");

@@ -7,28 +7,25 @@ import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.message.Message;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
-import raf.dsw.classycraft.app.gui.swing.message.MessageGeneratorImplementation;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 @Getter
 @Setter
 
 public class MainFrame extends JFrame implements Subscriber {
     private static MainFrame instance;
-
     private JMenuBar menu;
     private JToolBar toolBar;
-
     private ActionManager actionManager;
     private MessageGenerator messageGenerator;
-
     private ClassyTree classyTree;
+    private PackageView packageView;
+
 
 
     public MainFrame(MessageGenerator messageGenerator) {
@@ -43,6 +40,7 @@ public class MainFrame extends JFrame implements Subscriber {
 
         this.actionManager=new ActionManager();
         this.classyTree = new ClassyTreeImplementation();
+        packageView = new PackageView();
         initializeGUI();
     }
 
@@ -51,6 +49,7 @@ public class MainFrame extends JFrame implements Subscriber {
         Dimension screenSize =kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
+
         setSize(screenWidth/2,screenHeight/2);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,9 +72,10 @@ public class MainFrame extends JFrame implements Subscriber {
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
+        JPanel rightPanel = packageView;
         scroll.setMinimumSize(new Dimension(200,150));
 
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,rightPanel);
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);

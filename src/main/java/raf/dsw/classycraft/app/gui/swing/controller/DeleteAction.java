@@ -1,6 +1,9 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
 
+import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.ProjectExplorer;
+import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
@@ -22,7 +25,17 @@ public class DeleteAction extends AbscractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
+        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+        if (selected == null){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_NOT_SELECTED);
+            return;
+        }
+
+        if (selected.getClassyNode() instanceof ProjectExplorer) {
+
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.CANNOT_DELETE_PROJECT_EXPLORER);
+            return;
+        }
         MainFrame.getInstance().getClassyTree().deleteNode(selected);
     }
 }
