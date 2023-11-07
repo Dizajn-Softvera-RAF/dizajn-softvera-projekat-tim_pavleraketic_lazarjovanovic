@@ -7,12 +7,14 @@ import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.message.Message;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
+import raf.dsw.classycraft.app.gui.swing.message.MessageGeneratorImplementation;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 @Getter
 @Setter
@@ -25,13 +27,11 @@ public class MainFrame extends JFrame implements Subscriber {
     private MessageGenerator messageGenerator;
     private ClassyTree classyTree;
     private PackageView packageView;
+    private DiagramView diagramView;
 
 
 
-    public MainFrame(MessageGenerator messageGenerator) {
-        this.messageGenerator = messageGenerator;
-        messageGenerator.addSubscriber(MainFrame.getInstance());
-    }
+
     private MainFrame(){
 
     }
@@ -40,7 +40,9 @@ public class MainFrame extends JFrame implements Subscriber {
 
         this.actionManager=new ActionManager();
         this.classyTree = new ClassyTreeImplementation();
-        packageView = new PackageView();
+        this.packageView = new PackageView();
+
+
         initializeGUI();
     }
 
@@ -65,9 +67,9 @@ public class MainFrame extends JFrame implements Subscriber {
         //dodavanje prozora i Linije za splitovanje ta dva dela
         JPanel desktop = new JPanel();
         desktop.setBackground(Color.WHITE);
+
         JPanel left = new JPanel();
         left.setBackground(Color.WHITE);
-
 
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
 
@@ -98,7 +100,7 @@ public class MainFrame extends JFrame implements Subscriber {
 
         for (EventType eventType: EventType.values()){
             if (eventType.equals(msg.getEventType())){
-                JOptionPane.showMessageDialog(instance, msg.getText(), msg.getEventType().toString(), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.WARNING_MESSAGE);
             }
         }
     }

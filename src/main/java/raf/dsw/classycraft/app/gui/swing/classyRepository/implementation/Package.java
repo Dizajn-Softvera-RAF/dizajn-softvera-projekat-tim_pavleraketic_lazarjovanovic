@@ -15,12 +15,12 @@ import java.io.IOException;
 public class Package extends ClassyNodeComposite {
 
     private static int counter = 1;
-    //private boolean template;
+
 
     public Package(String name, ClassyNode parent) throws IOException {
         super(name, parent);
-        setName(name + counter);
-        counter++;
+//        setName(name + counter);
+//        counter++;
     }
 
     @Override

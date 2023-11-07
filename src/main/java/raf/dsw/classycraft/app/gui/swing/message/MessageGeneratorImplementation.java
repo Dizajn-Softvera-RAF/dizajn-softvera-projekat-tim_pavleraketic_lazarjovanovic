@@ -37,13 +37,13 @@ public class MessageGeneratorImplementation extends MessageGenerator{
 
     @Override
     public void addSubscriber(Subscriber subscriber) {
-        if (subscriber == null && subscribers.contains(subscriber)) return;
+        if (subscriber == null || subscribers.contains(subscriber)) return;
         subscribers.add(subscriber);
     }
 
     @Override
     public void removeSubscriber(Subscriber subscriber) {
-        if (subscriber == null && !(subscribers.contains(subscriber)) && subscribers.isEmpty()) return;
+        if (subscriber == null || !(subscribers.contains(subscriber)) && subscribers.isEmpty()) return;
         subscribers.remove(subscriber);
     }
 

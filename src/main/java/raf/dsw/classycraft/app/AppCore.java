@@ -10,6 +10,7 @@ import raf.dsw.classycraft.app.gui.swing.logger.FileLogger;
 import raf.dsw.classycraft.app.gui.swing.logger.LoggerFactory;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGeneratorImplementation;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 public class AppCore {
     public static void main(String[] args) {

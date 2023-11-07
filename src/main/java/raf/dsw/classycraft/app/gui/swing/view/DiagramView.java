@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class DiagramView extends JPanel implements Subscriber {
 
-    private JToolBar packageToolBar;
+    private JToolBar diagramToolBar;
     private Diagram diagram;
 
 

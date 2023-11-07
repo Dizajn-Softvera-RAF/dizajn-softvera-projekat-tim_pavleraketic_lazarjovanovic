@@ -31,7 +31,7 @@ public class EditAction extends AbscractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_NOT_SELECTED);
             return;
         }
-        String newName = JOptionPane.showInputDialog(MainFrame.getInstance(), "New name:\n", JOptionPane.QUESTION_MESSAGE);
+        String newName = JOptionPane.showInputDialog(MainFrame.getInstance(), "New name:\n","Rename", JOptionPane.QUESTION_MESSAGE);
         if (newName==null){
             return;
         } else if (newName.equals(" ") || newName.isEmpty()) {
@@ -43,7 +43,7 @@ public class EditAction extends AbscractClassyAction{
                 ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
                 return;
             }
-        }
+       }
         try {
             selected.setName(newName);
         } catch (IOException ex) {

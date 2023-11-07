@@ -66,7 +66,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         } else if (parent instanceof Project) {
             return  new Package("Package" + new Random().nextInt(100), parent);
         } else if (parent instanceof Package){
-            return new Diagram("Diagram" + new Random().nextInt(100),parent);
+            return new Diagram("Diagram" + new Random().nextInt(100), parent);
             }
         return null;
     }

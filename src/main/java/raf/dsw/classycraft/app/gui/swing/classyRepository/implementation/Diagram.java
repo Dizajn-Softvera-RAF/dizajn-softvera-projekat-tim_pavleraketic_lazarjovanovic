@@ -16,22 +16,13 @@ import java.io.IOException;
 public class Diagram extends ClassyLeaf {
 
     private static int counter=1;
-    private int stroke = 2;
-    private Color color;
-    //private Color realColor = Color.BLACK;
 
 
-    public Diagram(String name, ClassyNode parent, Color color, int stroke){
-        super(name, parent);
-        this.color = color;
-        this.stroke = stroke;
-        notifySubscribers(this);
-    }
 
     public Diagram(String name, ClassyNode parent) throws IOException {
         super(name, parent);
-        //setName(name + counter);
-        //counter++;
+//        setName(name + counter);
+//        counter++;
     }
 
     @Override

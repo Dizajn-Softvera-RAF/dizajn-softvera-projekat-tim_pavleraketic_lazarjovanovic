@@ -31,17 +31,13 @@ public class NewProjectAction extends AbscractClassyAction{
             return;
         }
 
+
         if (selected.getClassyNode() instanceof Diagram){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.CANNOT_ADD_CHILD);
             return;
         }
 
 
-//        if (selected.getClassyNode() instanceof Package){
-//            PackageView p = new PackageView();
-//            p.reloadTabs(selected);
-//            return;
-//        }
 
         try {
             MainFrame.getInstance().getClassyTree().addChild(selected);
