@@ -31,31 +31,31 @@ public class EditAction extends AbscractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_NOT_SELECTED);
             return;
         }
-        String newName = JOptionPane.showInputDialog(MainFrame.getInstance(), "New name:\n", JOptionPane.QUESTION_MESSAGE);
+        String newName = JOptionPane.showInputDialog(MainFrame.getInstance(), "New name:\n","Rename", JOptionPane.QUESTION_MESSAGE);
         if (newName==null){
             return;
         } else if (newName.equals(" ") || newName.isEmpty()) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
             return;
         }
-        for (ClassyNode child: selected.getClassyNode().getParent(1).getChildren()){
-            if (child.getName().equals(newName) && !(child.equals(selected))) {
-                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
-                return;
-            }
-        }
+//        for (ClassyNode child: selected.getClassyNode().getParent(1).getChildren()){
+//            if (child.getName().equals(newName) && !(child.equals(selected))) {
+//                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
+//                return;
+//            }
+//            }
         try {
             selected.setName(newName);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
 
-        if(selected.getClassyNode() instanceof Project){
-            MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) selected.getClassyNode());
-        }
-
-        if(selected.getClassyNode() instanceof Package){
-            MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) selected.getClassyNode().getParent());
-        }
+//        if(selected.getClassyNode() instanceof Project){
+//            MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) selected.getClassyNode());
+//        }
+//
+//        if(selected.getClassyNode() instanceof Package){
+//            MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) selected.getClassyNode().getParent());
+//        }
     }
 }

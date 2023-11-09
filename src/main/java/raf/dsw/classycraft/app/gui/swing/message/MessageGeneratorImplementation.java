@@ -1,9 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.message;
 
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
-
-import javax.swing.*;
 
 import static raf.dsw.classycraft.app.gui.swing.message.EventType.*;
 
@@ -37,13 +34,13 @@ public class MessageGeneratorImplementation extends MessageGenerator{
 
     @Override
     public void addSubscriber(Subscriber subscriber) {
-        if (subscriber == null && subscribers.contains(subscriber)) return;
+        if (subscriber == null || subscribers.contains(subscriber)) return;
         subscribers.add(subscriber);
     }
 
     @Override
     public void removeSubscriber(Subscriber subscriber) {
-        if (subscriber == null && !(subscribers.contains(subscriber)) && subscribers.isEmpty()) return;
+        if (subscriber == null || !(subscribers.contains(subscriber)) && subscribers.isEmpty()) return;
         subscribers.remove(subscriber);
     }
 

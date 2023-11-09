@@ -12,6 +12,9 @@ public class ActionManager {
     private NewProjectAction newProjectAction;
     private DeleteAction deleteAction;
     private EditAction editAction;
+    private EditAuthorAction editAuthorAction;
+
+
 
     public ActionManager() {
         this.exitAction = new ExitAction();
@@ -19,6 +22,8 @@ public class ActionManager {
         this.newProjectAction = new NewProjectAction();
         this.deleteAction = new DeleteAction();
         this.editAction = new EditAction();
+        this.editAuthorAction = new EditAuthorAction();
+
     }
 
 }

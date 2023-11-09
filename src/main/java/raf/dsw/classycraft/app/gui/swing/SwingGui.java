@@ -23,14 +23,4 @@ public class SwingGui implements Gui {
         mainFrame.setVisible(true);
     }
 
-    @Override
-    public void update(Object notification) {
-        Message msg = (Message) notification;
-
-        for (EventType eventType: EventType.values()){
-            if (eventType.equals(msg.getEventType())){
-                JOptionPane.showMessageDialog(mainFrame, msg.getText(), msg.getEventType().toString(), JOptionPane.WARNING_MESSAGE);
-            }
-        }
-    }
 }

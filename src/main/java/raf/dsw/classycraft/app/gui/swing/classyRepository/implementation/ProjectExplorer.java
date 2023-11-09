@@ -4,11 +4,15 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
+import javax.swing.*;
+import java.io.IOException;
+
 
 public class ProjectExplorer extends ClassyNodeComposite {
 
-    public ProjectExplorer(String name) {
-        super(name, null);
+
+    public ProjectExplorer(String name)  {
+            super(name, null);
     }
 
 
@@ -47,7 +51,7 @@ public class ProjectExplorer extends ClassyNodeComposite {
     }
 
     @Override
-    public void notifySubscribers(Object notification) {
+    public void notifySubscribers(Object notification) throws IOException {
         if (notification == null || subs.isEmpty()) return;
         for (Subscriber s : subs) {
             s.update(this);
