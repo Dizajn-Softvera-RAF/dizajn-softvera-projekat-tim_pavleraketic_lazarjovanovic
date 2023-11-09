@@ -1,8 +1,11 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
 
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -30,14 +33,10 @@ public class NewProjectAction extends AbscractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_NOT_SELECTED);
             return;
         }
-
-
         if (selected.getClassyNode() instanceof Diagram){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.CANNOT_ADD_CHILD);
             return;
         }
-
-
 
         try {
             MainFrame.getInstance().getClassyTree().addChild(selected);

@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.gui.swing.view;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
-import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
 import javax.swing.*;
@@ -24,7 +23,6 @@ public class DiagramView extends JPanel implements Subscriber {
 
         this.setLayout(new BorderLayout());
         setDiagram(diagram);
-
 
     }
 

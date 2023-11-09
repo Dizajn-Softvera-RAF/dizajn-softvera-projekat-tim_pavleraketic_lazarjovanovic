@@ -18,12 +18,8 @@ public class AppCore {
 
         MessageGenerator messageGenerator = new MessageGeneratorImplementation();
         Gui gui = new SwingGui(messageGenerator);
-
         LoggerFactory loggerFactory = new LoggerFactory(messageGenerator);
-
         ClassyRepository classyRepository = new ClassyRepositoryImplementation();
-
-        messageGenerator.addSubscriber(gui);
 
 
         appCore.initialize(gui, classyRepository,loggerFactory,messageGenerator);

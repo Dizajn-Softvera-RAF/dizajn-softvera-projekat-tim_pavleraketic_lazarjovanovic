@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.classyRepository.composite;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -11,8 +12,7 @@ import lombok.Setter;
 public abstract class ClassyNodeComposite extends ClassyNode {
 
     List<ClassyNode> children;
-
-    public ClassyNodeComposite(String name, ClassyNode parent) {
+    public ClassyNodeComposite(String name, ClassyNode parent)  {
         super(name, parent);
         this.children = new ArrayList<>();
     }

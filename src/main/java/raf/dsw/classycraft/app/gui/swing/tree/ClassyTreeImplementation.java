@@ -1,7 +1,10 @@
 package raf.dsw.classycraft.app.gui.swing.tree;
 
+import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyLeaf;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.factory.FactoryUtils;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.factory.NodeFactory;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
@@ -36,6 +39,8 @@ public class ClassyTreeImplementation implements ClassyTree{
         ClassyNode child = createChild(parent.getClassyNode());
         parent.add(new ClassyTreeItem(child));
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
+        
+
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
@@ -47,28 +52,17 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     @Override
     public void deleteNode(ClassyTreeItem selectedNode) {
+        ClassyNodeComposite p = (ClassyNodeComposite) selectedNode.getClassyNode().getParent();
+        p.removeChild(selectedNode.getClassyNode());
         selectedNode.removeAllChildren();
         selectedNode.removeFromParent();
         SwingUtilities.updateComponentTreeUI(treeView);
     }
 
-    @Override
-    public void editNode(ClassyTreeItem selectedNode) {
-        selectedNode.getClassyNode().getName();
-        SwingUtilities.updateComponentTreeUI(treeView);
-
-    }
-
 
     private ClassyNode createChild(ClassyNode parent) throws IOException {
-        if (parent instanceof ProjectExplorer) {
-                return  new Project("Project" +new Random().nextInt(100), parent);
-        } else if (parent instanceof Project) {
-            return  new Package("Package" + new Random().nextInt(100), parent);
-        } else if (parent instanceof Package){
-            return new Diagram("Diagram" + new Random().nextInt(100), parent);
-            }
-        return null;
+        NodeFactory nodeFactory = FactoryUtils.getFactory(parent);
+        return nodeFactory.getClassyNode(parent);
     }
 
 }

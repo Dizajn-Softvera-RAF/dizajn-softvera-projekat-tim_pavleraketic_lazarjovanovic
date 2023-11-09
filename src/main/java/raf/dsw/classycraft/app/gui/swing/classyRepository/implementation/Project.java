@@ -15,11 +15,15 @@ public class Project extends ClassyNodeComposite {
     private static int counter=1;
     private String author;
     protected String filePath;
-    //protected boolean changed = true;
 
-    public Project(String name, ClassyNode parent) {
+    public Project(String name, ClassyNode parent) throws IOException {
         super(name, parent);
+        setName(name + counter);
+        counter++;
     }
+
+
+
 
     @Override
     public void addChild(ClassyNode child) {
@@ -43,7 +47,7 @@ public class Project extends ClassyNodeComposite {
 
     }
 
-    public void setAuthor(String name) {
+    public void setAuthor(String name) throws IOException {
         author = name;
         notifySubscribers(this);
     }
@@ -62,7 +66,7 @@ public class Project extends ClassyNodeComposite {
     }
 
     @Override
-    public void notifySubscribers(Object notification) {
+    public void notifySubscribers(Object notification) throws IOException {
         if (notification == null || subs.isEmpty()) return;
         for (Subscriber s : subs) {
             s.update(this);

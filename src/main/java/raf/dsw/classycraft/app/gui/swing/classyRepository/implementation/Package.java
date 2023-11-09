@@ -19,8 +19,8 @@ public class Package extends ClassyNodeComposite {
 
     public Package(String name, ClassyNode parent) throws IOException {
         super(name, parent);
-//        setName(name + counter);
-//        counter++;
+        setName(name + counter);
+        counter++;
     }
 
     @Override
@@ -29,6 +29,12 @@ public class Package extends ClassyNodeComposite {
             Diagram project = (Diagram) child;
             if (!this.getChildren().contains(project)) {
                 this.getChildren().add(project);
+                try {
+                    System.out.println(project);
+                    notifySubscribers(project);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
@@ -38,6 +44,11 @@ public class Package extends ClassyNodeComposite {
         Diagram diagram = (Diagram) child;
         if (this.getChildren().contains(diagram)) {
             this.getChildren().remove(diagram);
+            try {
+                notifySubscribers(diagram);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
@@ -55,7 +66,7 @@ public class Package extends ClassyNodeComposite {
     }
 
     @Override
-    public void notifySubscribers(Object notification) {
+    public void notifySubscribers(Object notification) throws IOException {
         if (notification == null || subs.isEmpty()) return;
         for (Subscriber s : subs) {
             s.update(this);

@@ -13,7 +13,6 @@ public interface ClassyTree {
     ClassyTreeItem getSelectedNode();
 
     void deleteNode(ClassyTreeItem selectedNode);
-    void editNode(ClassyTreeItem selectedNode);
 
 
 }

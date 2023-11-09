@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
-import java.awt.*;
 import java.io.IOException;
 
 @Getter
@@ -15,14 +14,12 @@ import java.io.IOException;
 
 public class Diagram extends ClassyLeaf {
 
-    private static int counter=1;
-
-
+    private static int counter =1;
 
     public Diagram(String name, ClassyNode parent) throws IOException {
         super(name, parent);
-//        setName(name + counter);
-//        counter++;
+        setName(name + counter);
+        counter++;
     }
 
     @Override
@@ -40,7 +37,7 @@ public class Diagram extends ClassyLeaf {
     }
 
     @Override
-    public void notifySubscribers(Object obj) {
+    public void notifySubscribers(Object obj) throws IOException {
         if (obj == null || subs.isEmpty()) {
             return;
         }
@@ -49,4 +46,8 @@ public class Diagram extends ClassyLeaf {
             subscriber.update(obj);
     }
 
+    @Override
+    public String toString() {
+        return "Diagram{}";
+    }
 }

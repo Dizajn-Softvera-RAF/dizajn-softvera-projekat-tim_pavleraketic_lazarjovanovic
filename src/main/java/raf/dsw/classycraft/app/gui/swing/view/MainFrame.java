@@ -3,18 +3,18 @@ package raf.dsw.classycraft.app.gui.swing.view;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.message.Message;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
-import raf.dsw.classycraft.app.gui.swing.message.MessageGeneratorImplementation;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 @Getter
 @Setter
@@ -27,9 +27,6 @@ public class MainFrame extends JFrame implements Subscriber {
     private MessageGenerator messageGenerator;
     private ClassyTree classyTree;
     private PackageView packageView;
-    private DiagramView diagramView;
-
-
 
 
     private MainFrame(){
@@ -41,7 +38,7 @@ public class MainFrame extends JFrame implements Subscriber {
         this.actionManager=new ActionManager();
         this.classyTree = new ClassyTreeImplementation();
         this.packageView = new PackageView();
-
+        ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
 
         initializeGUI();
     }
@@ -65,8 +62,8 @@ public class MainFrame extends JFrame implements Subscriber {
 
 
         //dodavanje prozora i Linije za splitovanje ta dva dela
-        JPanel desktop = new JPanel();
-        desktop.setBackground(Color.WHITE);
+//        JPanel desktop = new JPanel();
+//        desktop.setBackground(Color.WHITE);
 
         JPanel left = new JPanel();
         left.setBackground(Color.WHITE);
@@ -100,7 +97,26 @@ public class MainFrame extends JFrame implements Subscriber {
 
         for (EventType eventType: EventType.values()){
             if (eventType.equals(msg.getEventType())){
-                JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.WARNING_MESSAGE);
+
+                if(msg.getEventType().equals(EventType.CANNOT_DELETE_PROJECT_EXPLORER)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.ERROR_MESSAGE);
+                } else if (msg.getEventType().equals(EventType.CANNOT_ADD_CHILD)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.INFORMATION_MESSAGE);
+                } else if (msg.getEventType().equals(EventType.ERROR)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.ERROR_MESSAGE);
+                } else if (msg.getEventType().equals(EventType.NODE_NOT_SELECTED)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.WARNING_MESSAGE);
+                } else if (msg.getEventType().equals(EventType.MUST_INSERT_NAME)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.INFORMATION_MESSAGE);
+                } else if (msg.getEventType().equals(EventType.CANNOT_DELETE_FILE)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.ERROR_MESSAGE);
+                } else if (msg.getEventType().equals(EventType.RESOURCE_NOT_FOUND)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.INFORMATION_MESSAGE);
+                } else if (msg.getEventType().equals(EventType.NODE_ALREADY_EXISTS)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.INFORMATION_MESSAGE);
+                } else if (msg.getEventType().equals(EventType.COMPONENT_NOT_SELECTED)){
+                    JOptionPane.showMessageDialog(this, msg.getText(), msg.getEventType().toString(), JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
     }

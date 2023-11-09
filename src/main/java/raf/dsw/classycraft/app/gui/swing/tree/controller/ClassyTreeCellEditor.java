@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.tree.controller;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
@@ -52,34 +53,19 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
             return;
 
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
+       String newName = e.getActionCommand();
+
+       if(newName == null)
+           return;
 
         try {
-            clicked.setName(e.getActionCommand());
-            if (e.getActionCommand().isEmpty()) {
-                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
-            }
-//            if (e.getActionCommand()==null){
-//                return;
-//            }
-//            for (ClassyNode child: clicked.getClassyNode().getParent(1).getChildren()){
-//                if (child.getName().equals(e.getActionCommand()) && !(child.equals(clicked))) {
-//                    ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
-//                    return;
-//                }
-//            }
-
-            if (clicked.getClassyNode() instanceof Project) {
-                MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) clicked.getClassyNode());
-            }
-
-            if (clicked.getClassyNode() instanceof Package) {
-                MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) clicked.getClassyNode().getParent());
-            }
-
-
-        } catch (IOException exception) {
+            clicked.setName(newName);}
+        catch (IOException exception) {
             throw new RuntimeException(exception);
         }
 
+
     }
+
 }
+

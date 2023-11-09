@@ -1,9 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.message;
 
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
-
-import javax.swing.*;
 
 import static raf.dsw.classycraft.app.gui.swing.message.EventType.*;
 
