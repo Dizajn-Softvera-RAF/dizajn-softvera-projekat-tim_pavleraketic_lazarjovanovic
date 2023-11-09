@@ -1,11 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.listener;
 
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
-import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
-import raf.dsw.classycraft.app.gui.swing.view.PackageView;
-
-import javax.swing.tree.TreePath;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

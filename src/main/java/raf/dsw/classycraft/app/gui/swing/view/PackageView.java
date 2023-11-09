@@ -21,8 +21,12 @@ public class PackageView extends JPanel implements Subscriber {
 
     private JTabbedPane jTabbedPane;
     private List<DiagramView> tabs;
+
+
     private JLabel projectName;
+    private JLabel jLabelName;
     private JLabel author;
+
     private ClassyNodeComposite paket;
 
 
@@ -32,16 +36,19 @@ public class PackageView extends JPanel implements Subscriber {
         projectName = new JLabel();
         projectName.setVisible(true);
         projectName.setAlignmentX(CENTER_ALIGNMENT);
-
-        author = new JLabel();
-        author.setVisible(true);
-
         add(projectName);
-        add(author);
+
+        jLabelName = new JLabel("Ime projekta: ");
+        jLabelName.setVisible(true);
+        jLabelName.setAlignmentX(CENTER_ALIGNMENT);
 
         //pravimo jTabbedPane i dodajemo ga na JPane
         jTabbedPane = new JTabbedPane();
         add(jTabbedPane);
+
+        author = new JLabel();
+        author.setVisible(true);
+        add(author);
 
         //inicijalizujemo listu
         tabs = new ArrayList<>();
@@ -55,8 +62,11 @@ public class PackageView extends JPanel implements Subscriber {
        tabs.clear();
        jTabbedPane.removeAll();
 
-        this.paket = (Package) selected;
+
+
+        this.paket = selected;
         paket.addSubscriber(this);
+
 
         for(ClassyNode child :  paket.getChildren()){
             if(child instanceof Diagram) {
@@ -74,11 +84,13 @@ public class PackageView extends JPanel implements Subscriber {
             Project p =(Project) paket.getParent();
             this.author.setText(p.getAuthor());
             this.projectName.setText(paket.getParent().getName());
+            //paket.getParent().addSubscriber(this);
         } else if (paket.getParent() instanceof Package) {
             Package pak1 = (Package) paket.getParent();
             Project p2 = (Project) pak1.getParent();
             this.author.setText(p2.getAuthor());
             this.projectName.setText(paket.getParent().getParent().getName());
+            //paket.getParent().getParent().addSubscriber(this);
         }
         jTabbedPane.setVisible(true);
 
