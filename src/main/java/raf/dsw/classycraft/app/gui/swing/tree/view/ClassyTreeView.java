@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.tree.view;
 
+import raf.dsw.classycraft.app.gui.swing.listener.TreeListener;
 import raf.dsw.classycraft.app.gui.swing.tree.controller.ClassyTreeCellEditor;
 import raf.dsw.classycraft.app.gui.swing.tree.controller.ClassyTreeSelectionListener;
 
@@ -15,6 +16,7 @@ public class ClassyTreeView extends JTree {
         setCellEditor(new ClassyTreeCellEditor(this, ruTreeCellRenderer));
         setCellRenderer(ruTreeCellRenderer);
         setEditable(true);
+        addMouseListener(new TreeListener());
     }
 
 }

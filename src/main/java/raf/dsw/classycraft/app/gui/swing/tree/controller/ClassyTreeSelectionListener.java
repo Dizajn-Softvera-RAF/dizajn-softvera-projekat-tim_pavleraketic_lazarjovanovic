@@ -9,12 +9,14 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassyTreeSelectionListener implements TreeSelectionListener {
+public class ClassyTreeSelectionListener extends MouseAdapter implements TreeSelectionListener {
 
-    //private List<Package> selektovani = new ArrayList<>();
+
 
     @Override
     public void valueChanged(TreeSelectionEvent e) {
@@ -23,15 +25,7 @@ public class ClassyTreeSelectionListener implements TreeSelectionListener {
         System.out.println("Selektovan cvor:"+ treeItemSelected.getClassyNode().getName());
         System.out.println("getPath: "+e.getPath());
 
-        if(treeItemSelected.getClassyNode() instanceof Package){
-                Package p = (Package) treeItemSelected.getClassyNode();
-                MainFrame.getInstance().getPackageView().reloadTabs(p);
-           }
-
-       }
-//        else if (treeItemSelected.getClassyNode() instanceof Diagram){
-//            Diagram d = (Diagram) treeItemSelected.getClassyNode();
-//            MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) d.getParent());
-//        }
     }
+
+}
 
