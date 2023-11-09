@@ -50,6 +50,6 @@ public abstract class ClassyNode implements Publisher {
 
         public void setName(String name) throws IOException {
             this.name = name;
-            //notifySubscribers(this);
+            notifySubscribers(this);
         }
 }

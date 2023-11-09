@@ -59,7 +59,9 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
            return;
 
         try {
-            clicked.setName(newName);}
+            clicked.setName(newName);
+
+        }
         catch (IOException exception) {
             throw new RuntimeException(exception);
         }

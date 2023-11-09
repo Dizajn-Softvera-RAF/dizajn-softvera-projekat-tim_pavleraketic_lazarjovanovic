@@ -56,6 +56,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         p.removeChild(selectedNode.getClassyNode());
         selectedNode.removeAllChildren();
         selectedNode.removeFromParent();
+        //treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
 
@@ -63,6 +64,7 @@ public class ClassyTreeImplementation implements ClassyTree{
     private ClassyNode createChild(ClassyNode parent) throws IOException {
         NodeFactory nodeFactory = FactoryUtils.getFactory(parent);
         return nodeFactory.getClassyNode(parent);
+
     }
 
 }

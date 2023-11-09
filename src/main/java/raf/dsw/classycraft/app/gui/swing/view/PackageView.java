@@ -25,9 +25,8 @@ public class PackageView extends JPanel implements Subscriber {
     private JLabel author;
     private ClassyNodeComposite paket;
 
+
     public PackageView(){
-
-
 
         //dodajemo ime projekta i autora
         projectName = new JLabel();
@@ -44,27 +43,26 @@ public class PackageView extends JPanel implements Subscriber {
         jTabbedPane = new JTabbedPane();
         add(jTabbedPane);
 
-
-
         //inicijalizujemo listu
         tabs = new ArrayList<>();
 
         BoxLayout boxL = new BoxLayout(this,BoxLayout.Y_AXIS);
         setLayout(boxL);
-
-
     }
 
     public void reloadTabs(ClassyNodeComposite selected){
 
        tabs.clear();
        jTabbedPane.removeAll();
+
         this.paket = (Package) selected;
         paket.addSubscriber(this);
+
         for(ClassyNode child :  paket.getChildren()){
+            if(child instanceof Diagram) {
                 DiagramView diagramView = new DiagramView((Diagram) child);
                 tabs.add(diagramView);
-
+            }
         }
 
         for(DiagramView tab : tabs){
@@ -72,9 +70,16 @@ public class PackageView extends JPanel implements Subscriber {
         }
 
 
-        //Project p = (Project) paket;
-        //this.author.setText(p.getAuthor());
-        this.projectName.setText(paket.getParent().getName());
+        if(paket.getParent() instanceof Project){
+            Project p =(Project) paket.getParent();
+            this.author.setText(p.getAuthor());
+            this.projectName.setText(paket.getParent().getName());
+        } else if (paket.getParent() instanceof Package) {
+            Package pak1 = (Package) paket.getParent();
+            Project p2 = (Project) pak1.getParent();
+            this.author.setText(p2.getAuthor());
+            this.projectName.setText(paket.getParent().getParent().getName());
+        }
         jTabbedPane.setVisible(true);
 
     }
@@ -83,10 +88,6 @@ public class PackageView extends JPanel implements Subscriber {
     @Override
     public void update(Object notification) {
         reloadTabs((ClassyNodeComposite) notification);
-//        Diagram d = (Diagram) notification;
-//        //tabs.add((DiagramView)notification);
-//        jTabbedPane.add(d.getName(),new DiagramView(d));
-
     }
 
 

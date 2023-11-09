@@ -21,10 +21,6 @@ public class DiagramFactory extends NodeFactory {
 
     @Override
     public ClassyNode createNode(ClassyNode node) throws IOException {
-        String s = JOptionPane.showInputDialog(MainFrame.getInstance(), "Paket ili Dijagram?\n", "Option", JOptionPane.QUESTION_MESSAGE);
-        if (s.toLowerCase().equals("paket")) {
-            return new Package("Paket", node);
-        }
         return new Diagram("Diagram" , node);
     }
 

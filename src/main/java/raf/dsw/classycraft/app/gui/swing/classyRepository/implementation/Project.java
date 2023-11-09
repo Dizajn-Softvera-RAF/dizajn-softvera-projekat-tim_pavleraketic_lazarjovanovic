@@ -53,6 +53,8 @@ public class Project extends ClassyNodeComposite {
     }
 
 
+
+
     @Override
     public void addSubscriber(Subscriber subscriber) {
         if (subscriber == null ||  subs.contains(subscriber)) return;
