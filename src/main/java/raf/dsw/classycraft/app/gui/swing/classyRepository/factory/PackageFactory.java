@@ -5,6 +5,7 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -18,7 +19,8 @@ public class PackageFactory extends NodeFactory {
 
     @Override
     public ClassyNode createNode(ClassyNode node) throws IOException {
-        return new Package("Package", node);
+        Package p = new Package("Package", node);
+        return p;
     }
 
     @Override

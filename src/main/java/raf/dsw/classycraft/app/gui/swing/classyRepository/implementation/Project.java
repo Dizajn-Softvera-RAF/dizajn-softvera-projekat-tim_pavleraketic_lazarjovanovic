@@ -49,8 +49,18 @@ public class Project extends ClassyNodeComposite {
 
     public void setAuthor(String name) throws IOException {
         author = name;
-        notifySubscribers(this);
+        for(ClassyNode child: this.getChildren()){
+            if(child instanceof Package)((Package) child).setAuthor(this.author);
+        }
     }
+    public void setName(String name) throws IOException {
+        super.setName(name);
+        for(ClassyNode child: this.getChildren()){
+            if(child instanceof Package)((Package) child).notifySubscribers("ime");
+        }
+    }
+
+
 
 
     @Override

@@ -53,13 +53,15 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
             return;
 
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
-       String newName = e.getActionCommand();
+        String newName = e.getActionCommand();
 
        if(newName == null)
            return;
 
         try {
-            clicked.setName(newName);}
+            clicked.setName(newName);
+
+        }
         catch (IOException exception) {
             throw new RuntimeException(exception);
         }

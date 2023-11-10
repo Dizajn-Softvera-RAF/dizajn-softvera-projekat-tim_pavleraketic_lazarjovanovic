@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
 
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
@@ -29,7 +30,7 @@ public class EditAuthorAction extends AbscractClassyAction {
         }
 
         if (selected.getClassyNode() instanceof Project) {
-            String newAuthor = JOptionPane.showInputDialog("Enter author name:");
+            String newAuthor = JOptionPane.showInputDialog("Enter authors name:");
             try {
                 ((Project) selected.getClassyNode()).setAuthor(newAuthor);
             } catch (IOException ex) {

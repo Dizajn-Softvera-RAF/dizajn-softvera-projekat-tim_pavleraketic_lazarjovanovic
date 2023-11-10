@@ -27,6 +27,7 @@ public class MainFrame extends JFrame implements Subscriber {
     private MessageGenerator messageGenerator;
     private ClassyTree classyTree;
     private PackageView packageView;
+    private JSplitPane split;
 
 
     private MainFrame(){
@@ -37,7 +38,7 @@ public class MainFrame extends JFrame implements Subscriber {
 
         this.actionManager=new ActionManager();
         this.classyTree = new ClassyTreeImplementation();
-        this.packageView = new PackageView();
+        this.packageView = new PackageView(null);
         ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
 
         initializeGUI();
@@ -74,7 +75,7 @@ public class MainFrame extends JFrame implements Subscriber {
         JPanel rightPanel = packageView;
         scroll.setMinimumSize(new Dimension(200,150));
 
-        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,rightPanel);
+        split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,rightPanel);
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
@@ -120,5 +121,12 @@ public class MainFrame extends JFrame implements Subscriber {
             }
         }
     }
+
+    public void reload(PackageView packageView){
+        split.setRightComponent(packageView);
+
+    }
+
+
 
 }

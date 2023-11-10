@@ -46,16 +46,11 @@ public class EditAction extends AbscractClassyAction{
 //            }
         try {
             selected.setName(newName);
+            selected.getClassyNode().setName(newName);
+            MainFrame.getInstance().getClassyTree().editNode(selected);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
 
-//        if(selected.getClassyNode() instanceof Project){
-//            MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) selected.getClassyNode());
-//        }
-//
-//        if(selected.getClassyNode() instanceof Package){
-//            MainFrame.getInstance().getPackageView().reloadTabs((ClassyNodeComposite) selected.getClassyNode().getParent());
-//        }
     }
 }

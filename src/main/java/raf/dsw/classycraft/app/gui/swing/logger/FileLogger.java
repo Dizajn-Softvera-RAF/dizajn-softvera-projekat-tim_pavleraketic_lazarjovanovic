@@ -11,16 +11,14 @@ public class FileLogger implements Logger  {
 
     @Override
     public void log(String greska) {
-        try {
-            FileOutputStream fos = new FileOutputStream("E:\\DSW\\src\\main\\resources\\log.txt");
-            OutputStreamWriter osw = new OutputStreamWriter(fos);
-            BufferedWriter bw = new BufferedWriter(osw);
 
-            bw.write(greska);
-            bw.newLine();
-            bw.close();
-            osw.close();
-            fos.close();
+        File file = new File(getClass().getResource("/log/log.txt").getFile());
+        try {
+            file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file, true);
+            fileWriter.write(greska);
+            fileWriter.write("\n");
+            fileWriter.close();
         } catch (FileNotFoundException e){
             System.out.println("Filenotfound");
         } catch (IOException e) {

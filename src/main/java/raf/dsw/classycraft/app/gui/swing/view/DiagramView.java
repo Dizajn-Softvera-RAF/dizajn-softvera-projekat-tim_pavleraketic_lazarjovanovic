@@ -3,10 +3,12 @@ package raf.dsw.classycraft.app.gui.swing.view;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 @Getter
 @Setter
@@ -15,6 +17,7 @@ public class DiagramView extends JPanel implements Subscriber {
 
     private JToolBar diagramToolBar;
     private Diagram diagram;
+    private PackageView packageView;
 
 
 
@@ -32,9 +35,15 @@ public class DiagramView extends JPanel implements Subscriber {
 
     }
 
+    public void setPackageView(PackageView packageView){
+        this.packageView = packageView;
+    }
+
+
 
     @Override
-    public void update(Object notification) {
-
+    public void update(Object notification) throws IOException {
+        packageView.setDiagrams();
+        MainFrame.getInstance().reload(packageView);
     }
 }

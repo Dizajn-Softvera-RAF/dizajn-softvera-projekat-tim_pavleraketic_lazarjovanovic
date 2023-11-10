@@ -15,12 +15,23 @@ import java.io.IOException;
 public class Package extends ClassyNodeComposite {
 
     private static int counter = 1;
+    private String author;
 
 
     public Package(String name, ClassyNode parent) throws IOException {
         super(name, parent);
         setName(name + counter);
         counter++;
+        if(parent instanceof Project){
+            this.author = ((Project) parent).getAuthor();
+        } else if (parent instanceof  Package) {
+            this.author = ((Package) parent).getAuthor();
+        }
+    }
+
+    public void setAuthor(String name) throws IOException {
+        author = name;
+        notifySubscribers("ime");
     }
 
     @Override
@@ -31,7 +42,7 @@ public class Package extends ClassyNodeComposite {
                 this.getChildren().add(project);
                 try {
                     System.out.println(project);
-                    notifySubscribers(project);
+                    notifySubscribers("child");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -51,6 +62,12 @@ public class Package extends ClassyNodeComposite {
             }
         }
 
+    }
+
+    @Override
+    public void setName(String name) throws IOException {
+        super.setName(name);
+        notifySubscribers("ime");
     }
 
     @Override

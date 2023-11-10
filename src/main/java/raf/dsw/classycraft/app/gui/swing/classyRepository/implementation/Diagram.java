@@ -46,8 +46,5 @@ public class Diagram extends ClassyLeaf {
             subscriber.update(obj);
     }
 
-    @Override
-    public String toString() {
-        return "Diagram{}";
-    }
+
 }

@@ -2,6 +2,8 @@ package raf.dsw.classycraft.app.gui.swing.message;
 
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
+import java.io.IOException;
+
 import static raf.dsw.classycraft.app.gui.swing.message.EventType.*;
 
 public class MessageGeneratorImplementation extends MessageGenerator{
@@ -48,7 +50,11 @@ public class MessageGeneratorImplementation extends MessageGenerator{
     public void notifySubscribers(Object notification) {
         if (notification == null || subscribers.isEmpty()) return;
         for (Subscriber s: subscribers){
-            s.update(this.message);
+            try {
+                s.update(this.message);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
