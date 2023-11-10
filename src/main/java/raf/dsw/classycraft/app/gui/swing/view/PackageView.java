@@ -21,88 +21,94 @@ public class PackageView extends JPanel implements Subscriber {
 
     private JTabbedPane jTabbedPane;
     private List<DiagramView> tabs;
-
-
     private JLabel projectName;
-    private JLabel jLabelName;
     private JLabel author;
+    private Package paket;
 
-    private ClassyNodeComposite paket;
 
 
-    public PackageView(){
 
-        //dodajemo ime projekta i autora
+    public PackageView(Package paket){
+        this.paket = paket;
+        initalize();
+    }
+
+    private void initalize() {
+
         projectName = new JLabel();
-        projectName.setVisible(true);
-        projectName.setAlignmentX(CENTER_ALIGNMENT);
-        add(projectName);
-
-        jLabelName = new JLabel("Ime projekta: ");
-        jLabelName.setVisible(true);
-        jLabelName.setAlignmentX(CENTER_ALIGNMENT);
-
-        //pravimo jTabbedPane i dodajemo ga na JPane
-        jTabbedPane = new JTabbedPane();
-        add(jTabbedPane);
-
         author = new JLabel();
-        author.setVisible(true);
+        jTabbedPane = new JTabbedPane();
+        tabs = new ArrayList<>();
+
+        add(projectName);
+        add(jTabbedPane);
         add(author);
 
-        //inicijalizujemo listu
-        tabs = new ArrayList<>();
+        projectName.setVisible(true);
+        projectName.setAlignmentX(CENTER_ALIGNMENT);
+        author.setVisible(true);
+        jTabbedPane.setVisible(true);
 
         BoxLayout boxL = new BoxLayout(this,BoxLayout.Y_AXIS);
         setLayout(boxL);
+
     }
 
-    public void reloadTabs(ClassyNodeComposite selected){
+    public void load(ClassyNodeComposite selected){
 
-       tabs.clear();
-       jTabbedPane.removeAll();
-
-
-
-        this.paket = selected;
+        if(selected==null || !(selected instanceof Package)){
+            return;
+        }
+        setDiagrams();
+        //prebaciti u konstruktor?
+        this.paket = (Package) selected;
         paket.addSubscriber(this);
-
-
-        for(ClassyNode child :  paket.getChildren()){
-            if(child instanceof Diagram) {
-                DiagramView diagramView = new DiagramView((Diagram) child);
-                tabs.add(diagramView);
-            }
-        }
-
-        for(DiagramView tab : tabs){
-            jTabbedPane.add(tab.getDiagram().getName(),tab);
-        }
-
-
-        if(paket.getParent() instanceof Project){
-            Project p =(Project) paket.getParent();
-            this.author.setText(p.getAuthor());
-            this.projectName.setText(paket.getParent().getName());
-            //paket.getParent().addSubscriber(this);
-        } else if (paket.getParent() instanceof Package) {
-            Package pak1 = (Package) paket.getParent();
-            Project p2 = (Project) pak1.getParent();
-            this.author.setText(p2.getAuthor());
-            this.projectName.setText(paket.getParent().getParent().getName());
-            //paket.getParent().getParent().addSubscriber(this);
-        }
-        jTabbedPane.setVisible(true);
-
+        paket.getParent().addSubscriber(this);
+        setLabels();
     }
 
+    private void setLabels() {
+        if(paket.getParent() instanceof Project){
+        this.author.setText("Autor: "+(((Project)paket.getParent()).getAuthor()));
+        this.projectName.setText("Ime projekta: " + ((Project)paket.getParent()).getName());
+        }
+        else if(paket.getParent() instanceof Package){
+            while(!(paket.getParent() instanceof Project)){
+                Package paket2 = (Package) paket.getParent();
+               paket.setParent(paket2.getParent());
+            }
+            this.author.setText("Autor: "+(((Project)paket.getParent()).getAuthor()));
+            this.projectName.setText("Ime projekta: " + ((Project)paket.getParent()).getName());}
+        }
+
+
+    public void setDiagrams() {
+        tabs.clear();
+        jTabbedPane.removeAll();
+        for(ClassyNode child: paket.getChildren()){
+            if (!(child instanceof Diagram)) continue;
+            DiagramView d = new DiagramView((Diagram) child);
+            d.setPackageView(this);
+            tabs.add(d);
+            for(DiagramView tab : tabs){
+                jTabbedPane.add(tab.getDiagram().getName(),tab);
+            }
+            //jTabbedPane.add(d.getDiagram().getName());
+        }
+    }
 
     @Override
     public void update(Object notification) {
-        reloadTabs((ClassyNodeComposite) notification);
+        if(notification instanceof Package) load((Package) notification);
+        else if(notification instanceof String){
+            if(notification.equals("child")) setDiagrams();
+            else if (notification.equals("ime")) setLabels();}
+        }
     }
 
 
 
 
-}
+
+
+

@@ -11,7 +11,8 @@ public class FileLogger implements Logger  {
 
     @Override
     public void log(String greska) {
-        File file = new File("log.txt");
+
+        File file = new File(getClass().getResource("/log/log.txt").getFile());
         try {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(file, true);

@@ -60,6 +60,11 @@ public class ClassyTreeImplementation implements ClassyTree{
         SwingUtilities.updateComponentTreeUI(treeView);
     }
 
+    @Override
+    public void editNode(ClassyTreeItem classyTreeItem) {
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
 
     private ClassyNode createChild(ClassyNode parent) throws IOException {
         NodeFactory nodeFactory = FactoryUtils.getFactory(parent);

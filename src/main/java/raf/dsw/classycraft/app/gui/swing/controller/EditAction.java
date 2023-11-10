@@ -46,6 +46,8 @@ public class EditAction extends AbscractClassyAction{
 //            }
         try {
             selected.setName(newName);
+            selected.getClassyNode().setName(newName);
+            MainFrame.getInstance().getClassyTree().editNode(selected);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

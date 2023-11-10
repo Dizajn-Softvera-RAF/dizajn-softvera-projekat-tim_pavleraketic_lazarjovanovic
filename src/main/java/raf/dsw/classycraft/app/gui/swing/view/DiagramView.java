@@ -17,6 +17,7 @@ public class DiagramView extends JPanel implements Subscriber {
 
     private JToolBar diagramToolBar;
     private Diagram diagram;
+    private PackageView packageView;
 
 
 
@@ -34,9 +35,20 @@ public class DiagramView extends JPanel implements Subscriber {
 
     }
 
+    public void setPackageView(PackageView packageView){
+        this.packageView = packageView;
+    }
+
+
 
     @Override
-    public void update(Object notification)  {
+    public void update(Object notification) throws IOException {
+        //diagram.setName((String) notification);
+       // MainFrame.getInstance().getPackageView().reloadTabs((Package)diagram.getParent());
+        packageView.setDiagrams();
+        MainFrame.getInstance().reload(packageView);
+
+
 
     }
 }

@@ -13,6 +13,16 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+
     <groupId>groupId</groupId>
     <artifactId>dizajn-softvera-projekat-tim_pavleraketic_lazarjovanovic</artifactId>
     <version>1.0-SNAPSHOT</version>

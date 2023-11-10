@@ -5,6 +5,7 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.ProjectExplorer;
+import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
@@ -30,6 +31,7 @@ public class FactoryUtils {
                 options,
                 options[0]);
         if (choice == JOptionPane.CLOSED_OPTION) {
+            //MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.COMPONENT_NOT_SELECTED);
             System.out.println("Dialog closed without making a selection.");
         } else if (options[choice].equals("Package")){
             return new PackageFactory("Package", parent);
