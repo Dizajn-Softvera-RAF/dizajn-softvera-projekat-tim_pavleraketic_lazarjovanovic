@@ -60,7 +60,6 @@ public class PackageView extends JPanel implements Subscriber {
             return;
         }
         setDiagrams();
-        //prebaciti u konstruktor?
         this.paket = (Package) selected;
         paket.addSubscriber(this);
         paket.getParent().addSubscriber(this);
@@ -93,7 +92,6 @@ public class PackageView extends JPanel implements Subscriber {
             for(DiagramView tab : tabs){
                 jTabbedPane.add(tab.getDiagram().getName(),tab);
             }
-            //jTabbedPane.add(d.getDiagram().getName());
         }
     }
 

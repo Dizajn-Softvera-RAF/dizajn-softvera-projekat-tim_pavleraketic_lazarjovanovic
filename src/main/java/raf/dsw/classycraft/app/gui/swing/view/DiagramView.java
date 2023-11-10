@@ -43,12 +43,7 @@ public class DiagramView extends JPanel implements Subscriber {
 
     @Override
     public void update(Object notification) throws IOException {
-        //diagram.setName((String) notification);
-       // MainFrame.getInstance().getPackageView().reloadTabs((Package)diagram.getParent());
         packageView.setDiagrams();
         MainFrame.getInstance().reload(packageView);
-
-
-
     }
 }
