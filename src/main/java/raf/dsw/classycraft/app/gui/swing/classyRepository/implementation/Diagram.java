@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.io.IOException;
 import java.util.ConcurrentModificationException;
@@ -47,7 +48,7 @@ public class Diagram extends ClassyLeaf {
             for (Subscriber subscriber:subs)
                 subscriber.update(obj);
         } catch (ConcurrentModificationException e){
-                System.out.println("Promenili ste ime");
+
             }
     }
 

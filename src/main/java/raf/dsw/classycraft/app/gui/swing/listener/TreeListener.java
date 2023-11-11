@@ -29,13 +29,9 @@ public class TreeListener extends MouseAdapter {
                         throw new RuntimeException(ex);
                     }
                     MainFrame.getInstance().reload(pv);
-                    //System.out.println("aaa");
-
                 }
             }
-        } catch (NullPointerException es){
-            System.out.println("Niste izabrali nista");
-        }
+        } catch (NullPointerException ex){}
 
-    }
-}
+
+}}
