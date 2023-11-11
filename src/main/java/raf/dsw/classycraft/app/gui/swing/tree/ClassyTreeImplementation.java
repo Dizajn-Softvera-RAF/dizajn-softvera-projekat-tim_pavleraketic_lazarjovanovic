@@ -9,15 +9,19 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.ProjectExplorer;
+import raf.dsw.classycraft.app.gui.swing.message.EventType;
+import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
+import raf.dsw.classycraft.app.gui.swing.message.MessageGeneratorImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import java.io.IOException;
 import java.util.Random;
 
-public class ClassyTreeImplementation implements ClassyTree{
+public class ClassyTreeImplementation implements ClassyTree {
 
     private ClassyTreeView treeView;
     private DefaultTreeModel treeModel;
@@ -39,7 +43,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         ClassyNode child = createChild(parent.getClassyNode());
         parent.add(new ClassyTreeItem(child));
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
-        
+
 
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
@@ -67,9 +71,11 @@ public class ClassyTreeImplementation implements ClassyTree{
 
 
     private ClassyNode createChild(ClassyNode parent) throws IOException {
-        NodeFactory nodeFactory = FactoryUtils.getFactory(parent);
-        return nodeFactory.getClassyNode(parent);
 
+            NodeFactory nodeFactory = FactoryUtils.getFactory(parent);
+            return nodeFactory.getClassyNode(parent);
     }
+
+
 
 }

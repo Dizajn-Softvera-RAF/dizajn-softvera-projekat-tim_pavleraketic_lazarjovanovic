@@ -6,8 +6,11 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.io.IOException;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 @Getter
 @Setter
@@ -41,10 +44,12 @@ public class Diagram extends ClassyLeaf {
         if (obj == null || subs.isEmpty()) {
             return;
         }
+        try{
+            for (Subscriber subscriber:subs)
+                subscriber.update(obj);
+        } catch (ConcurrentModificationException e){
 
-        for (Subscriber subscriber:subs)
-            subscriber.update(obj);
+            }
     }
-
 
 }

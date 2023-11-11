@@ -9,6 +9,7 @@ import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ConcurrentModificationException;
 
 @Getter
 @Setter
