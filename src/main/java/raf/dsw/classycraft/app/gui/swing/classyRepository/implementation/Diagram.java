@@ -8,6 +8,8 @@ import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
 import java.io.IOException;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 @Getter
 @Setter
@@ -41,10 +43,12 @@ public class Diagram extends ClassyLeaf {
         if (obj == null || subs.isEmpty()) {
             return;
         }
-
-        for (Subscriber subscriber:subs)
-            subscriber.update(obj);
+        try{
+            for (Subscriber subscriber:subs)
+                subscriber.update(obj);
+        } catch (ConcurrentModificationException e){
+                System.out.println("Promenili ste ime");
+            }
     }
-
 
 }

@@ -31,7 +31,6 @@ public class FactoryUtils {
                 options,
                 options[0]);
         if (choice == JOptionPane.CLOSED_OPTION) {
-            //MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.COMPONENT_NOT_SELECTED);
             System.out.println("Dialog closed without making a selection.");
         } else if (options[choice].equals("Package")){
             return new PackageFactory("Package", parent);

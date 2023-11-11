@@ -38,12 +38,12 @@ public class EditAction extends AbscractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
             return;
         }
-//        for (ClassyNode child: selected.getClassyNode().getParent(1).getChildren()){
-//            if (child.getName().equals(newName) && !(child.equals(selected))) {
-//                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
-//                return;
-//            }
-//            }
+        for (ClassyNode child: selected.getClassyNode().getParent(1).getChildren()){
+            if (child.getName().equals(newName) && !(child.equals(selected))) {
+                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
+                return;
+            }
+        }
         try {
             selected.setName(newName);
             selected.getClassyNode().setName(newName);
