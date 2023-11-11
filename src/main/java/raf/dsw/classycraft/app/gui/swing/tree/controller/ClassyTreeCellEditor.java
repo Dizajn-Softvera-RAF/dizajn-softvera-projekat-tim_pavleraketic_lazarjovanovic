@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeCo
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -59,6 +60,24 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
            return;
 
         try {
+
+            if(!(clicked.getClassyNode() instanceof ProjectExplorer)){
+                for (ClassyNode child: clicked.getClassyNode().getParent(1).getChildren()){
+                    if (child.getName().equals(newName) && !(child.equals(clicked))) {
+                        ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
+                        return;
+                    }
+                }
+            }else{
+                for (ClassyNode child: ((ProjectExplorer) clicked.getClassyNode()).getChildren()){
+                    if (child.getName().equals(newName) && !(child.equals(clicked))) {
+                        ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
+                        return;
+                    }
+                }
+            }
+
+
             clicked.setName(newName);
 
         }

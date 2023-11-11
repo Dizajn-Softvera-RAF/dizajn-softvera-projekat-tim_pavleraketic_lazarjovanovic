@@ -5,6 +5,7 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -38,10 +39,19 @@ public class EditAction extends AbscractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
             return;
         }
-        for (ClassyNode child: selected.getClassyNode().getParent(1).getChildren()){
-            if (child.getName().equals(newName) && !(child.equals(selected))) {
-                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
-                return;
+        if(!(selected.getClassyNode() instanceof ProjectExplorer)){
+            for (ClassyNode child: selected.getClassyNode().getParent(1).getChildren()){
+                if (child.getName().equals(newName) && !(child.equals(selected))) {
+                    ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
+                    return;
+                }
+            }
+        }else{
+            for (ClassyNode child: ((ProjectExplorer) selected.getClassyNode()).getChildren()){
+                if (child.getName().equals(newName) && !(child.equals(selected))) {
+                    ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
+                    return;
+                }
             }
         }
         try {
