@@ -61,7 +61,7 @@ public class Package extends ClassyNodeComposite {
                 throw new RuntimeException(e);
             }
         }
-        if (child instanceof Package) {
+        if (child.getParent() instanceof Package) {
             try {
                 child.notifySubscribers("clear");
             } catch (IOException e) {
@@ -70,6 +70,9 @@ public class Package extends ClassyNodeComposite {
         }
 
     }
+
+
+
 
     @Override
     public void setName(String name) throws IOException {

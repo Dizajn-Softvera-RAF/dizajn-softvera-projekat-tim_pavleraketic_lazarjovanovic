@@ -41,9 +41,11 @@ public class Project extends ClassyNodeComposite {
         {
             this.getChildren().remove(aPackage);
         }
-
         deleteAll(aPackage);
     }
+
+
+
 
     public void deleteAll(ClassyNodeComposite classyNodeComposite){
         if (classyNodeComposite.getChildren() == null || classyNodeComposite.getChildren().isEmpty()){

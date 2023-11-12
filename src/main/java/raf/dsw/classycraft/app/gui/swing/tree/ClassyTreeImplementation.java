@@ -45,7 +45,7 @@ public class ClassyTreeImplementation implements ClassyTree {
         if(child == null) return;
         parent.add(new ClassyTreeItem(child));
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
-        System.out.println(parent.getClassyNode()+" "+child);
+        //System.out.println(parent.getClassyNode()+" "+child);
 
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
