@@ -35,7 +35,12 @@ public class ProjectExplorer extends ClassyNodeComposite {
         {
             this.getChildren().remove(project);
         }
+
+        if (child instanceof Project) {
+            project.deleteAll(project);
+        }
     }
+
 
     @Override
     public void addSubscriber(Subscriber subscriber) {

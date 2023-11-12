@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.tree;
 
+import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyLeaf;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
@@ -41,9 +42,10 @@ public class ClassyTreeImplementation implements ClassyTree {
             return;
 
         ClassyNode child = createChild(parent.getClassyNode());
+        if(child == null) return;
         parent.add(new ClassyTreeItem(child));
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
-
+        System.out.println(parent.getClassyNode()+" "+child);
 
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
@@ -73,6 +75,7 @@ public class ClassyTreeImplementation implements ClassyTree {
     private ClassyNode createChild(ClassyNode parent) throws IOException {
 
             NodeFactory nodeFactory = FactoryUtils.getFactory(parent);
+            if(nodeFactory == null)return null;
             return nodeFactory.getClassyNode(parent);
     }
 
