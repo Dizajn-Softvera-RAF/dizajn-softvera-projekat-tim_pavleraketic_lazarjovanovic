@@ -18,7 +18,7 @@ public class AppCore {
 
         MessageGenerator messageGenerator = new MessageGeneratorImplementation();
         Gui gui = new SwingGui(messageGenerator);
-        LoggerFactory loggerFactory = new LoggerFactory(messageGenerator);
+        LoggerFactory loggerFactory = new LoggerFactory();
         ClassyRepository classyRepository = new ClassyRepositoryImplementation();
 
 
