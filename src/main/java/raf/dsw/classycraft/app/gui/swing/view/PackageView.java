@@ -95,13 +95,23 @@ public class PackageView extends JPanel implements Subscriber {
         }
     }
 
+    public void
+    clearTabs(){
+        jTabbedPane.removeAll();
+        tabs.clear();
+        projectName.setVisible(false);
+        author.setVisible(false);
+    }
+
     @Override
     public void update(Object notification) {
         if(notification instanceof Package) load((Package) notification);
         else if(notification instanceof String){
             if(notification.equals("child")) setDiagrams();
-            else if (notification.equals("ime")) setLabels();}
+            else if (notification.equals("ime")) setLabels();
+            else if (notification.equals("clear")) clearTabs();}
         }
+
     }
 
 

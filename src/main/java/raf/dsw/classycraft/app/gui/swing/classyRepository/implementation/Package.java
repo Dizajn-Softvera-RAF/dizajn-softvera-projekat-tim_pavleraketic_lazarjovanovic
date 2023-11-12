@@ -56,7 +56,14 @@ public class Package extends ClassyNodeComposite {
         if (this.getChildren().contains(diagram)) {
             this.getChildren().remove(diagram);
             try {
-                notifySubscribers(diagram);
+                notifySubscribers("child");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (child instanceof Package) {
+            try {
+                child.notifySubscribers("clear");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

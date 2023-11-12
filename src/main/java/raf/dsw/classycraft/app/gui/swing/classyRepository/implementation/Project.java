@@ -22,9 +22,6 @@ public class Project extends ClassyNodeComposite {
         counter++;
     }
 
-
-
-
     @Override
     public void addChild(ClassyNode child) {
         if(child != null && child instanceof Package)
@@ -45,7 +42,37 @@ public class Project extends ClassyNodeComposite {
             this.getChildren().remove(aPackage);
         }
 
+        deleteAll(aPackage);
     }
+
+    public void deleteAll(ClassyNodeComposite classyNodeComposite){
+        if (classyNodeComposite.getChildren() == null || classyNodeComposite.getChildren().isEmpty()){
+            try {
+                classyNodeComposite.notifySubscribers("clear");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+        }
+        for (ClassyNode child: classyNodeComposite.getChildren()){
+            if (child instanceof Project) {
+                deleteAll((Project) child);
+                try {
+                    child.notifySubscribers("clear");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                try {
+                    child.getParent().notifySubscribers("clear");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                return;
+            }
+        }
+    }
+
 
     public void setAuthor(String name) throws IOException {
         author = name;
