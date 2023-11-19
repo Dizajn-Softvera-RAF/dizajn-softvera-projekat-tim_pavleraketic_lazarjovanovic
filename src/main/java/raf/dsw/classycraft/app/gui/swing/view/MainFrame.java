@@ -23,11 +23,12 @@ public class MainFrame extends JFrame implements Subscriber {
     private static MainFrame instance;
     private JMenuBar menu;
     private JToolBar toolBar;
+    private JSplitPane split;
     private ActionManager actionManager;
     private MessageGenerator messageGenerator;
     private ClassyTree classyTree;
     private PackageView packageView;
-    private JSplitPane split;
+
 
 
     private MainFrame(){
