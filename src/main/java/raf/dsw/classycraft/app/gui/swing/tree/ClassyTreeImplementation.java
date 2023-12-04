@@ -1,7 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.tree;
 
 import raf.dsw.classycraft.app.core.ApplicationFramework;
-import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyLeaf;
+
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.factory.FactoryUtils;

@@ -23,11 +23,13 @@ public class MainFrame extends JFrame implements Subscriber {
     private static MainFrame instance;
     private JMenuBar menu;
     private JToolBar toolBar;
+    private JSplitPane split;
     private ActionManager actionManager;
     private MessageGenerator messageGenerator;
     private ClassyTree classyTree;
     private PackageView packageView;
-    private JSplitPane split;
+    private JToolBar vToolBar;
+
 
 
     private MainFrame(){
@@ -60,6 +62,9 @@ public class MainFrame extends JFrame implements Subscriber {
 
         toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
+
+        vToolBar = new MyVToolBar();
+        add(vToolBar,BorderLayout.EAST);
 
 
         //dodavanje prozora i Linije za splitovanje ta dva dela

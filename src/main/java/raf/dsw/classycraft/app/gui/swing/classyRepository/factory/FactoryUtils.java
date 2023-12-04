@@ -37,7 +37,7 @@ public class FactoryUtils {
             return new PackageFactory("Package", parent);
         }
         else return new DiagramFactory("Diagram" , parent);
-        }
+    }
         return null;
     }
 }

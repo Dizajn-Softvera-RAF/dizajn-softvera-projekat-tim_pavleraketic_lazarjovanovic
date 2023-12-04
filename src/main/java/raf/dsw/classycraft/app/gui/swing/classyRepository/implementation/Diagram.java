@@ -1,10 +1,11 @@
 package raf.dsw.classycraft.app.gui.swing.classyRepository.implementation;
 
-import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyLeaf;
+
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
@@ -15,7 +16,7 @@ import java.util.Iterator;
 @Getter
 @Setter
 
-public class Diagram extends ClassyLeaf {
+public class Diagram extends ClassyNodeComposite {
 
     private static int counter =1;
 
@@ -23,6 +24,16 @@ public class Diagram extends ClassyLeaf {
         super(name, parent);
         setName(name + counter);
         counter++;
+    }
+
+    @Override
+    public void addChild(ClassyNode child) {
+
+    }
+
+    @Override
+    public void removeChild(ClassyNode child) {
+
     }
 
     @Override
