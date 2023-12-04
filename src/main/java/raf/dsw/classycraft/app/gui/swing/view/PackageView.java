@@ -8,9 +8,9 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
+import raf.dsw.classycraft.app.gui.swing.state.StateManager;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +26,7 @@ public class PackageView extends JPanel implements Subscriber {
     private JLabel author;
     private Package paket;
     private Map<Diagram,DiagramView> diagramMap;
+    private StateManager stateManager;
 
 
 
@@ -131,6 +132,35 @@ public class PackageView extends JPanel implements Subscriber {
         }
         tabs.remove(remove);
     }
+
+    public void startAddState(){
+        this.stateManager.setAddState();
+    }
+    public void startDeleteState(){
+        this.stateManager.setDeleteState();
+    }
+    public void startMoveState(){this.stateManager.setMoveState();}
+    public void startSelectState(){this.stateManager.setSelectState();}
+
+    public void startConnectState(){this.stateManager.setConnectState();}
+    public void misKliknut(int x, int y, DiagramView m ){
+        //System.out.println("kliknute su koordinate: ("+x+", "+y+")\t"+"na mapi "+m.getName());
+        stateManager.getCurrent().misKliknut(x, y, m);
+    }
+
+    public void misPritisnut(int x, int y, DiagramView m){
+        //System.out.println("kliknute su koordinate: ("+x+", "+y+")\t"+"na mapi "+m.getName());
+        stateManager.getCurrent().misPritisnut(x, y, m);
+    }
+
+    public void misPovucen(int x, int y, DiagramView m){
+        //System.out.println("kliknute su koordinate: ("+x+", "+y+")\t"+"na mapi "+m.getName());
+        stateManager.getCurrent().misPovucen(x, y, m);
+    }
+    public void misOtpusten(int x, int y, DiagramView m){
+        //System.out.println("kliknute su koordinate: ("+x+", "+y+")\t"+"na mapi "+m.getName());
+        stateManager.getCurrent().misOtpusten(x,y,m);
+}
 
 
 

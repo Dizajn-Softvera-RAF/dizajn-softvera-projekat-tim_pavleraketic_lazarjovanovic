@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.gui.swing.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classycraft.app.gui.swing.controller.state.*;
 
 @Getter
 @Setter
@@ -14,6 +15,12 @@ public class ActionManager {
     private EditAction editAction;
     private EditAuthorAction editAuthorAction;
 
+    private AddStateAction addStateAction;
+    private ConnectStateAction connectStateAction;
+    private DeleteStateAction deleteStateAction;
+    private MoveStateAction moveStateAction;
+    private SelectStateAction selectStateAction;
+
 
 
     public ActionManager() {
@@ -23,6 +30,12 @@ public class ActionManager {
         this.deleteAction = new DeleteAction();
         this.editAction = new EditAction();
         this.editAuthorAction = new EditAuthorAction();
+
+        this.addStateAction = new AddStateAction();
+        this.connectStateAction = new ConnectStateAction();
+        this.deleteStateAction = new DeleteStateAction();
+        this.moveStateAction = new MoveStateAction();
+        this.selectStateAction = new SelectStateAction();
 
     }
 

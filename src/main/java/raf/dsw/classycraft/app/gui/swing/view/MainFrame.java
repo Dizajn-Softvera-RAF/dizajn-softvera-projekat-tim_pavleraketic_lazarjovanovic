@@ -28,6 +28,7 @@ public class MainFrame extends JFrame implements Subscriber {
     private MessageGenerator messageGenerator;
     private ClassyTree classyTree;
     private PackageView packageView;
+    private JToolBar vToolBar;
 
 
 
@@ -61,6 +62,9 @@ public class MainFrame extends JFrame implements Subscriber {
 
         toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
+
+        vToolBar = new MyVToolBar();
+        add(vToolBar,BorderLayout.EAST);
 
 
         //dodavanje prozora i Linije za splitovanje ta dva dela
