@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -24,6 +25,7 @@ public class PackageView extends JPanel implements Subscriber {
     private JLabel projectName;
     private JLabel author;
     private Package paket;
+    private Map<Diagram,DiagramView> diagramMap;
 
 
 
@@ -101,6 +103,36 @@ public class PackageView extends JPanel implements Subscriber {
         projectName.setVisible(false);
         author.setVisible(false);
     }
+
+    public void ucitavanje(){
+
+
+        DiagramView remove = null;
+
+        for(ClassyNode child: paket.getChildren()){
+            if (!(child instanceof Diagram)) continue;
+            if (diagramMap.containsKey(child)) continue;
+            DiagramView d = new DiagramView((Diagram) child);
+            d.setPackageView(this);
+            tabs.add(d);
+            jTabbedPane.add(d);
+            diagramMap.put((Diagram) child, d);
+        }
+
+        for (DiagramView tab: tabs){
+            if (paket.getChildren().contains(tab.getDiagram())) {
+                continue;
+            }
+            else{
+                jTabbedPane.remove(tab);
+                diagramMap.remove(tab.getDiagram(), tab);
+                remove = tab;
+            }
+        }
+        tabs.remove(remove);
+    }
+
+
 
 
     @Override
