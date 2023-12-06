@@ -18,11 +18,13 @@ public class Class extends Interclass {
     public Class(String name, ClassyNode parent, Painter painter, Color color, int x, int y) {
         super(name, parent, painter, color, x, y);
         this.setColor(Color.BLACK);
+
     }
 
     public Class(String aClass, Diagram diagram, int x, int y) {
         super(aClass,diagram,null,null,x,y);
         this.setColor(Color.BLACK);
+        this.setStrokeW(2);
     }
 
     @Override

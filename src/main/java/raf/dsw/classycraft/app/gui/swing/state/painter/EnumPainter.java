@@ -13,8 +13,10 @@ public class EnumPainter extends ElementPainter{
 
     private Enum e;
 
-    protected EnumPainter(DiagramElement diagramElement) {
+    public EnumPainter(DiagramElement diagramElement) {
+
         super(diagramElement);
+        this.e = (Enum) diagramElement;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class EnumPainter extends ElementPainter{
         if (e.getName()== null) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
             try {
-                e.setName("klasa");
+                e.setName("enum");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

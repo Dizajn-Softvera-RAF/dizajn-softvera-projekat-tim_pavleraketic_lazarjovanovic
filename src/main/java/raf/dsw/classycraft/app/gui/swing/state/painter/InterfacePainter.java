@@ -12,8 +12,10 @@ import java.io.IOException;
 public class InterfacePainter extends ElementPainter{
 
     private Interface i;
-    protected InterfacePainter(DiagramElement diagramElement) {
+    public InterfacePainter(DiagramElement diagramElement) {
+
         super(diagramElement);
+        this.i = (Interface) diagramElement;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class InterfacePainter extends ElementPainter{
         if (i.getName()== null) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
             try {
-                i.setName("klasa");
+                i.setName("Interface");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
