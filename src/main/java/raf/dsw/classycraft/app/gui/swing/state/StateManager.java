@@ -28,6 +28,7 @@ public class StateManager {
 
         public void setAddState() {
             state = addState;
+            addState.izaberi();
         }
         
         public void setMoveState() {

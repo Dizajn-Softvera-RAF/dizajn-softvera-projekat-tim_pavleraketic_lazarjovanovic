@@ -29,6 +29,11 @@ public class Diagram extends ClassyNodeComposite {
     @Override
     public void addChild(ClassyNode child) {
 
+        try {
+            this.notifySubscribers("aaaaaaaa");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
