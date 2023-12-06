@@ -33,6 +33,7 @@ public class PackageView extends JPanel implements Subscriber {
 
     public PackageView(Package paket){
         this.paket = paket;
+        this.stateManager = new StateManager();
         initalize();
     }
 
