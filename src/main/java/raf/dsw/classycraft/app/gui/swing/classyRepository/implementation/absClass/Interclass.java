@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
-import raf.dsw.classycraft.app.gui.swing.state.painter.ClassPainter;
-import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
-import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
+import raf.dsw.classycraft.app.gui.swing.state.painter.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -28,6 +26,7 @@ public abstract class Interclass extends DiagramElement {
     private int height;
 
 
+
     public Interclass(String name, ClassyNode parent, Painter painter, Color color, int x, int y) {
         super(name, parent);
 
@@ -36,9 +35,18 @@ public abstract class Interclass extends DiagramElement {
         this.width = name.length() * 16;
         this.height = name.length() * 21;
 
+
         this.color = defaultColor;
         this.strokeW = 3;
-        this.painter = new ClassPainter(this);
+        System.out.println(name);
+        if(name.equals("Class")){
+           this.painter = new ClassPainter(this);
+        } else if (name.equals("Enum")) {
+            this.painter = new EnumPainter(this);
+        }else if(name.equals("Interface")){
+            this.painter = new InterfacePainter(this);
+        }
+
     }
 
     @Override

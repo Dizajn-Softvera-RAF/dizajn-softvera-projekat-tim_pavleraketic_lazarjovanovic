@@ -31,7 +31,7 @@ public class ClassPainter extends ElementPainter{
         if (c.getName()== null) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
             try {
-                c.setName("klasa");
+                c.setName("class");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
