@@ -43,7 +43,9 @@ public class StateManager {
 
     public void setConnectState() {state = deleteState;}
 
-    public void setAddAttributeState(){state = addAttributeState;}
+    public void setAddAttributeState(){state = addAttributeState;
+            addAttributeState.izaberiTip();
+        }
 
     public State getCurrent() {
         return state;}
