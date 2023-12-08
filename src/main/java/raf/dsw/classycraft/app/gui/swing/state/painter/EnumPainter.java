@@ -45,6 +45,6 @@ public class EnumPainter extends ElementPainter{
 
     @Override
     public boolean elementAt(int x, int y) {
-        return false;
+        return e.getPainter().getShape().contains(x,y);
     }
 }

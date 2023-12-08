@@ -11,6 +11,7 @@ import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.state.StateManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,7 @@ public class PackageView extends JPanel implements Subscriber {
             DiagramView d = new DiagramView((Diagram) child);
             d.setPackageView(this);
             tabs.add(d);
+
             for(DiagramView tab : tabs){
                 jTabbedPane.add(tab.getDiagram().getName(),tab);
             }
@@ -142,6 +144,7 @@ public class PackageView extends JPanel implements Subscriber {
     }
     public void startMoveState(){this.stateManager.setMoveState();}
     public void startSelectState(){this.stateManager.setSelectState();}
+    public void startAddAttributeState(){this.stateManager.setAddAttributeState();}
 
     public void startConnectState(){this.stateManager.setConnectState();}
     public void misKliknut(int x, int y, DiagramView m ){
@@ -171,6 +174,7 @@ public class PackageView extends JPanel implements Subscriber {
         if(notification instanceof Package) load((Package) notification);
         else if(notification instanceof String){
             if(notification.equals("child")) setDiagrams();
+            //else if (notification.equals("child1")) ucitavanje();
             else if (notification.equals("ime")) setLabels();
             else if (notification.equals("clear")) clearTabs();
             }

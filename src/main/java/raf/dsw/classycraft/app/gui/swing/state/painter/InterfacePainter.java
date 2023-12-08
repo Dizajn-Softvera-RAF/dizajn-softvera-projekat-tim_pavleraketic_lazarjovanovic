@@ -44,6 +44,6 @@ public class InterfacePainter extends ElementPainter{
 
     @Override
     public boolean elementAt(int x, int y) {
-        return false;
+        return i.getPainter().getShape().contains(x,y);
     }
 }

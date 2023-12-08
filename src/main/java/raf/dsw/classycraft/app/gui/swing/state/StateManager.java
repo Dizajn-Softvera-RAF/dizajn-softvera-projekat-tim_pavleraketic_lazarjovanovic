@@ -1,7 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.state;
 import lombok.Getter;
 import raf.dsw.classycraft.app.gui.swing.state.controller.*;
-import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 
 @Getter
 public class StateManager {
@@ -12,6 +11,7 @@ public class StateManager {
         private AddState addState;
         private MoveState moveState;
         private DeleteState deleteState;
+        private AddAttributeState addAttributeState;
 
         public StateManager () {
             initialise();
@@ -23,12 +23,13 @@ public class StateManager {
             moveState = new MoveState();
             selectState = new SelectState();
             deleteState = new DeleteState();
+            addAttributeState = new AddAttributeState();
             state = selectState;
         }
 
         public void setAddState() {
             state = addState;
-            addState.izaberi();
+            addState.izaberiTip();
         }
         
         public void setMoveState() {
@@ -41,6 +42,10 @@ public class StateManager {
     public void setSelectState() {state = selectState;}
 
     public void setConnectState() {state = deleteState;}
+
+    public void setAddAttributeState(){state = addAttributeState;
+            addAttributeState.izaberiTip();
+        }
 
     public State getCurrent() {
         return state;}

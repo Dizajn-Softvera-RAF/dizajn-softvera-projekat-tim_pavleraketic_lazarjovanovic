@@ -30,19 +30,19 @@ public class ClassPainter extends ElementPainter{
         g.draw(getShape());
         if (c.getName()== null) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
-            try {
-                c.setName("class");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
         }
 
         g.drawString(c.getName(), c.getX(), c.getY()-10);
+
+
     }
 
 
     @Override
     public boolean elementAt(int x, int y) {
-        return false;
+        return c.getPainter().getShape().contains(x,y);
     }
+
+
 }

@@ -17,10 +17,11 @@ public abstract class Painter {
         this.diagramElement = diagramElement;
     }
 
+    public Painter() {
+    }
+
     public abstract void draw (Graphics2D g);
 
     public abstract boolean elementAt (int x, int y);
-
-
 
 }

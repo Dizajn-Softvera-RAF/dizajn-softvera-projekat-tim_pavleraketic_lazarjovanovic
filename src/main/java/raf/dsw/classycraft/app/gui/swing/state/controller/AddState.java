@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
-import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Enum;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Interface;
@@ -15,18 +14,21 @@ import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 @Setter
 @Getter
 public class AddState implements State {
 
     public String izabran;
+    public String abst;
 
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
         System.out.println("clik");
         if(izabran.equals("Class")) {
+            isAbstract();
 
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
@@ -41,6 +43,21 @@ public class AddState implements State {
                 }
             }
             Class c = new Class("Class", diagramView.getDiagram(), x, y);// :)
+            if(abst.equals("Abs")){
+                try {
+                    c.setName(izaberiIme() + " (A) ");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else{
+                try {
+                    c.setName(izaberiIme());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
             c.getPainter().setDiagramElement(c);
 
             //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram(), c);
@@ -60,12 +77,17 @@ public class AddState implements State {
                     }
                 }
             }
-            Enum е = new Enum("Enum", diagramView.getDiagram(), x, y);// :)
-            е.getPainter().setDiagramElement(е);
+            Enum en = new Enum("Enum", diagramView.getDiagram(), x, y);// :)
+            try {
+                en.setName(izaberiIme());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            en.getPainter().setDiagramElement(en);
 
-            //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram(), c);
-            diagramView.getPainters().add(е.getPainter());
-            diagramView.getDiagram().addChild(е);
+            //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram());
+            diagramView.getPainters().add(en.getPainter());
+            diagramView.getDiagram().addChild(en);
             diagramView.repaint();
 
         }else if (izabran.equals("Interface")) {
@@ -82,6 +104,11 @@ public class AddState implements State {
                 }
             }
             Interface i = new Interface("Interface", diagramView.getDiagram(), x, y);// :)
+            try {
+                i.setName(izaberiIme());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             i.getPainter().setDiagramElement(i);
 
             //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram(), c);
@@ -108,7 +135,7 @@ public class AddState implements State {
 
     }
 
-    public void izaberi() {
+    public void izaberiTip() {
         String[] s = {"Class", "Enum", "Interface"};
         int choice = JOptionPane.showOptionDialog(null,
                 "Choose an option:",
@@ -128,4 +155,29 @@ public class AddState implements State {
             izabran = "Interface";
         }
     }
+
+    public String izaberiIme(){
+        String ime = JOptionPane.showInputDialog(null,"Set name","Name");
+        if(ime == null) return null;
+        return ime;
+    }
+
+    public void isAbstract(){
+        String[] s = {"Abstract", "Not Abs"};
+        int choice = JOptionPane.showOptionDialog(null,
+                "Choose an option:",
+                "Option Dialog",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                s,
+                s[0]);
+        if (choice == JOptionPane.CLOSED_OPTION) {
+            System.out.println("Dialog closed without making a selection.");
+        } else if (s[choice].equals("Abstract")) {
+            abst = "Abs";
+        }else if (s[choice].equals("Not Abs")) {
+            abst = "NotAbs";
+    }
+}
 }
