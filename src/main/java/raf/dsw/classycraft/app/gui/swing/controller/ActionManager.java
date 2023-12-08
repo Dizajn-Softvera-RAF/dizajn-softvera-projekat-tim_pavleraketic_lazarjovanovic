@@ -16,6 +16,7 @@ public class ActionManager {
     private EditAuthorAction editAuthorAction;
 
     private AddStateAction addStateAction;
+    private AddAttributeAction addAttributeAction;
     private ConnectStateAction connectStateAction;
     private DeleteStateAction deleteStateAction;
     private MoveStateAction moveStateAction;
@@ -32,6 +33,7 @@ public class ActionManager {
         this.editAuthorAction = new EditAuthorAction();
 
         this.addStateAction = new AddStateAction();
+        this.addAttributeAction = new AddAttributeAction();
         this.connectStateAction = new ConnectStateAction();
         this.deleteStateAction = new DeleteStateAction();
         this.moveStateAction = new MoveStateAction();

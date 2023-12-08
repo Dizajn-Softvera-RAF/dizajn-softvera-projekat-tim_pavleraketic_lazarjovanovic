@@ -144,6 +144,7 @@ public class PackageView extends JPanel implements Subscriber {
     }
     public void startMoveState(){this.stateManager.setMoveState();}
     public void startSelectState(){this.stateManager.setSelectState();}
+    public void startAddAttributeState(){this.stateManager.setAddAttributeState();}
 
     public void startConnectState(){this.stateManager.setConnectState();}
     public void misKliknut(int x, int y, DiagramView m ){

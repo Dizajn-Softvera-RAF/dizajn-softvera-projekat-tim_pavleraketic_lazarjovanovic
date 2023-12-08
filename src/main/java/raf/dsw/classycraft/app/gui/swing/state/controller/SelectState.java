@@ -2,7 +2,7 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 
 import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
-import raf.dsw.classycraft.app.gui.swing.state.painter.MultiSelectionPainter;
+import raf.dsw.classycraft.app.gui.swing.state.MultiSelectionPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;

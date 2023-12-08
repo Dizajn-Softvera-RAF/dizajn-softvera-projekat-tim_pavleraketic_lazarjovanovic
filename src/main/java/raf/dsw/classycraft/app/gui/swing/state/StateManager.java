@@ -11,6 +11,7 @@ public class StateManager {
         private AddState addState;
         private MoveState moveState;
         private DeleteState deleteState;
+        private AddAttributeState addAttributeState;
 
         public StateManager () {
             initialise();
@@ -22,6 +23,7 @@ public class StateManager {
             moveState = new MoveState();
             selectState = new SelectState();
             deleteState = new DeleteState();
+            addAttributeState = new AddAttributeState();
             state = selectState;
         }
 
@@ -40,6 +42,8 @@ public class StateManager {
     public void setSelectState() {state = selectState;}
 
     public void setConnectState() {state = deleteState;}
+
+    public void setAddAttributeState(){state = addAttributeState;}
 
     public State getCurrent() {
         return state;}

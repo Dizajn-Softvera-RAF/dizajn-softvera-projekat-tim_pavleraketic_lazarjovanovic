@@ -1,9 +1,11 @@
-package raf.dsw.classycraft.app.gui.swing.state.painter;
+package raf.dsw.classycraft.app.gui.swing.state;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
+import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
+import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

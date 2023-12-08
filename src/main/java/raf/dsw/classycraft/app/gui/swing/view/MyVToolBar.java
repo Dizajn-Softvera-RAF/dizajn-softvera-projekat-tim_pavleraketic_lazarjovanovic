@@ -9,6 +9,7 @@ public class MyVToolBar extends JToolBar {
         setFloatable(false);
 
         add(MainFrame.getInstance().getActionManager().getAddStateAction());
+        add(MainFrame.getInstance().getActionManager().getAddAttributeAction());
         add(MainFrame.getInstance().getActionManager().getDeleteStateAction());
         add(MainFrame.getInstance().getActionManager().getSelectStateAction());
         add(MainFrame.getInstance().getActionManager().getConnectStateAction());
