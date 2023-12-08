@@ -24,6 +24,4 @@ public abstract class Painter {
 
     public abstract boolean elementAt (int x, int y);
 
-
-
 }

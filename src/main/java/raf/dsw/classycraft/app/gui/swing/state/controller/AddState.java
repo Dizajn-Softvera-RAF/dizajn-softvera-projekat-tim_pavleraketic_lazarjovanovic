@@ -13,6 +13,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 @Setter
@@ -20,12 +21,14 @@ import java.io.IOException;
 public class AddState implements State {
 
     public String izabran;
+    public String abst;
 
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
         System.out.println("clik");
         if(izabran.equals("Class")) {
+            isAbstract();
 
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
@@ -40,11 +43,21 @@ public class AddState implements State {
                 }
             }
             Class c = new Class("Class", diagramView.getDiagram(), x, y);// :)
-            try {
-                c.setName(izaberiIme());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if(abst.equals("Abs")){
+                try {
+                    c.setName(izaberiIme() + " (A) ");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
+            else{
+                try {
+                    c.setName(izaberiIme());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
             c.getPainter().setDiagramElement(c);
 
             //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram(), c);
@@ -148,4 +161,23 @@ public class AddState implements State {
         if(ime == null) return null;
         return ime;
     }
+
+    public void isAbstract(){
+        String[] s = {"Abstract", "Not Abs"};
+        int choice = JOptionPane.showOptionDialog(null,
+                "Choose an option:",
+                "Option Dialog",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                s,
+                s[0]);
+        if (choice == JOptionPane.CLOSED_OPTION) {
+            System.out.println("Dialog closed without making a selection.");
+        } else if (s[choice].equals("Abstract")) {
+            abst = "Abs";
+        }else if (s[choice].equals("Not Abs")) {
+            abst = "NotAbs";
+    }
+}
 }
