@@ -14,11 +14,10 @@ public class Interface extends Interclass {
 
     public Interface(String name, ClassyNode parent, Painter painter, Color color, int x, int y) {
         super(name, parent, painter, color, x, y);
-        this.setColor(Color.GREEN);
     }
     public Interface(String aClass, Diagram diagram, int x, int y) {
         super(aClass,diagram,null,null,x,y);
-        this.setColor(Color.GREEN);
+        this.setColor(Color.orange);
         this.setStrokeW(4);
     }
 

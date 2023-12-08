@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
-import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Enum;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Interface;
@@ -14,7 +13,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 
 import javax.swing.*;
-import java.awt.*;
+import java.io.IOException;
 
 @Setter
 @Getter
@@ -41,6 +40,11 @@ public class AddState implements State {
                 }
             }
             Class c = new Class("Class", diagramView.getDiagram(), x, y);// :)
+            try {
+                c.setName(izaberiIme());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             c.getPainter().setDiagramElement(c);
 
             //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram(), c);
@@ -60,12 +64,17 @@ public class AddState implements State {
                     }
                 }
             }
-            Enum е = new Enum("Enum", diagramView.getDiagram(), x, y);// :)
-            е.getPainter().setDiagramElement(е);
+            Enum en = new Enum("Enum", diagramView.getDiagram(), x, y);// :)
+            try {
+                en.setName(izaberiIme());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            en.getPainter().setDiagramElement(en);
 
-            //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram(), c);
-            diagramView.getPainters().add(е.getPainter());
-            diagramView.getDiagram().addChild(е);
+            //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram());
+            diagramView.getPainters().add(en.getPainter());
+            diagramView.getDiagram().addChild(en);
             diagramView.repaint();
 
         }else if (izabran.equals("Interface")) {
@@ -82,6 +91,11 @@ public class AddState implements State {
                 }
             }
             Interface i = new Interface("Interface", diagramView.getDiagram(), x, y);// :)
+            try {
+                i.setName(izaberiIme());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             i.getPainter().setDiagramElement(i);
 
             //ApplicationFramework.getInstance().getClassyRepository().addChild(diagramView.getDiagram(), c);
@@ -108,7 +122,7 @@ public class AddState implements State {
 
     }
 
-    public void izaberi() {
+    public void izaberiTip() {
         String[] s = {"Class", "Enum", "Interface"};
         int choice = JOptionPane.showOptionDialog(null,
                 "Choose an option:",
@@ -127,5 +141,11 @@ public class AddState implements State {
         }else if (s[choice].equals("Interface")) {
             izabran = "Interface";
         }
+    }
+
+    public String izaberiIme(){
+        String ime = JOptionPane.showInputDialog(null,"Set name","Name");
+        if(ime == null) return null;
+        return ime;
     }
 }

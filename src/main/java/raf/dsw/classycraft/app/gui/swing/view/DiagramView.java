@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
+import raf.dsw.classycraft.app.gui.swing.state.ClassSelectionModel;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.view.controller.MouseController;
@@ -27,6 +28,7 @@ public class DiagramView extends JPanel implements Subscriber {
     private PackageView packageView;
     private List<Painter> painters;
     private List<Painter> selected;
+    private ClassSelectionModel classSelectionModel;
 
     private MouseController mc;
 
@@ -52,6 +54,7 @@ public class DiagramView extends JPanel implements Subscriber {
             painters.add(c.getPainter());
         }
         setDiagram(diagram);
+
 
     }
 

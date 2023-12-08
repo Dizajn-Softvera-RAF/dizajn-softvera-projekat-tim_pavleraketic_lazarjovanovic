@@ -32,12 +32,11 @@ public abstract class Interclass extends DiagramElement {
 
         this.x = x;
         this.y = y;
-        this.width = name.length() * 16;
-        this.height = name.length() * 21;
-
-
+        this.width = 90;
+        this.height = 120;
         this.color = defaultColor;
         this.strokeW = 3;
+
         System.out.println(name);
         if(name.equals("Class")){
            this.painter = new ClassPainter(this);
