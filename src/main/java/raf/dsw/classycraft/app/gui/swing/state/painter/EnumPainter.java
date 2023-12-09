@@ -49,6 +49,7 @@ public class EnumPainter extends ElementPainter{
                     e.setWidth(e.getMaxWidth() + 5);
                     e.setHeight(brojac + 5);
                     brojac += 15;
+
                 } else if(cc instanceof Atribut){
                     //MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                     continue;
@@ -58,6 +59,7 @@ public class EnumPainter extends ElementPainter{
                 }
         }
         brojac = 15;
+        e.setMaxWidth(0);
 
 
 

@@ -39,6 +39,7 @@ public class Diagram extends ClassyNodeComposite {
     @Override
     public void removeChild(ClassyNode child) {
 
+
     }
 
     @Override

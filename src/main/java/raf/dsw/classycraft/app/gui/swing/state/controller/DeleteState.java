@@ -11,6 +11,7 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 public class DeleteState implements State {
     
@@ -42,9 +43,38 @@ public class DeleteState implements State {
             System.out.println("");
     }
     }
-        
+//public void misKliknut(int x, int y, DiagramView diagramView) {
+//    try {
+//        Iterator<Painter> iterator = diagramView.getPainters().iterator();
+//
+//        while (iterator.hasNext()) {
+//            Painter p = iterator.next();
+//
+//            if (p.elementAt(x, y)) {
+//                if (p.getDiagramElement() instanceof Interclass) {
+//                    staSeBrise();
+//                    if (izabran.equals("Interclass")) {
+//                        iterator.remove();
+//                        diagramView.repaint();
+//                    } else if (izabran.equals("ClassContent")) {
+//                        otvoriListu(p);
+//                        ((Interclass) p.getDiagramElement()).getContent().remove(ime);
+//                        diagramView.repaint();
+//                    }
+//                } else if (p.getDiagramElement() instanceof Connection) {
+//                    iterator.remove();
+//                    diagramView.repaint();
+//                }
+//            }
+//        }
+//    } catch (ConcurrentModificationException e) {
+//        System.out.println("");
+//    }
+//}
 
-    
+
+
+
 
     @Override
     public void misPritisnut(int x, int y, DiagramView diagramView) {

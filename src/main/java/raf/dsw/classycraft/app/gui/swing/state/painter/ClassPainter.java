@@ -46,6 +46,7 @@ public class ClassPainter extends ElementPainter{
                     c.setWidth(c.getMaxWidth() + 5);
                     c.setHeight(brojac + 5);
                     brojac += 15;
+
                 } else if (cc instanceof Atribut) {
                     Atribut a = (Atribut) cc;
                     int currWidth = fm.stringWidth(a.toString());
@@ -55,11 +56,13 @@ public class ClassPainter extends ElementPainter{
                     c.setWidth(c.getMaxWidth() + 5);
                     c.setHeight(brojac + 5);
                     brojac += 15;
+
                 } else if(cc instanceof EnumElement){
                     break;
                 }
         }
         brojac = 15;
+        c.setMaxWidth(0);
 
         Rectangle2D.Double rectangle = new Rectangle2D.Double();
         rectangle.setRect(c.getX(), c.getY(), c.getWidth(), c.getHeight());

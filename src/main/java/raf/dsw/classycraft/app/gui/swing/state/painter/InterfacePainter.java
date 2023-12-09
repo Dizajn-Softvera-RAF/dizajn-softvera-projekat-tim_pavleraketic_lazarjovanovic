@@ -48,6 +48,7 @@ public class InterfacePainter extends ElementPainter{
                     i.setWidth(i.getMaxWidth() + 5);
                     i.setHeight(brojac + 5);
                     brojac += 15;
+
                 } else if (cc instanceof Atribut) {
                     //MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                     continue;
@@ -55,8 +56,10 @@ public class InterfacePainter extends ElementPainter{
                     //MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                     continue;
                 }
+
         }
         brojac = 15;
+        i.setMaxWidth(0);
 
 
         Rectangle2D.Double rectangle = new Rectangle2D.Double();
