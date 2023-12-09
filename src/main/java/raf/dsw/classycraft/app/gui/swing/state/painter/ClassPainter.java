@@ -23,7 +23,7 @@ public class ClassPainter extends ElementPainter{
 
     @Override
     public void draw(Graphics2D g) {
-
+        g.drawString(c.getName(), c.getX(), c.getY() - 10);
         Font f = new Font("Sheriff", Font.PLAIN,10);
         g.setFont(f);
         FontMetrics fm = g.getFontMetrics(f);
@@ -37,6 +37,7 @@ public class ClassPainter extends ElementPainter{
                         c.setMaxWidth(currWidth + 10);
                     g.drawString(m.toString(), c.getX(), c.getY() + brojac);
                     c.setWidth(c.getMaxWidth() + 5);
+                    c.setHeight(brojac + 5);
                     brojac += 15;
                 } else if (cc instanceof Atribut) {
                     Atribut a = (Atribut) cc;
@@ -45,6 +46,7 @@ public class ClassPainter extends ElementPainter{
                         c.setMaxWidth(currWidth + 10);
                     g.drawString(a.toString(), c.getX() + 5, c.getY() + brojac);
                     c.setWidth(c.getMaxWidth() + 5);
+                    c.setHeight(brojac + 5);
                     brojac += 15;
                 }
         }
@@ -63,7 +65,7 @@ public class ClassPainter extends ElementPainter{
         if (c.getName() == null) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
         }
-        g.drawString(c.getName(), c.getX(), c.getY() - 10);
+
 
     }
 
