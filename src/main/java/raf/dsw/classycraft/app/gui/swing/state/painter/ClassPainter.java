@@ -44,7 +44,7 @@ public class ClassPainter extends ElementPainter{
                     int currWidth = fm.stringWidth(a.toString());
                     if(c.getMaxWidth()<currWidth)
                         c.setMaxWidth(currWidth + 10);
-                    g.drawString(a.toString(), c.getX() + 5, c.getY() + brojac);
+                    g.drawString(a.toString(), c.getX(), c.getY() + brojac);
                     c.setWidth(c.getMaxWidth() + 5);
                     c.setHeight(brojac + 5);
                     brojac += 15;

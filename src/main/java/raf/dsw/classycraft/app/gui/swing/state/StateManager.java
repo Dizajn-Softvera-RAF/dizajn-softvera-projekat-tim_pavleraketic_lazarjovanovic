@@ -37,11 +37,11 @@ public class StateManager {
         }
         
 
-    public void setDeleteState() {state = connectionState;}
+    public void setDeleteState() {state = deleteState;}
 
     public void setSelectState() {state = selectState;}
 
-    public void setConnectState() {state = deleteState;}
+    public void setConnectState() {state = connectionState;}
 
     public void setAddClassContentState(){state = addClassContentState;
             addClassContentState.izaberiTip();
