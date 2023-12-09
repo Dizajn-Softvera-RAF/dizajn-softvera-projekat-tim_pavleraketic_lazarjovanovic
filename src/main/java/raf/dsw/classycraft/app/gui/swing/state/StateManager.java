@@ -11,7 +11,7 @@ public class StateManager {
         private AddState addState;
         private MoveState moveState;
         private DeleteState deleteState;
-        private AddAttributeState addAttributeState;
+        private AddClassContentState addClassContentState;
 
         public StateManager () {
             initialise();
@@ -23,7 +23,7 @@ public class StateManager {
             moveState = new MoveState();
             selectState = new SelectState();
             deleteState = new DeleteState();
-            addAttributeState = new AddAttributeState();
+            addClassContentState = new AddClassContentState();
             state = selectState;
         }
 
@@ -43,8 +43,8 @@ public class StateManager {
 
     public void setConnectState() {state = deleteState;}
 
-    public void setAddAttributeState(){state = addAttributeState;
-            addAttributeState.izaberiTip();
+    public void setAddClassContentState(){state = addClassContentState;
+            addClassContentState.izaberiTip();
         }
 
     public State getCurrent() {

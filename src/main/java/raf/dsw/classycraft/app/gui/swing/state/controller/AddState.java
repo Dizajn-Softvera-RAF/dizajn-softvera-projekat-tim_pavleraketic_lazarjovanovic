@@ -12,9 +12,12 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.font.TextAttribute;
 import java.io.IOException;
+import java.text.AttributedString;
 
 @Setter
 @Getter
@@ -22,6 +25,7 @@ public class AddState implements State {
 
     public String izabran;
     public String abst;
+
 
 
     @Override
@@ -42,10 +46,10 @@ public class AddState implements State {
                     }
                 }
             }
-            Class c = new Class("Class", diagramView.getDiagram(), x, y);// :)
+            Class c = new Class("Class", diagramView.getDiagram(), x, y);
             if(abst.equals("Abs")){
                 try {
-                    c.setName(izaberiIme() + " (A) ");
+                    c.setName( izaberiIme() + " (A) ");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

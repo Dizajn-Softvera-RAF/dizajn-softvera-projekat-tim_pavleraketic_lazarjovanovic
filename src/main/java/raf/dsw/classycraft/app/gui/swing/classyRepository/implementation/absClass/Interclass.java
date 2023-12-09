@@ -8,6 +8,8 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.*;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Setter
@@ -19,11 +21,14 @@ public abstract class Interclass extends DiagramElement {
     private Painter painter;
     private Color color;
     private Color defaultColor = Color.BLACK;
+    private List<ClassContent> content;
+    private int maxWidth = 0;
 
     private int x;
     private int y;
     private int width;
     private int height;
+
 
 
 
@@ -36,6 +41,8 @@ public abstract class Interclass extends DiagramElement {
         this.height = 120;
         this.color = defaultColor;
         this.strokeW = 3;
+        content = new ArrayList<>();
+        this.maxWidth = 0;
 
         System.out.println(name);
         if(name.equals("Class")){

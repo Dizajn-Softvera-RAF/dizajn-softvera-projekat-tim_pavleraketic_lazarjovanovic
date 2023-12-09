@@ -20,4 +20,8 @@ public abstract class ElementPainter extends Painter {
 
     public ElementPainter() {
     }
+
+    @Override
+    public abstract boolean elementAt(int x, int y);
+
 }
