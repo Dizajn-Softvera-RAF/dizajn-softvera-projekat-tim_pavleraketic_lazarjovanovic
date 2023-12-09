@@ -3,11 +3,14 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.ClassContent;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Connection;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
+import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
+import java.util.ConcurrentModificationException;
 
 public class DeleteState implements State {
     
@@ -16,24 +19,28 @@ public class DeleteState implements State {
     
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
-        for(Painter p: diagramView.getPainters()){
-            if (p.elementAt(x, y)) {
-                if(p.getDiagramElement() instanceof Interclass){
-                   staSeBrise();
-                   if(izabran.equals("Interclass")){
-                       diagramView.getPainters().remove(p);
-                       diagramView.repaint();
-                   } else if (izabran.equals("ClassContent")) {
-                        otvoriListu(p);
-                        ((Interclass) p.getDiagramElement()).getContent().remove(ime);
+        try {
+            for (Painter p : diagramView.getPainters()) {
+                if (p.elementAt(x, y)) {
+                    if (p.getDiagramElement() instanceof Interclass) {
+                        staSeBrise();
+                        if (izabran.equals("Interclass")) {
+                            diagramView.getPainters().remove(p);
+                            diagramView.repaint();
+                        } else if (izabran.equals("ClassContent")) {
+                            otvoriListu(p);
+                            ((Interclass) p.getDiagramElement()).getContent().remove(ime);
+                            diagramView.repaint();
+                        }
+                    } else if (p.getDiagramElement() instanceof Connection) {
+                        diagramView.getPainters().remove(p);
                         diagramView.repaint();
-                   }
-                } else if (p.getDiagramElement() instanceof Connection) {
-                    diagramView.getPainters().remove(p);
-                    diagramView.repaint();
+                    }
                 }
             }
-        }
+        } catch (ConcurrentModificationException e){
+            System.out.println("");
+    }
     }
         
 
@@ -82,11 +89,10 @@ public class DeleteState implements State {
                 options, options[0]);
 
         if (selectedOption == null) {
-            System.out.println("User canceled the input.");
+            MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.COMPONENT_NOT_SELECTED);
         } else {
             ime = (ClassContent) selectedOption;
-            System.out.println("You selected: " + selectedOption);
-            return (ClassContent) ime;
+            return ime;
         }
       return null;
     }

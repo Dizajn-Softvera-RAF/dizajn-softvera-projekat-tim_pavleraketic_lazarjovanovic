@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.ClassContent;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.classContent.Atribut;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.classContent.EnumElement;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.classContent.Metod;
 import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
@@ -40,8 +41,17 @@ public class AddClassContentState implements State {
             }
         }
         diagramView.repaint();
+    } else if (izabran.equals("Enum Element")) {
+            for (Painter p : diagramView.getPainters()) {
+                if (p.elementAt(x, y)) {
+                    ClassContent enumElement = new EnumElement("");
+                    enumElement.setIme(ime().toUpperCase());
+                    ((Interclass) p.getDiagramElement()).getContent().add(enumElement);
+                }
+            }
+            diagramView.repaint();
+        }
     }
-}
 
 
 
@@ -61,7 +71,7 @@ public class AddClassContentState implements State {
     }
 
     public void izaberiTip() {
-        String[] s = {"Method", "Attribute"};
+        String[] s = {"Method", "Attribute","Enum Element"};
         int choice = JOptionPane.showOptionDialog(null,
                 "Choose an option:",
                 "Option Dialog",
@@ -76,6 +86,8 @@ public class AddClassContentState implements State {
             izabran = "Method";
         } else if (s[choice].equals("Attribute")) {
             izabran = "Attribute";
+        } else if(s[choice].equals("Enum Element")){
+            izabran = "Enum Element";
         }
     }
 
