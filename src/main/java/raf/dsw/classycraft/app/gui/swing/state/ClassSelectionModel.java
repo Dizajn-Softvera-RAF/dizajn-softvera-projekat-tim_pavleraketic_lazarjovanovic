@@ -2,6 +2,11 @@ package raf.dsw.classycraft.app.gui.swing.state;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Connection;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Enum;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Interface;
 import raf.dsw.classycraft.app.gui.swing.observer.Publisher;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
@@ -17,9 +22,8 @@ import java.util.List;
 
 public class ClassSelectionModel implements Publisher {
 
-    private List<ElementPainter> selected;
+    private List<Painter> selected;
     protected List<Subscriber> subscribers;
-//    private Color oldColor;
 
     public ClassSelectionModel() {
         this.selected = new ArrayList<>();
@@ -28,15 +32,38 @@ public class ClassSelectionModel implements Publisher {
 
     public void addElement(Painter p) throws IOException {
         if (p != null) {
-            this.getSelected().add((ElementPainter) p);
-            ((ElementPainter) p).getInterclass().setColor(Color.BLUE);
+
+
+            this.getSelected().add(p);
+            try {
+                if(p.getDiagramElement()  instanceof Interclass ){
+                    ((Interclass) p.getDiagramElement()).setColor(Color.cyan);
+                }
+            } catch (NullPointerException e){
+                System.out.println("");
+            }
+
             notifySubscribers(this);
         }
     }
 
     public void clearList() throws IOException {
-        for(ElementPainter p : this.getSelected()){
-            p.getInterclass().setColor(p.getInterclass().getColor());
+        for(Painter p : this.getSelected()){
+            try {
+                if(p.getDiagramElement()  instanceof Interclass){
+                    if(p.getDiagramElement() instanceof Class){
+                        ((Interclass) p.getDiagramElement()).setColor(Color.BLACK);
+                    } else if (p.getDiagramElement() instanceof Interface) {
+                        ((Interclass) p.getDiagramElement()).setColor(Color.ORANGE);
+                    }else if (p.getDiagramElement() instanceof Enum) {
+                        ((Interclass) p.getDiagramElement()).setColor(Color.magenta);
+                    }
+
+                }
+            } catch (NullPointerException e){
+                System.out.println("");
+            }
+
         }
         getSelected().clear();
     }

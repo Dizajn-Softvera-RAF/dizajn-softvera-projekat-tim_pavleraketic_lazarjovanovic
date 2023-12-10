@@ -10,6 +10,7 @@ import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
@@ -21,60 +22,43 @@ public class DeleteState implements State {
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
         try {
-            for (Painter p : diagramView.getPainters()) {
-                if (p.elementAt(x, y)) {
-                    if (p.getDiagramElement() instanceof Interclass) {
-                        staSeBrise();
-                        if (izabran.equals("Interclass")) {
+            if(diagramView.getClassSelectionModel().getSelected().isEmpty()){
+                for (Painter p : diagramView.getPainters()) {
+                    if (p.elementAt(x, y)) {
+                        if (p.getDiagramElement() instanceof Interclass) {
+                            staSeBrise();
+                            if (izabran.equals("Interclass")) {
+                                diagramView.getPainters().remove(p);
+                                diagramView.repaint();
+                            } else if (izabran.equals("ClassContent")) {
+                                otvoriListu(p);
+                                ((Interclass) p.getDiagramElement()).getContent().remove(ime);
+                                diagramView.repaint();
+                            }
+                        } else if (p.getDiagramElement() instanceof Connection) {
                             diagramView.getPainters().remove(p);
                             diagramView.repaint();
-                        } else if (izabran.equals("ClassContent")) {
-                            otvoriListu(p);
-                            ((Interclass) p.getDiagramElement()).getContent().remove(ime);
-                            diagramView.repaint();
                         }
-                    } else if (p.getDiagramElement() instanceof Connection) {
+                    }
+                }
+            } else{
+                for(Painter p: diagramView.getClassSelectionModel().getSelected()){
+                    if(p.getDiagramElement() instanceof Interclass){
                         diagramView.getPainters().remove(p);
                         diagramView.repaint();
                     }
+
                 }
+                diagramView.getClassSelectionModel().clearList();
             }
+
+
         } catch (ConcurrentModificationException e){
             System.out.println("");
+    } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-    }
-//public void misKliknut(int x, int y, DiagramView diagramView) {
-//    try {
-//        Iterator<Painter> iterator = diagramView.getPainters().iterator();
-//
-//        while (iterator.hasNext()) {
-//            Painter p = iterator.next();
-//
-//            if (p.elementAt(x, y)) {
-//                if (p.getDiagramElement() instanceof Interclass) {
-//                    staSeBrise();
-//                    if (izabran.equals("Interclass")) {
-//                        iterator.remove();
-//                        diagramView.repaint();
-//                    } else if (izabran.equals("ClassContent")) {
-//                        otvoriListu(p);
-//                        ((Interclass) p.getDiagramElement()).getContent().remove(ime);
-//                        diagramView.repaint();
-//                    }
-//                } else if (p.getDiagramElement() instanceof Connection) {
-//                    iterator.remove();
-//                    diagramView.repaint();
-//                }
-//            }
-//        }
-//    } catch (ConcurrentModificationException e) {
-//        System.out.println("");
-//    }
-//}
-
-
-
-
 
     @Override
     public void misPritisnut(int x, int y, DiagramView diagramView) {

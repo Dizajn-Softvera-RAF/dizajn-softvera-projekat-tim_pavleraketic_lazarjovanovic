@@ -32,6 +32,7 @@ public class Class extends Interclass {
         this.setColor(Color.BLACK);
         this.setStrokeW(2);
         content = new ArrayList<>();
+
     }
 
     @Override
@@ -47,5 +48,10 @@ public class Class extends Interclass {
     @Override
     public void notifySubscribers(Object notification) throws IOException {
 
+    }
+
+    @Override
+    public void napraviTacke() {
+        super.napraviTacke();
     }
 }

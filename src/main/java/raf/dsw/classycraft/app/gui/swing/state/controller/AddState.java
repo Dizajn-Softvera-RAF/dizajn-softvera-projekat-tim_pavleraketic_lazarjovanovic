@@ -11,6 +11,7 @@ import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 
 import javax.swing.*;
@@ -47,6 +48,7 @@ public class AddState implements State {
                 }
             }
             Class c = new Class("Class", diagramView.getDiagram(), x, y);
+            //c.napraviTacke();
             if(abst.equals("Abs")){
                 try {
                     c.setName( izaberiIme() + " (A) ");
@@ -82,6 +84,7 @@ public class AddState implements State {
                 }
             }
             Enum en = new Enum("Enum", diagramView.getDiagram(), x, y);// :)
+            //en.napraviTacke();
             try {
                 en.setName(izaberiIme());
             } catch (IOException e) {
@@ -108,6 +111,7 @@ public class AddState implements State {
                 }
             }
             Interface i = new Interface("Interface", diagramView.getDiagram(), x, y);// :)
+            //i.napraviTacke();
             try {
                 i.setName(izaberiIme());
             } catch (IOException e) {
@@ -177,6 +181,7 @@ public class AddState implements State {
                 s,
                 s[0]);
         if (choice == JOptionPane.CLOSED_OPTION) {
+            MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
             System.out.println("Dialog closed without making a selection.");
         } else if (s[choice].equals("Abstract")) {
             abst = "Abs";

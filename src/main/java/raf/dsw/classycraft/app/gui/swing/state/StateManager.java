@@ -41,7 +41,8 @@ public class StateManager {
 
     public void setSelectState() {state = selectState;}
 
-    public void setConnectState() {state = connectionState;}
+    public void setConnectState() {state = connectionState;
+        connectionState.izaberi();}
 
     public void setAddClassContentState(){state = addClassContentState;
             addClassContentState.izaberiTip();

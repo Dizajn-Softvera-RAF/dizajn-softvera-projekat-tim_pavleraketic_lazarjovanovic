@@ -42,4 +42,9 @@ public class Enum extends Interclass {
     public void notifySubscribers(Object notification) throws IOException {
 
     }
+
+    @Override
+    public void napraviTacke() {
+        super.napraviTacke();
+    }
 }

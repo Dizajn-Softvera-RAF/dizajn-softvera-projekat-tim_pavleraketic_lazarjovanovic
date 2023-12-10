@@ -1,8 +1,9 @@
-package raf.dsw.classycraft.app.gui.swing.state.painter;
+package raf.dsw.classycraft.app.gui.swing.state.painter.classContent;
 
 
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.classContent.Metod;
+import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
 
 import java.awt.*;
 

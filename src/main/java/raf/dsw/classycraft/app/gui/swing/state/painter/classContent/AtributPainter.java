@@ -1,13 +1,14 @@
-package raf.dsw.classycraft.app.gui.swing.state.painter;
+package raf.dsw.classycraft.app.gui.swing.state.painter.classContent;
 
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.ClassContent;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.classContent.Atribut;
+import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
 
-public class AtributPainter extends ElementPainter{
+public class AtributPainter extends ElementPainter {
 
     Atribut a;
 

@@ -45,6 +45,9 @@ public class DiagramView extends JPanel implements Subscriber {
         addMouseListener(mc);
         addMouseMotionListener(mc);
 
+        classSelectionModel = new ClassSelectionModel();
+        classSelectionModel.addSubscriber(this);
+
         painters = new ArrayList<>();
         selected = new ArrayList<>();
 
@@ -74,11 +77,12 @@ public class DiagramView extends JPanel implements Subscriber {
 
     @Override
     public void update(Object notification) throws IOException {
-        if (notification instanceof  String) repaint();
-        else {
-            packageView.setDiagrams();
-            MainFrame.getInstance().reload(packageView);
-        }
+//        if (notification instanceof  String) repaint();
+//        else {
+//            packageView.setDiagrams();
+//            MainFrame.getInstance().reload(packageView);
+//        }
+        repaint();
 
     }
 
