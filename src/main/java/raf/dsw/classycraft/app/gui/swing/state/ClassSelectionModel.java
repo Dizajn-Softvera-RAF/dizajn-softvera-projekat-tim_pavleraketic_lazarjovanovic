@@ -24,6 +24,9 @@ public class ClassSelectionModel implements Publisher {
 
     private List<Painter> selected;
     protected List<Subscriber> subscribers;
+    private Color customColor = new Color(150,219,219);
+    private Color customColorEnum = new Color(255,107,215);
+    private Color customColorInterface = new Color(93,217,119);
 
     public ClassSelectionModel() {
         this.selected = new ArrayList<>();
@@ -37,7 +40,7 @@ public class ClassSelectionModel implements Publisher {
             this.getSelected().add(p);
             try {
                 if(p.getDiagramElement()  instanceof Interclass ){
-                    ((Interclass) p.getDiagramElement()).setColor(Color.cyan);
+                    ((Interclass) p.getDiagramElement()).setColor(customColor);
                 }
             } catch (NullPointerException e){
                 System.out.println("");
@@ -54,9 +57,9 @@ public class ClassSelectionModel implements Publisher {
                     if(p.getDiagramElement() instanceof Class){
                         ((Interclass) p.getDiagramElement()).setColor(Color.BLACK);
                     } else if (p.getDiagramElement() instanceof Interface) {
-                        ((Interclass) p.getDiagramElement()).setColor(Color.ORANGE);
+                        ((Interclass) p.getDiagramElement()).setColor(customColorInterface);
                     }else if (p.getDiagramElement() instanceof Enum) {
-                        ((Interclass) p.getDiagramElement()).setColor(Color.magenta);
+                        ((Interclass) p.getDiagramElement()).setColor(customColorEnum);
                     }
 
                 }

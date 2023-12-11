@@ -20,8 +20,8 @@ public class Interface extends Interclass {
     }
     public Interface(String aClass, Diagram diagram, int x, int y) {
         super(aClass,diagram,null,null,x,y);
-        this.setColor(Color.orange);
-        this.setStrokeW(4);
+        this.setColor(new Color(93,217,119));
+        this.setStrokeW(2);
         content = new ArrayList<>();
     }
 

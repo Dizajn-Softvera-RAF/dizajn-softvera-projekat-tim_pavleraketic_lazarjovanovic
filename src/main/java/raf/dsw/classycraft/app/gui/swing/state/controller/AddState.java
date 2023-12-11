@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Enum;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Interface;
@@ -37,11 +38,11 @@ public class AddState implements State {
 
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
-                    if (!(p.getDiagramElement() instanceof Class)) continue;
+                    if (!(p.getDiagramElement() instanceof Interclass)) continue;
                     if (p.elementAt(x, y) ||
-                            p.elementAt(x + ((Class)  p.getDiagramElement()).getWidth(), y) ||
-                            p.elementAt(x + ((Class) p.getDiagramElement()).getWidth(), y + ((Class) p.getDiagramElement()).getHeight()) ||
-                            p.elementAt(x, y + ((Class) p.getDiagramElement()).getHeight())) {
+                            p.elementAt(x + ((Interclass)  p.getDiagramElement()).getWidth(), y) ||
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y + ((Interclass) p.getDiagramElement()).getHeight()) ||
+                            p.elementAt(x, y + ((Interclass) p.getDiagramElement()).getHeight())) {
                         ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                         return;
                     }
@@ -73,11 +74,11 @@ public class AddState implements State {
         } else if (izabran.equals("Enum")) {
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
-                    if (!(p.getDiagramElement() instanceof Enum)) continue;
+                    if (!(p.getDiagramElement() instanceof Interclass)) continue;
                     if (p.elementAt(x, y) ||
-                            p.elementAt(x + ((Enum) p.getDiagramElement()).getWidth(), y) ||
-                            p.elementAt(x + ((Enum) p.getDiagramElement()).getWidth(), y + ((Enum) p.getDiagramElement()).getHeight()) ||
-                            p.elementAt(x, y + ((Enum) p.getDiagramElement()).getHeight())) {
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y) ||
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y + ((Interclass) p.getDiagramElement()).getHeight()) ||
+                            p.elementAt(x, y + ((Interclass) p.getDiagramElement()).getHeight())) {
                         ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                         return;
                     }
@@ -100,11 +101,11 @@ public class AddState implements State {
         }else if (izabran.equals("Interface")) {
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
-                    if (!( p.getDiagramElement() instanceof Interface)) continue;
+                    if (!( p.getDiagramElement() instanceof Interclass)) continue;
                     if (p.elementAt(x, y) ||
-                            p.elementAt(x + ((Interface) p.getDiagramElement()).getWidth(), y) ||
-                            p.elementAt(x + ((Interface) p.getDiagramElement()).getWidth(), y + ((Interface) p.getDiagramElement()).getHeight()) ||
-                            p.elementAt(x, y + ((Interface) p.getDiagramElement()).getHeight())) {
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y) ||
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y + ((Interclass) p.getDiagramElement()).getHeight()) ||
+                            p.elementAt(x, y + ((Interclass) p.getDiagramElement()).getHeight())) {
                         ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                         return;
                     }

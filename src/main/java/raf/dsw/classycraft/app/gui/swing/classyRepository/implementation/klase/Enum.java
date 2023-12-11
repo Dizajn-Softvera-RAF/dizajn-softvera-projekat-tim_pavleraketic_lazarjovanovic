@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Enum extends Interclass {
 
-    private List<ClassContent> contetnt;
+    private List<ClassContent> content;
 
 
     public Enum(String name, ClassyNode parent, Painter painter, Color color, int x, int y) {
@@ -24,8 +24,9 @@ public class Enum extends Interclass {
 
     public Enum(String anEnum, Diagram diagram, int x, int y) {
         super(anEnum,diagram,null,null,x,y);
-        this.setColor(Color.MAGENTA);
-        contetnt = new ArrayList<>();
+        this.setColor(new Color(255,107,215));
+        this.setStrokeW(2);
+        content = new ArrayList<>();
     }
 
     @Override

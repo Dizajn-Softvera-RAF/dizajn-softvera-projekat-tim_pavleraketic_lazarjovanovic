@@ -18,7 +18,9 @@ import java.io.IOException;
 public class EnumPainter extends ElementPainter {
 
     private Enum e;
-    private int brojac = 15;
+    private int brojac = 45;
+    private String enumm = "<<enum>>";
+
 
     public EnumPainter(DiagramElement diagramElement) {
 
@@ -29,40 +31,52 @@ public class EnumPainter extends ElementPainter {
     @Override
     public void draw(Graphics2D g) {
 
+        Font f = new Font("Sheriff", Font.ITALIC,12);
+        g.setFont(f);
+        FontMetrics fm = g.getFontMetrics(f);
         Color color = e.getColor();
         g.setColor(color);
         BasicStroke basicStroke = new BasicStroke(e.getStrokeW());
         g.setStroke(basicStroke);
 
-        g.drawString(e.getName() + " <<enum>>", e.getX(), e.getY() - 10);
 
-        Font f = new Font("Sheriff", Font.ITALIC,10);
-        g.setFont(f);
-        FontMetrics fm = g.getFontMetrics(f);
+        int nameWidth = fm.stringWidth(e.getName());
+        int enumWidth = fm.stringWidth(enumm);
+
 
         if (!e.getContent().isEmpty()) {
             for (ClassContent cc : e.getContent())
                 if (cc instanceof EnumElement) {
                     EnumElement enumElement = (EnumElement) cc;
                     int currWidth = fm.stringWidth(enumElement.toString());
-                    if(e.getMaxWidth()<currWidth)
-                        e.setMaxWidth(currWidth + 10);
+                    if(e.getMaxWidth()<currWidth && currWidth>nameWidth) {
+                        e.setMaxWidth(currWidth + 20);
+                    } else if(nameWidth > e.getMaxWidth() && nameWidth>currWidth) {
+                        e.setMaxWidth(nameWidth + 20);
+                    }
                     g.drawString(enumElement.toString(), e.getX(), e.getY() + brojac);
                     e.setWidth(e.getMaxWidth() + 5);
                     e.setHeight(brojac + 5);
                     brojac += 15;
 
                 } else if(cc instanceof Atribut){
-                    //MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
-                    continue;
-                }else if(cc instanceof Metod){
-                    //MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
-                    continue;
-                }
-        }
-        brojac = 15;
-        e.setMaxWidth(0);
 
+                }else if(cc instanceof Metod){
+
+                }
+        } else{
+            if(enumWidth > nameWidth){
+                e.setWidth(enumWidth + 25);
+            }else{
+                e.setWidth(nameWidth + 25);
+            }
+
+        }
+        brojac = 45;
+        e.setMaxWidth(0);
+        g.drawString(e.getName() , e.getX()+e.getWidth()/2 - nameWidth/2, e.getY() + 15);
+        g.drawString(enumm,e.getX()+e.getWidth()/2 - enumWidth/2,e.getY()+30);
+        g.drawLine(e.getX(),e.getY()+35,e.getX()+e.getWidth(),e.getY()+35);
 
 
 
@@ -77,6 +91,8 @@ public class EnumPainter extends ElementPainter {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
             try {
                 e.setName("enum");
+
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

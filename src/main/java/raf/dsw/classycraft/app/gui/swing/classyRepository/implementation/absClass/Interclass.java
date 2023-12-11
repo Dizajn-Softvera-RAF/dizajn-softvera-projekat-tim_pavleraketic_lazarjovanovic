@@ -41,8 +41,8 @@ public abstract class Interclass extends DiagramElement {
 
         this.x = x;
         this.y = y;
-        this.width = 100;
-        this.height = 130;
+        this.width = 150;
+        this.height = 180;
         this.color = defaultColor;
         this.strokeW = 3;
         content = new ArrayList<>();
