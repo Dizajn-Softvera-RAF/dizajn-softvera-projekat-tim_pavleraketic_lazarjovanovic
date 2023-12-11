@@ -12,17 +12,16 @@ public class AgregacijaPainter extends ConnectPainter {
 
     private Agregacija agregacija;
 
-    public AgregacijaPainter(DiagramElement diagramElement) {
-        super(diagramElement);
+    public AgregacijaPainter(DiagramElement diagramElement, Point pos1, Point pos2) {
+        super(diagramElement, pos1, pos2);
     }
+
 
     @Override
     public void draw(Graphics2D g) {
-        Connection connection = (Connection)super.getDiagramElement();
-        connection.setNewCoordinates();
-        g.setColor(Color.GRAY);
-        Line2D.Float line = new Line2D.Float(connection.getXF(), connection.getYF(), connection.getXS(), connection.getYS());
-        setShape(line);
+        g.setColor(Color.BLACK);
+        setShape(new Line2D.Float(getPos1().x,getPos1().y,getPos2().x,getPos2().y));
+        g.setStroke(new BasicStroke(2));
         g.draw(getShape());
     }
 

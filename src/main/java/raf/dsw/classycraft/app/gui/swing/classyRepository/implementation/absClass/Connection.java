@@ -5,7 +5,6 @@ import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
 
-import java.io.IOException;
 @Getter
 @Setter
 
@@ -22,13 +21,13 @@ public abstract class Connection extends DiagramElement {
         this.ka = ka;
     }
 
-    public void setFirstTopic(Interclass od) {
+    public void setFirst(Interclass od) {
         this.od = od;
         xF = od.getX();
         yF = od.getY();
     }
 
-    public void setSecondTopic(Interclass ka) {
+    public void setSecondSecond(Interclass ka) {
         this.ka = ka;
         xS = ka.getX();
         yS = ka.getY();
