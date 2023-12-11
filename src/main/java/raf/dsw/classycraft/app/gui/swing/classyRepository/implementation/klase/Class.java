@@ -32,7 +32,6 @@ public class Class extends Interclass {
         this.setColor(Color.BLACK);
         this.setStrokeW(2);
         content = new ArrayList<>();
-
     }
 
     @Override

@@ -29,6 +29,6 @@ public class GeneralizacijaPainter extends ConnectPainter {
 
     @Override
     public boolean elementAt(int x, int y) {
-        return false;
+        return getShape().contains(x,y);
     }
 }

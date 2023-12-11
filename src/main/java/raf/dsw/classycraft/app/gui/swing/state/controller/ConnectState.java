@@ -110,6 +110,7 @@ public class ConnectState implements State {
                 }
             }
         }
+
         for(ConnectPainter n: connectPainterList){
             diagramView.getPainters().add(n);
             diagramView.repaint();
