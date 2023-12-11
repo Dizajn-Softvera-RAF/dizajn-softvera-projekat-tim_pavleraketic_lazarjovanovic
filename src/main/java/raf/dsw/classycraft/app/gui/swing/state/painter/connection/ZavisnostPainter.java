@@ -24,7 +24,7 @@ public class ZavisnostPainter extends ConnectPainter {
         g.setColor(color);
         g.setColor(color);
         setShape(new Line2D.Float(getPos1().x,getPos1().y,getPos2().x,getPos2().y));
-        g.setStroke(new BasicStroke(2));
+        g.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
         g.draw(getShape());
     }
 

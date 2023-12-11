@@ -17,6 +17,6 @@ public class ZoomOutAction extends AbscractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //MainFrame.getInstance().getPackageView().getDiagramMap().get().zoomOut();
+        //MainFrame.getInstance().getPackageView()
     }
 }
