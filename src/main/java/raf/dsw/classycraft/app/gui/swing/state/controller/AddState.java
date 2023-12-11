@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Enum;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Interface;
@@ -11,10 +12,14 @@ import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.font.TextAttribute;
 import java.io.IOException;
+import java.text.AttributedString;
 
 @Setter
 @Getter
@@ -22,6 +27,7 @@ public class AddState implements State {
 
     public String izabran;
     public String abst;
+
 
 
     @Override
@@ -32,20 +38,21 @@ public class AddState implements State {
 
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
-                    if (!(p.getDiagramElement() instanceof Class)) continue;
+                    if (!(p.getDiagramElement() instanceof Interclass)) continue;
                     if (p.elementAt(x, y) ||
-                            p.elementAt(x + ((Class)  p.getDiagramElement()).getWidth(), y) ||
-                            p.elementAt(x + ((Class) p.getDiagramElement()).getWidth(), y + ((Class) p.getDiagramElement()).getHeight()) ||
-                            p.elementAt(x, y + ((Class) p.getDiagramElement()).getHeight())) {
+                            p.elementAt(x + ((Interclass)  p.getDiagramElement()).getWidth(), y) ||
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y + ((Interclass) p.getDiagramElement()).getHeight()) ||
+                            p.elementAt(x, y + ((Interclass) p.getDiagramElement()).getHeight())) {
                         ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                         return;
                     }
                 }
             }
-            Class c = new Class("Class", diagramView.getDiagram(), x, y);// :)
+            Class c = new Class("Class", diagramView.getDiagram(), x, y);
+            //c.napraviTacke();
             if(abst.equals("Abs")){
                 try {
-                    c.setName(izaberiIme() + " (A) ");
+                    c.setName( izaberiIme() + " (A) ");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -67,17 +74,18 @@ public class AddState implements State {
         } else if (izabran.equals("Enum")) {
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
-                    if (!(p.getDiagramElement() instanceof Enum)) continue;
+                    if (!(p.getDiagramElement() instanceof Interclass)) continue;
                     if (p.elementAt(x, y) ||
-                            p.elementAt(x + ((Enum) p.getDiagramElement()).getWidth(), y) ||
-                            p.elementAt(x + ((Enum) p.getDiagramElement()).getWidth(), y + ((Enum) p.getDiagramElement()).getHeight()) ||
-                            p.elementAt(x, y + ((Enum) p.getDiagramElement()).getHeight())) {
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y) ||
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y + ((Interclass) p.getDiagramElement()).getHeight()) ||
+                            p.elementAt(x, y + ((Interclass) p.getDiagramElement()).getHeight())) {
                         ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                         return;
                     }
                 }
             }
             Enum en = new Enum("Enum", diagramView.getDiagram(), x, y);// :)
+            //en.napraviTacke();
             try {
                 en.setName(izaberiIme());
             } catch (IOException e) {
@@ -93,17 +101,18 @@ public class AddState implements State {
         }else if (izabran.equals("Interface")) {
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
-                    if (!( p.getDiagramElement() instanceof Interface)) continue;
+                    if (!( p.getDiagramElement() instanceof Interclass)) continue;
                     if (p.elementAt(x, y) ||
-                            p.elementAt(x + ((Interface) p.getDiagramElement()).getWidth(), y) ||
-                            p.elementAt(x + ((Interface) p.getDiagramElement()).getWidth(), y + ((Interface) p.getDiagramElement()).getHeight()) ||
-                            p.elementAt(x, y + ((Interface) p.getDiagramElement()).getHeight())) {
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y) ||
+                            p.elementAt(x + ((Interclass) p.getDiagramElement()).getWidth(), y + ((Interclass) p.getDiagramElement()).getHeight()) ||
+                            p.elementAt(x, y + ((Interclass) p.getDiagramElement()).getHeight())) {
                         ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
                         return;
                     }
                 }
             }
             Interface i = new Interface("Interface", diagramView.getDiagram(), x, y);// :)
+            //i.napraviTacke();
             try {
                 i.setName(izaberiIme());
             } catch (IOException e) {
@@ -173,6 +182,7 @@ public class AddState implements State {
                 s,
                 s[0]);
         if (choice == JOptionPane.CLOSED_OPTION) {
+            MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
             System.out.println("Dialog closed without making a selection.");
         } else if (s[choice].equals("Abstract")) {
             abst = "Abs";

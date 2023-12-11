@@ -1,10 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.state.controller;
 
-import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.state.State;
-import raf.dsw.classycraft.app.gui.swing.state.painter.ClassPainter;
-import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
+import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.ClassPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;

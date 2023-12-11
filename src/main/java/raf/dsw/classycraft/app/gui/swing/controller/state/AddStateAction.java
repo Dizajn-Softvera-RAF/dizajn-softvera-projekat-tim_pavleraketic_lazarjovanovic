@@ -1,12 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.controller.state;
 
-import raf.dsw.classycraft.app.gui.swing.classyRepository.factory.PackageFactory;
 import raf.dsw.classycraft.app.gui.swing.controller.AbscractClassyAction;
-import raf.dsw.classycraft.app.gui.swing.state.controller.AddState;
-import raf.dsw.classycraft.app.gui.swing.state.painter.ClassPainter;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class AddStateAction  extends AbscractClassyAction {

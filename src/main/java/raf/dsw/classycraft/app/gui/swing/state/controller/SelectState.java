@@ -2,11 +2,12 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 
 import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.ElementPainter;
-import raf.dsw.classycraft.app.gui.swing.state.MultiSelectionPainter;
+import raf.dsw.classycraft.app.gui.swing.state.painter.MultiSelectionPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,19 @@ public class SelectState implements State {
 
     private PackageView packageView;
     private int x1,y1;
-    private List<ElementPainter> nova = new ArrayList<>();
+    private List<Painter> nova = new ArrayList<>();
     private MultiSelectionPainter msp = new MultiSelectionPainter();
 
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
-        diagramView = (DiagramView) packageView.getJTabbedPane().getSelectedComponent();
+
+
+    }
+
+    @Override
+    public void misPritisnut(int x, int y, DiagramView diagramView) {
+        //diagramView = (DiagramView) packageView.getJTabbedPane().getSelectedComponent();
 
         if(!(diagramView.getClassSelectionModel().getSelected().isEmpty())){
             try {
@@ -33,8 +40,13 @@ public class SelectState implements State {
         nova.clear();
 
         for(Painter p: diagramView.getPainters()){
+
             if(p.elementAt(x,y)){
-                diagramView.getClassSelectionModel().getSelected().add((ElementPainter) p);
+                try {
+                    diagramView.getClassSelectionModel().addElement(p);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
             else{
                 x1 = x;
@@ -42,21 +54,19 @@ public class SelectState implements State {
                 nova.add(msp);
             }
         }
-        for(ElementPainter p : nova){
-            diagramView.getPainters().add(p);
+        if(!nova.isEmpty()){
+            for(Painter p : nova){
+                diagramView.getPainters().add(p);
+                diagramView.repaint();
+            }
         }
-
-    }
-
-    @Override
-    public void misPritisnut(int x, int y, DiagramView diagramView) {
 
     }
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView)  {
 
-        if((diagramView.getClassSelectionModel().getSelected().isEmpty())) {
+        if(!(diagramView.getClassSelectionModel().getSelected().isEmpty())) {
             try {
                 diagramView.getClassSelectionModel().clearList();
             } catch (IOException e) {
@@ -65,11 +75,9 @@ public class SelectState implements State {
         }
 
         msp.updatePoints(x1, y1, x, y);
-        try {
-            diagramView.update(this);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        //diagramView.update(msp);
+        diagramView.repaint();
+
 
         for(Painter p : diagramView.getPainters()){
             if(p instanceof MultiSelectionPainter)
@@ -79,9 +87,9 @@ public class SelectState implements State {
                 diagramView.getPainters().remove(msp);
                 return;
             }
-            if(msp.getShape().intersects(((((ElementPainter) p).getShape().getBounds().getX())), ((ElementPainter) p).getShape().getBounds().getY(), ((ElementPainter) p).getShape().getBounds().getWidth(), ((ElementPainter) p).getShape().getBounds().getHeight())){
+            if(msp.getShape().intersects((( p.getShape().getBounds().getX())), p.getShape().getBounds().getY(), p.getShape().getBounds().getWidth(),  p.getShape().getBounds().getHeight())){
                 try {
-                    diagramView.getClassSelectionModel().addElement((ElementPainter) p);
+                    diagramView.getClassSelectionModel().addElement(p);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -93,7 +101,7 @@ public class SelectState implements State {
     @Override
     public void misOtpusten(int x, int y, DiagramView diagramView) {
 
-        for (ElementPainter n : nova) {
+        for (Painter n : nova) {
             diagramView.getPainters().remove(n);
             msp = new MultiSelectionPainter();
         }

@@ -1,0 +1,32 @@
+package raf.dsw.classycraft.app.gui.swing.state.painter.connection;
+
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Connection;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Agregacija;
+import raf.dsw.classycraft.app.gui.swing.state.painter.ConnectPainter;
+
+import java.awt.*;
+import java.awt.geom.Line2D;
+
+public class AgregacijaPainter extends ConnectPainter {
+
+    private Agregacija agregacija;
+
+    public AgregacijaPainter(DiagramElement diagramElement, Point pos1, Point pos2) {
+        super(diagramElement, pos1, pos2);
+    }
+
+
+    @Override
+    public void draw(Graphics2D g) {
+        g.setColor(Color.BLACK);
+        setShape(new Line2D.Float(getPos1().x,getPos1().y,getPos2().x,getPos2().y));
+        g.setStroke(new BasicStroke(2));
+        g.draw(getShape());
+    }
+
+    @Override
+    public boolean elementAt(int x, int y) {
+        return getShape().contains(x,y);
+    }
+}
