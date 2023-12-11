@@ -5,6 +5,8 @@ import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
 
+import java.awt.*;
+
 @Getter
 @Setter
 
@@ -13,12 +15,14 @@ public abstract class Connection extends DiagramElement {
     private Interclass od;
     private Interclass ka;
     private float xF, yF, xS, yS;
+    private Color color;
 
 
-    public Connection(String name, ClassyNode parent,Interclass od, Interclass ka){
+    public Connection(String name, ClassyNode parent,Interclass od, Interclass ka,Color color){
         super(name, parent);
         this.od = od;
         this.ka = ka;
+        this.color = color;
     }
 
     public void setFirst(Interclass od) {

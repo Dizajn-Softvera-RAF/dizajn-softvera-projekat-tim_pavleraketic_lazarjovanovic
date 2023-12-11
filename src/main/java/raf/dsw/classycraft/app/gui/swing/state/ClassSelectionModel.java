@@ -41,6 +41,8 @@ public class ClassSelectionModel implements Publisher {
             try {
                 if(p.getDiagramElement()  instanceof Interclass ){
                     ((Interclass) p.getDiagramElement()).setColor(customColor);
+                }else if(p.getDiagramElement() instanceof Connection ){
+                    ((Connection) p.getDiagramElement()).setColor(customColor);
                 }
             } catch (NullPointerException e){
                 System.out.println("");
@@ -62,6 +64,8 @@ public class ClassSelectionModel implements Publisher {
                         ((Interclass) p.getDiagramElement()).setColor(customColorEnum);
                     }
 
+                } else if(p.getDiagramElement() instanceof Connection){
+                    ((Connection) p.getDiagramElement()).setColor(Color.BLACK);
                 }
             } catch (NullPointerException e){
                 System.out.println("");
