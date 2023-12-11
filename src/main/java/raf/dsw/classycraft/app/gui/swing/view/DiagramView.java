@@ -4,18 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
-import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 import raf.dsw.classycraft.app.gui.swing.state.ClassSelectionModel;
+import raf.dsw.classycraft.app.gui.swing.state.painter.ConnectPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.view.controller.MouseController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 @Getter
@@ -29,6 +29,13 @@ public class DiagramView extends JPanel implements Subscriber {
     private List<Painter> painters;
     private List<Painter> selected;
     private ClassSelectionModel classSelectionModel;
+    List<ConnectPainter> connectList = new ArrayList<>();
+
+
+    double translateX = 0;
+    double translateY = 0;
+    double scalingf = 1;
+    private AffineTransform transformation = new AffineTransform();
 
     private MouseController mc;
 
@@ -59,6 +66,24 @@ public class DiagramView extends JPanel implements Subscriber {
         setDiagram(diagram);
 
 
+    }
+
+    private void setUpTransformation(){
+        transformation.setToScale(scalingf,scalingf);
+        transformation.translate(translateX,translateY);
+        repaint();
+    }
+
+    public void zoomIn(){
+        scalingf *= 1.2;
+        if(scalingf > 3) scalingf = 3;
+        setUpTransformation();
+
+    }
+    public void zoomOut(){
+        scalingf *= 0.8;
+        if(scalingf < 0.4) scalingf = 0.4;
+        setUpTransformation();
     }
 
 

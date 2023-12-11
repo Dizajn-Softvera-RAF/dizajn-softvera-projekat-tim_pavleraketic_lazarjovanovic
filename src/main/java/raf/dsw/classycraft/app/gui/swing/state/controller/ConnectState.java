@@ -50,21 +50,29 @@ public class ConnectState implements State {
                     i1 = (Interclass) p.getDiagramElement();
                     i2 = (Interclass) p.getDiagramElement();
                     if(izabran.equals("Agregacija")){
-                        connection = new Agregacija("Agregacija",diagramView.getDiagram().getParent(),i1,i2);
+                        pos1.setLocation(i1.getX(),i1.getY());
+                        connection = new Agregacija("Agregacija",diagramView.getDiagram().getParent(),i1,i2,Color.black);
                         connectPainter = new AgregacijaPainter(connection,pos1,pos2);
                         connectPainterList.add(connectPainter);
+                        diagramView.getConnectList().add(connectPainter);
                     } else if (izabran.equals("Generalizacija")) {
-                        connection = new Generalizacija("Generalizacija",diagramView.getDiagram().getParent(),i1,i2);
+                        pos1.setLocation(i1.getX(),i1.getY());
+                        connection = new Generalizacija("Generalizacija",diagramView.getDiagram().getParent(),i1,i2,Color.black);
                         connectPainter = new GeneralizacijaPainter(connection,pos1,pos2);
                         connectPainterList.add(connectPainter);
+                        diagramView.getConnectList().add(connectPainter);
                     } else if (izabran.equals("Kompozicija")) {
-                        connection = new Kompozicija("Kompozicija",diagramView.getDiagram().getParent(),i1,i2);
+                        pos1.setLocation(i1.getX(),i1.getY());
+                        connection = new Kompozicija("Kompozicija",diagramView.getDiagram().getParent(),i1,i2,Color.black);
                         connectPainter = new KompozicijaPainter(connection,pos1,pos2);
                         connectPainterList.add(connectPainter);
+                        diagramView.getConnectList().add(connectPainter);
                     } else if (izabran.equals("Zavisnost")) {
-                        connection = new Zavisnost("Zavisnost",diagramView.getDiagram().getParent(),i1,i2);
+                        pos1.setLocation(i1.getX(),i1.getY());
+                        connection = new Zavisnost("Zavisnost",diagramView.getDiagram().getParent(),i1,i2,Color.black);
                         connectPainter = new ZavisnostPainter(connection,pos1,pos2);
                         connectPainterList.add(connectPainter);
+                        diagramView.getConnectList().add(connectPainter);
                     }
                 }
             }
@@ -102,7 +110,11 @@ public class ConnectState implements State {
                 }
             }
         }
-
+        for(ConnectPainter n: connectPainterList){
+            diagramView.getPainters().add(n);
+            diagramView.repaint();
+        }
+        connectPainterList.clear();
         diagramView.repaint();
 
     }

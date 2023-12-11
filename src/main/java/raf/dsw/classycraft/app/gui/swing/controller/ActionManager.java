@@ -21,6 +21,8 @@ public class ActionManager {
     private DeleteStateAction deleteStateAction;
     private MoveStateAction moveStateAction;
     private SelectStateAction selectStateAction;
+    private ZoomInAction zoomInAction;
+    private ZoomOutAction zoomOutAction;
 
 
 
@@ -38,6 +40,8 @@ public class ActionManager {
         this.deleteStateAction = new DeleteStateAction();
         this.moveStateAction = new MoveStateAction();
         this.selectStateAction = new SelectStateAction();
+        this.zoomInAction = new ZoomInAction();
+        this.zoomOutAction = new ZoomOutAction();
 
     }
 

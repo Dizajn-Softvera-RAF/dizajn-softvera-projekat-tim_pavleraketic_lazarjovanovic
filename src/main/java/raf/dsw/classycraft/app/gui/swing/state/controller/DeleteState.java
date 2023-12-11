@@ -37,6 +37,7 @@ public class DeleteState implements State {
                             }
                         } else if (p.getDiagramElement() instanceof Connection) {
                             diagramView.getPainters().remove(p);
+                            diagramView.getConnectList().remove(p);
                             diagramView.repaint();
                         }
                     }
@@ -44,6 +45,9 @@ public class DeleteState implements State {
             } else{
                 for(Painter p: diagramView.getClassSelectionModel().getSelected()){
                     if(p.getDiagramElement() instanceof Interclass){
+                        diagramView.getPainters().remove(p);
+                        diagramView.repaint();
+                    } else if (p.getDiagramElement() instanceof Connection) {
                         diagramView.getPainters().remove(p);
                         diagramView.repaint();
                     }

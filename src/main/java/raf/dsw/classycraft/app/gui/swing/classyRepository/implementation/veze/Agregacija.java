@@ -7,13 +7,17 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClas
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.observer.Subscriber;
 
+import java.awt.*;
 import java.io.IOException;
 @Getter
 @Setter
 
 public class Agregacija extends Connection {
-    public Agregacija(String name, ClassyNode parent, Interclass od, Interclass ka) {
-        super(name, parent, od, ka);
+
+
+    public Agregacija(String name, ClassyNode parent, Interclass od, Interclass ka, Color color) {
+        super(name, parent, od, ka, color);
+        this.setColor(Color.black);
     }
 
     @Override

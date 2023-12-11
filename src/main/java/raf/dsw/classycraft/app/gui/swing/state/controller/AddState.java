@@ -52,14 +52,23 @@ public class AddState implements State {
             //c.napraviTacke();
             if(abst.equals("Abs")){
                 try {
-                    c.setName( izaberiIme() + " (A) ");
+                    if(izaberiIme()!= null){
+                        c.setName( izaberiIme() + " (A) ");
+                    } else{
+                        return;
+                    }
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
             else{
                 try {
-                    c.setName(izaberiIme());
+                    if(izaberiIme()!= null){
+                        c.setName(izaberiIme());
+                    } else{
+                        return;
+                    }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -87,7 +96,11 @@ public class AddState implements State {
             Enum en = new Enum("Enum", diagramView.getDiagram(), x, y);// :)
             //en.napraviTacke();
             try {
-                en.setName(izaberiIme());
+                if(izaberiIme()!= null){
+                    en.setName(izaberiIme());
+                } else{
+                    return;
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -114,7 +127,11 @@ public class AddState implements State {
             Interface i = new Interface("Interface", diagramView.getDiagram(), x, y);// :)
             //i.napraviTacke();
             try {
-                i.setName(izaberiIme());
+                if(izaberiIme()!= null){
+                    i.setName(izaberiIme());
+                } else{
+                    return;
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
