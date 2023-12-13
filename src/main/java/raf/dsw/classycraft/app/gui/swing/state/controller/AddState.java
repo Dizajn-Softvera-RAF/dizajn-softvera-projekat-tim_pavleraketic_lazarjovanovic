@@ -52,13 +52,8 @@ public class AddState implements State {
             //c.napraviTacke();
             if(abst.equals("Abs")){
                 try {
-                    if(izaberiIme()!= null){
-                        c.setName( izaberiIme() + " (A) ");
-                    } else{
-                        return;
-                    }
-
-                } catch (IOException e) {
+                    c.setName( izaberiIme() + " (A) ");
+                    } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -96,11 +91,7 @@ public class AddState implements State {
             Enum en = new Enum("Enum", diagramView.getDiagram(), x, y);// :)
             //en.napraviTacke();
             try {
-                if(izaberiIme()!= null){
                     en.setName(izaberiIme());
-                } else{
-                    return;
-                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -127,11 +118,7 @@ public class AddState implements State {
             Interface i = new Interface("Interface", diagramView.getDiagram(), x, y);// :)
             //i.napraviTacke();
             try {
-                if(izaberiIme()!= null){
-                    i.setName(izaberiIme());
-                } else{
-                    return;
-                }
+                i.setName(izaberiIme());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -199,7 +186,7 @@ public class AddState implements State {
                 s,
                 s[0]);
         if (choice == JOptionPane.CLOSED_OPTION) {
-            MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
+            //MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.ERROR);
             System.out.println("Dialog closed without making a selection.");
         } else if (s[choice].equals("Abstract")) {
             abst = "Abs";

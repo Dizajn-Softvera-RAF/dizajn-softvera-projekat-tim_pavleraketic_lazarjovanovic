@@ -18,7 +18,7 @@ import java.io.IOException;
 public class InterfacePainter extends ElementPainter {
 
     private Interface i;
-    private int brojac = 45;
+    private int brojac = 50;
     private String interface1 = "<<interface>>";
 
     public InterfacePainter(DiagramElement diagramElement) {
@@ -30,6 +30,7 @@ public class InterfacePainter extends ElementPainter {
     @Override
     public void draw(Graphics2D g) {
 
+        i.getPoints().clear();
         Font f = new Font("Sherif", Font.PLAIN, 12);
         g.setFont(f);
         FontMetrics fm = g.getFontMetrics(f);
@@ -58,9 +59,6 @@ public class InterfacePainter extends ElementPainter {
                     i.setHeight(brojac + 5);
                     brojac += 15;
 
-                } else if (cc instanceof Atribut) {
-
-                } else if (cc instanceof EnumElement) {
                 }
 
 
@@ -70,9 +68,10 @@ public class InterfacePainter extends ElementPainter {
             } else {
                 i.setWidth(nameWidth + 25);
             }
+        }
 
 
-            brojac = 45;
+            brojac = 50;
             i.setMaxWidth(0);
 
 
@@ -97,7 +96,6 @@ public class InterfacePainter extends ElementPainter {
             }
 
         }
-    }
 
     @Override
     public boolean elementAt(int x, int y) {

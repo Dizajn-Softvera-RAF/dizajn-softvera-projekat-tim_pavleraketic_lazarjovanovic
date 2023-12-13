@@ -44,4 +44,9 @@ public class Interface extends Interclass {
     public void napraviTacke() {
         super.napraviTacke();
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

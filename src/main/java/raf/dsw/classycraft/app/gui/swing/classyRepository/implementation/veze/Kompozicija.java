@@ -33,4 +33,13 @@ public class Kompozicija extends Connection {
     public void notifySubscribers(Object notification) throws IOException {
 
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Connection) {
+            Connection otherObj = (Connection) obj;
+            return ((this.getOd().equals(otherObj.getOd()) && this.getKa().equals(otherObj.getKa())) ||
+                    (this.getOd().equals(otherObj.getKa()) && this.getKa().equals(otherObj.getOd())));
+        }
+        return false;
+    }
 }

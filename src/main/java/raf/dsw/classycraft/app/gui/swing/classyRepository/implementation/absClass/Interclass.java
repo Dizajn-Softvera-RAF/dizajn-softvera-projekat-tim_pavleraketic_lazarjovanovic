@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.state.painter.*;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.ClassPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.EnumPainter;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Setter
 @Getter
-public abstract class Interclass extends DiagramElement {
+public abstract class Interclass extends DiagramElement implements Cloneable {
 
 
     private int strokeW;
@@ -27,6 +28,7 @@ public abstract class Interclass extends DiagramElement {
     private List<ClassContent> content;
     private int maxWidth = 0;
     private List<Point> points;
+
 
     private int x;
     private int y;
@@ -49,16 +51,14 @@ public abstract class Interclass extends DiagramElement {
         this.maxWidth = 0;
         points = new ArrayList<>();
 
+
         System.out.println(name);
         if(name.equals("Class")){
            this.painter = new ClassPainter(this);
-           //napraviTacke();
-        } else if (name.equals("Enum")) {
+        }else if (name.equals("Enum")) {
             this.painter = new EnumPainter(this);
-            //napraviTacke();
         }else if(name.equals("Interface")){
             this.painter = new InterfacePainter(this);
-            //napraviTacke();
         }
 
     }
@@ -81,5 +81,13 @@ public abstract class Interclass extends DiagramElement {
 
     }
 
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Interclass novi = (Interclass) super.clone();
+        List<Point> point1 = new ArrayList<>(getPoints());
+        List<ClassContent> content1 = new ArrayList<>(getContent());
+        novi.setY(getY() + 200);
+        novi.setX(getX() + 200);
+        return novi;
+    }
 }
