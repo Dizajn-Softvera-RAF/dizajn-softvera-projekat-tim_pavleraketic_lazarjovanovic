@@ -154,6 +154,8 @@ public class PackageView extends JPanel implements Subscriber {
 
     public void startConnectState(){this.stateManager.setConnectState();}
     public void startDuplicateState(){this.stateManager.setDuplicateState();}
+
+    public void startEditClasscontentState(){this.stateManager.setEditClassContentState();}
     public void misKliknut(int x, int y, DiagramView m ){
         //System.out.println("kliknute su koordinate: ("+x+", "+y+")\t"+"na mapi "+m.getName());
         stateManager.getCurrent().misKliknut(x, y, m);

@@ -13,6 +13,7 @@ public class StateManager {
         private DeleteState deleteState;
         private AddClassContentState addClassContentState;
         private DuplicateState duplicateState;
+        private EditClassContentState editClassContentState;
 
         public StateManager () {
             initialise();
@@ -26,6 +27,7 @@ public class StateManager {
             deleteState = new DeleteState();
             addClassContentState = new AddClassContentState();
             duplicateState = new DuplicateState();
+            editClassContentState = new EditClassContentState();
             state = selectState;
         }
 
@@ -52,6 +54,10 @@ public class StateManager {
     public void setDuplicateState() {
         state = duplicateState;
     }
+    public void setEditClassContentState() {
+        state = editClassContentState;
+    }
+
 
     public State getCurrent() {
         return state;}

@@ -89,7 +89,8 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
         novi.painter = null;
         novi.points = new ArrayList<>(getPoints());
         novi.content = new ArrayList<>(getContent());
-        novi.x = this.x + 100;
+        novi.connectPainters = new ArrayList<>();
+        novi.x = this.x + 120;
         novi.y = this.y;
 
         return novi;

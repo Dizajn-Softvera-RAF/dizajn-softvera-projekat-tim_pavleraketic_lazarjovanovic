@@ -19,4 +19,5 @@ public interface ClassyTree {
 
 
     void addDiagramChild(Diagram diagram, DiagramElement novi);
+    void removeDiagramChild(Diagram diagram, DiagramElement childToRemove);
 }
