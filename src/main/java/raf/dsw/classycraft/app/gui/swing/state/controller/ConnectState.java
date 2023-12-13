@@ -17,6 +17,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.connection.Generalizacija
 import raf.dsw.classycraft.app.gui.swing.state.painter.connection.KompozicijaPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.connection.ZavisnostPainter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,6 +44,7 @@ public class ConnectState implements State {
         i1 = null;
         i2 = null;
         boolean jeli = false;
+
 
         for(Painter p: diagramView.getPainters()){
             if(p.getDiagramElement() instanceof Interclass){
@@ -90,6 +92,7 @@ public class ConnectState implements State {
                         connectPainterList.add(connectPainter);
                         dodajUListu(i1, connectPainter);
                         diagramView.getConnectList().add(connectPainter);
+
                     }
 
 
@@ -113,6 +116,7 @@ public class ConnectState implements State {
             }
         }
         diagramView.repaint();
+
     }
 
     @Override
@@ -128,6 +132,7 @@ public class ConnectState implements State {
 
         connectPainter.setPos2(new Point(x,y));
         boolean jel = false;
+        DiagramElement novi = null;
 
         for(Painter p: diagramView.getPainters()){
             if(p.getDiagramElement() instanceof Interclass){
@@ -146,6 +151,7 @@ public class ConnectState implements State {
                     }
                     jel = true;
                     connection.setKa(interclass);
+                    novi = connection;
                     dodajUListu(interclass,connectPainter);
                 }
             }
@@ -171,7 +177,7 @@ public class ConnectState implements State {
         }
         connectPainterList.clear();
         diagramView.repaint();
-
+        MainFrame.getInstance().getClassyTree().addDiagramChild(diagramView.getDiagram(), novi);
     }
 
 
