@@ -25,42 +25,32 @@ public class DuplicateState implements State {
                 if (p.elementAt(x, y)) {
                     if (p.getDiagramElement() instanceof Interclass) {
                         Interclass k1 = (Interclass) p.getDiagramElement();
+                        Interclass cloned = (Interclass) k1.clone();
                         if(p.getDiagramElement() instanceof Class){
-                            try {
 
-                                Interclass cloned = (Interclass) k1.clone();
-                                ClassPainter classPainter = new ClassPainter(cloned);
-                                diagramView.getPainters().add(classPainter);
-                                diagramView.getDiagram().addChild(cloned);
-                                diagramView.repaint();
+                            ClassPainter classPainter = new ClassPainter(cloned);
+                            cloned.setPainter(classPainter);
+                            diagramView.getPainters().add(classPainter);
+                            diagramView.getDiagram().addChild(cloned);
+                            diagramView.repaint();
 
-                            } catch (CloneNotSupportedException e) {
-                                throw new RuntimeException(e);
-                            }
                         } else if (p.getDiagramElement() instanceof Enum) {
-                            try {
 
-                                Enum cloned =(Enum) k1.clone();
-                                EnumPainter enumPainter = new EnumPainter(cloned);
-                                diagramView.getPainters().add(enumPainter);
-                                diagramView.getDiagram().addChild(cloned);
-                                diagramView.repaint();
+                            EnumPainter enumPainter = new EnumPainter(cloned);
+                            cloned.setPainter(enumPainter);
+                            diagramView.getPainters().add(enumPainter);
+                            diagramView.getDiagram().addChild(cloned);
+                            diagramView.repaint();
 
-                            } catch (CloneNotSupportedException e) {
-                                throw new RuntimeException(e);
-                            }
                         } else if (p.getDiagramElement() instanceof Interface) {
-                            try {
 
-                                Interface cloned = (Interface) k1.clone();
-                                InterfacePainter interfacePainter = new InterfacePainter(cloned);
-                                diagramView.getPainters().add(interfacePainter);
-                                diagramView.getDiagram().addChild(cloned);
-                                diagramView.repaint();
 
-                            } catch (CloneNotSupportedException e) {
-                                throw new RuntimeException(e);
-                            }
+                            InterfacePainter interfacePainter = new InterfacePainter(cloned);
+                            cloned.setPainter(interfacePainter);
+                            diagramView.getPainters().add(interfacePainter);
+                            diagramView.getDiagram().addChild(cloned);
+                            diagramView.repaint();
+
                         }
                     }
                 }
@@ -68,6 +58,8 @@ public class DuplicateState implements State {
             }
         } catch (ConcurrentModificationException e){
 
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
         }
 
     }

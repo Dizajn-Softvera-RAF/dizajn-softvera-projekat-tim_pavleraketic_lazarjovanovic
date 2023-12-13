@@ -50,6 +50,8 @@ public class ConnectState implements State {
                         connection.setOd(i1);
                         connectPainter = new AgregacijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
+                        dodajUListu(i1,connectPainter);
+                        System.out.println(i1.getConnectPainters() + "      1");
                         diagramView.getConnectList().add(connectPainter);
 
 
@@ -59,6 +61,7 @@ public class ConnectState implements State {
                         connection.setOd(i1);
                         connectPainter = new GeneralizacijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
+                        dodajUListu(i1,connectPainter);
                         diagramView.getConnectList().add(connectPainter);
 
 
@@ -68,6 +71,7 @@ public class ConnectState implements State {
                         connection.setOd(i1);
                         connectPainter = new KompozicijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
+                        dodajUListu(i1,connectPainter);
                         diagramView.getConnectList().add(connectPainter);
 
 
@@ -77,6 +81,7 @@ public class ConnectState implements State {
                         connection.setOd(i1);
                         connectPainter = new ZavisnostPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
+                        dodajUListu(i1,connectPainter);
                         diagramView.getConnectList().add(connectPainter);
 
                     }
@@ -84,8 +89,11 @@ public class ConnectState implements State {
             }
         }
         for(ConnectPainter n: connectPainterList){
-            diagramView.getPainters().add(n);
-            diagramView.repaint();
+            if(!diagramView.getPainters().contains(n)) {
+                System.out.println(n + "     2");
+                diagramView.getPainters().add(n);
+                diagramView.repaint();
+            }
         }
         diagramView.repaint();
     }
@@ -119,13 +127,19 @@ public class ConnectState implements State {
                         }
                     }
                     connection.setKa(interclass);
+                    dodajUListu(interclass,connectPainter);
                 }
             }
         }
 
         for(ConnectPainter n: connectPainterList){
-            diagramView.getPainters().add(n);
-            diagramView.repaint();
+            System.out.println(n + "     2");
+            if(!diagramView.getPainters().contains(n)){
+                diagramView.getPainters().add(n);
+                System.out.println(diagramView.getPainters().size() + "   size");
+                diagramView.repaint();
+            }
+
         }
         connectPainterList.clear();
         diagramView.repaint();
@@ -153,6 +167,11 @@ public class ConnectState implements State {
             izabran = "Generalizacija";
         } else if(s[choice].equals("Zavisnost")) {
             izabran = "Zavisnost";
+        }
+    }
+    public void dodajUListu(Interclass i, ConnectPainter connectPainter){
+        if(!i.getConnectPainters().contains(connectPainter)){
+            i.getConnectPainters().add(connectPainter);
         }
     }
 }

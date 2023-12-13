@@ -19,7 +19,7 @@ import java.util.List;
 public class Class extends Interclass {
 
 
-    private List<ClassContent> content;
+
 
     public Class(String name, ClassyNode parent, Painter painter, Color color, int x, int y) {
         super(name, parent, painter, color, x, y);
@@ -31,7 +31,7 @@ public class Class extends Interclass {
         super(aClass,diagram,null,null,x,y);
         this.setColor(Color.BLACK);
         this.setStrokeW(2);
-        content = new ArrayList<>();
+
     }
 
     @Override
@@ -53,8 +53,5 @@ public class Class extends Interclass {
     public void napraviTacke() {
         super.napraviTacke();
     }
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
+
 }

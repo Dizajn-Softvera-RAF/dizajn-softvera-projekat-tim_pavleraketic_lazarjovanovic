@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Enum extends Interclass {
 
-    private List<ClassContent> content;
+
 
 
     public Enum(String name, ClassyNode parent, Painter painter, Color color, int x, int y) {
@@ -26,7 +26,7 @@ public class Enum extends Interclass {
         super(anEnum,diagram,null,null,x,y);
         this.setColor(new Color(255,107,215));
         this.setStrokeW(2);
-        content = new ArrayList<>();
+
     }
 
     @Override
@@ -48,8 +48,5 @@ public class Enum extends Interclass {
     public void napraviTacke() {
         super.napraviTacke();
     }
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
+
 }
