@@ -1,11 +1,13 @@
 package raf.dsw.classycraft.app.gui.swing.state.controller;
 
+import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Connection;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Agregacija;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Generalizacija;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Kompozicija;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Zavisnost;
+import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.ConnectPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
@@ -39,10 +41,14 @@ public class ConnectState implements State {
     public void misPritisnut(int x, int y, DiagramView diagramView) {
         i1 = null;
         i2 = null;
+        boolean jeli = false;
 
         for(Painter p: diagramView.getPainters()){
             if(p.getDiagramElement() instanceof Interclass){
                 if(p.elementAt(x,y)){
+                    jeli = true;
+
+
                     i1 = (Interclass) p.getDiagramElement();
                     if(izabran.equals("Agregacija")){
 
@@ -77,17 +83,27 @@ public class ConnectState implements State {
 
                     } else if (izabran.equals("Zavisnost")) {
 
-                        connection = new Zavisnost("Zavisnost",diagramView.getDiagram().getParent(),i1,null,Color.black);
+                        connection = new Zavisnost("Zavisnost", diagramView.getDiagram().getParent(), i1, null, Color.black);
                         connection.setOd(i1);
-                        connectPainter = new ZavisnostPainter(connection,new Point(x,y),new Point(x,y));
+                        connectPainter = new ZavisnostPainter(connection, new Point(x, y), new Point(x, y));
                         connectPainterList.add(connectPainter);
-                        dodajUListu(i1,connectPainter);
+                        dodajUListu(i1, connectPainter);
                         diagramView.getConnectList().add(connectPainter);
-
                     }
+
+
                 }
             }
         }
+
+        if(jeli == false){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.COMPONENT_NOT_SELECTED);
+            //diagramView.getPainters().remove(connectPainter);
+            connectPainterList.remove(connectPainter);
+            diagramView.repaint();
+            return;
+        }
+
         for(ConnectPainter n: connectPainterList){
             if(!diagramView.getPainters().contains(n)) {
                 System.out.println(n + "     2");
@@ -110,6 +126,7 @@ public class ConnectState implements State {
         }
 
         connectPainter.setPos2(new Point(x,y));
+        boolean jel = false;
 
         for(Painter p: diagramView.getPainters()){
             if(p.getDiagramElement() instanceof Interclass){
@@ -126,14 +143,24 @@ public class ConnectState implements State {
                             }
                         }
                     }
+                    jel = true;
                     connection.setKa(interclass);
                     dodajUListu(interclass,connectPainter);
                 }
             }
         }
 
+
+        if(jel == false){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.COMPONENT_NOT_SELECTED);
+            diagramView.getPainters().remove(connectPainter);
+            connectPainterList.remove(connectPainter);
+            diagramView.repaint();
+            return;
+        }
+
         for(ConnectPainter n: connectPainterList){
-            System.out.println(n + "     2");
+            System.out.println(n + "     22");
             if(!diagramView.getPainters().contains(n)){
                 diagramView.getPainters().add(n);
                 System.out.println(diagramView.getPainters().size() + "   size");
