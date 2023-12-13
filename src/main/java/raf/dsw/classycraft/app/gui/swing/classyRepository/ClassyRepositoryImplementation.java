@@ -27,18 +27,29 @@ public class ClassyRepositoryImplementation implements ClassyRepository {
     @Override
     public void addChild(ClassyNodeComposite parent, ClassyNode child) {
 
-            if (child != null || parent.getChildren().contains(child)) {
+            if (child != null)
+                if (parent.getChildren().contains(child)) {
                 ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.NODE_ALREADY_EXISTS);
                 return;
             }
+
             if(parent instanceof Package && child instanceof Package){
                 while(parent instanceof Package){
                     parent = (ClassyNodeComposite) parent.getParent();
                 }
             }
+
             parent.getChildren().add(child);
+        System.out.println(parent.getChildren());
         }
 
-
+    @Override
+    public void deleteChild(ClassyNodeComposite parent, ClassyNode child) {
+        if (child != null){
+            if (parent.getChildren().contains(child)) parent.getChildren().remove(child);
+        }
     }
+
+
+}
 

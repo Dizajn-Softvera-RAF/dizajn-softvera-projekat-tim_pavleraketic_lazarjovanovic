@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 public class ZoomOutAction extends AbscractClassyAction {
 
 
-    public ZoomOutAction(){
+    public ZoomOutAction() {
         putValue(SMALL_ICON, loadIcon("/images/zoomout.png"));
         putValue(NAME, "Zoom Out");
         putValue(SHORT_DESCRIPTION, "Zoom Out");
@@ -17,6 +17,6 @@ public class ZoomOutAction extends AbscractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //MainFrame.getInstance().getPackageView()
+        //MainFrame.getInstance().getPackageView().getTabs().get(0).zoomOut();
     }
 }

@@ -10,5 +10,7 @@ public interface ClassyRepository {
 
      void addChild(ClassyNodeComposite parent, ClassyNode child);
 
+     void deleteChild(ClassyNodeComposite parent, ClassyNode child);
+
 
 }

@@ -12,6 +12,7 @@ import raf.dsw.classycraft.app.gui.swing.state.StateManager;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class PackageView extends JPanel implements Subscriber {
         author = new JLabel();
         jTabbedPane = new JTabbedPane();
         tabs = new ArrayList<>();
-
+        diagramMap = new HashMap<>();
         add(projectName);
         add(jTabbedPane);
         add(author);
@@ -98,6 +99,7 @@ public class PackageView extends JPanel implements Subscriber {
                 jTabbedPane.add(tab.getDiagram().getName(),tab);
             }
         }
+
     }
 
     public void clearTabs(){
@@ -133,6 +135,11 @@ public class PackageView extends JPanel implements Subscriber {
             }
         }
         tabs.remove(remove);
+
+        for(DiagramView tab : tabs){
+            jTabbedPane.add(tab.getDiagram().getName(),tab);
+        }
+        jTabbedPane.setSelectedComponent(tabs.get(0));
     }
 
     public void startAddState(){
@@ -164,7 +171,7 @@ public class PackageView extends JPanel implements Subscriber {
     public void misOtpusten(int x, int y, DiagramView m){
         //System.out.println("kliknute su koordinate: ("+x+", "+y+")\t"+"na mapi "+m.getName());
         stateManager.getCurrent().misOtpusten(x,y,m);
-}
+    }
 
 
 
@@ -174,7 +181,7 @@ public class PackageView extends JPanel implements Subscriber {
         if(notification instanceof Package) load((Package) notification);
         else if(notification instanceof String){
             if(notification.equals("child")) setDiagrams();
-            //else if (notification.equals("child1")) ucitavanje();
+            else if (notification.equals("promena")) ucitavanje();
             else if (notification.equals("ime")) setLabels();
             else if (notification.equals("clear")) clearTabs();
             }
