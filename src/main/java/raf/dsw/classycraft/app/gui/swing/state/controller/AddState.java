@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.state.controller;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Enum;
@@ -33,6 +34,7 @@ public class AddState implements State {
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
         System.out.println("clik");
+        DiagramElement novi = null;
         if(izabran.equals("Class")) {
             isAbstract();
 
@@ -49,6 +51,7 @@ public class AddState implements State {
                 }
             }
             Class c = new Class("Class", diagramView.getDiagram(), x, y);
+
             //c.napraviTacke();
             if(abst.equals("Abs")){
                 try {
@@ -75,6 +78,7 @@ public class AddState implements State {
             diagramView.getPainters().add(c.getPainter());
             diagramView.getDiagram().addChild(c);
             diagramView.repaint();
+            novi = c;
         } else if (izabran.equals("Enum")) {
             for (Painter p : diagramView.getPainters()) {
                 if (p instanceof ElementPainter) {
@@ -101,6 +105,7 @@ public class AddState implements State {
             diagramView.getPainters().add(en.getPainter());
             diagramView.getDiagram().addChild(en);
             diagramView.repaint();
+            novi = en;
 
         }else if (izabran.equals("Interface")) {
             for (Painter p : diagramView.getPainters()) {
@@ -128,8 +133,10 @@ public class AddState implements State {
             diagramView.getPainters().add(i.getPainter());
             diagramView.getDiagram().addChild(i);
             diagramView.repaint();
-
+            novi = i;
         }
+
+        MainFrame.getInstance();
 
     }
 

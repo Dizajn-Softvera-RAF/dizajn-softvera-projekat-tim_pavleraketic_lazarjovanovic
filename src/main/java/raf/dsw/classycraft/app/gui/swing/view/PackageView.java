@@ -99,6 +99,7 @@ public class PackageView extends JPanel implements Subscriber {
                 jTabbedPane.add(tab.getDiagram().getName(),tab);
             }
         }
+
     }
 
     public void clearTabs(){
@@ -138,6 +139,7 @@ public class PackageView extends JPanel implements Subscriber {
         for(DiagramView tab : tabs){
             jTabbedPane.add(tab.getDiagram().getName(),tab);
         }
+        jTabbedPane.setSelectedComponent(tabs.get(0));
     }
 
     public void startAddState(){

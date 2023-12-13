@@ -46,7 +46,7 @@ public class ClassyTreeImplementation implements ClassyTree {
         parent.add(new ClassyTreeItem(child));
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
         //System.out.println(parent.getClassyNode()+" "+child);
-
+        //ApplicationFramework.getInstance().getClassyRepository().addChild((ClassyNodeComposite) parent.getClassyNode(), child);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
@@ -62,7 +62,8 @@ public class ClassyTreeImplementation implements ClassyTree {
         p.removeChild(selectedNode.getClassyNode());
         selectedNode.removeAllChildren();
         selectedNode.removeFromParent();
-        //treeView.expandPath(treeView.getSelectionPath());
+        treeView.expandPath(treeView.getSelectionPath());
+       // ApplicationFramework.getInstance().getClassyRepository().deleteChild(p, selectedNode.getClassyNode());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
 
