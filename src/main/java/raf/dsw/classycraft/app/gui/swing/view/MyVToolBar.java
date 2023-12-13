@@ -16,6 +16,7 @@ public class MyVToolBar extends JToolBar {
         add(MainFrame.getInstance().getActionManager().getMoveStateAction());
         add(MainFrame.getInstance().getActionManager().getZoomInAction());
         add(MainFrame.getInstance().getActionManager().getZoomOutAction());
+        add(MainFrame.getInstance().getActionManager().getDuplicateAction());
 
 
     }

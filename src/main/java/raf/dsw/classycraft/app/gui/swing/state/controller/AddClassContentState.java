@@ -24,7 +24,6 @@ public class AddClassContentState implements State {
                 if (p.elementAt(x, y)) {
                     ClassContent atribut = new Atribut("");
                     atribut.setVidljivost(vidljivost());
-                    if(tip() == null || ime() == null) return;
                     atribut.setTip(tip());
                     atribut.setIme(ime());
                     ((Interclass) p.getDiagramElement()).getContent().add(atribut);
@@ -36,7 +35,6 @@ public class AddClassContentState implements State {
             if (p.elementAt(x, y)) {
                 ClassContent metod = new Metod("");
                 metod.setVidljivost(vidljivost());
-                if(tip() == null || ime() == null) return;
                 metod.setTip(tip());
                 metod.setIme(ime());
                 ((Interclass) p.getDiagramElement()).getContent().add(metod);
@@ -47,7 +45,6 @@ public class AddClassContentState implements State {
             for (Painter p : diagramView.getPainters()) {
                 if (p.elementAt(x, y)) {
                     ClassContent enumElement = new EnumElement("");
-                    if(ime() == null) return;
                     enumElement.setIme(ime().toUpperCase());
                     ((Interclass) p.getDiagramElement()).getContent().add(enumElement);
                 }

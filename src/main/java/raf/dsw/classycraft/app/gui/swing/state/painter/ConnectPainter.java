@@ -19,7 +19,6 @@ public abstract class ConnectPainter extends Painter {
 
     public ConnectPainter(DiagramElement diagramElement,Point pos1,Point pos2) {
         super(diagramElement);
-        this.s = s;
         this.pos1 = pos1;
         this.pos2 = pos2;
     }

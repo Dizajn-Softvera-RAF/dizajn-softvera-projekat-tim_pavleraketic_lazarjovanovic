@@ -32,7 +32,6 @@ public class Class extends Interclass {
         this.setColor(Color.BLACK);
         this.setStrokeW(2);
         content = new ArrayList<>();
-
     }
 
     @Override
@@ -53,5 +52,9 @@ public class Class extends Interclass {
     @Override
     public void napraviTacke() {
         super.napraviTacke();
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

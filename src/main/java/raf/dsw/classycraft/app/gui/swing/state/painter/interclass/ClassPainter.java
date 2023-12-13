@@ -27,7 +27,7 @@ public class ClassPainter extends ElementPainter {
     @Override
     public void draw(Graphics2D g) {
 
-
+        c.getPoints().clear();
         Font f = new Font("Sheriff", Font.PLAIN,12);
         g.setFont(f);
         FontMetrics fm = g.getFontMetrics(f);
@@ -83,8 +83,8 @@ public class ClassPainter extends ElementPainter {
         setShape(rectangle);
 
         g.draw(getShape());
-
         c.napraviTacke();
+
         if (c.getName() == null) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(EventType.MUST_INSERT_NAME);
         }

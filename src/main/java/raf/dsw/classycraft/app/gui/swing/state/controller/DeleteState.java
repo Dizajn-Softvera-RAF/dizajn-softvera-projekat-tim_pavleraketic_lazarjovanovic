@@ -5,6 +5,7 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClas
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.state.State;
+import raf.dsw.classycraft.app.gui.swing.state.painter.ConnectPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -28,6 +29,9 @@ public class DeleteState implements State {
                         if (p.getDiagramElement() instanceof Interclass) {
                             staSeBrise();
                             if (izabran.equals("Interclass")) {
+                                for(ConnectPainter cp: diagramView.getConnectList()){
+                                    diagramView.getPainters().remove(cp);
+                                }
                                 diagramView.getPainters().remove(p);
                                 diagramView.repaint();
                             } else if (izabran.equals("ClassContent")) {
@@ -45,10 +49,14 @@ public class DeleteState implements State {
             } else{
                 for(Painter p: diagramView.getClassSelectionModel().getSelected()){
                     if(p.getDiagramElement() instanceof Interclass){
+                        for(ConnectPainter cp: diagramView.getConnectList()){
+                            diagramView.getPainters().remove(cp);
+                        }
                         diagramView.getPainters().remove(p);
                         diagramView.repaint();
                     } else if (p.getDiagramElement() instanceof Connection) {
                         diagramView.getPainters().remove(p);
+                        diagramView.getConnectList().remove(p);
                         diagramView.repaint();
                     }
 

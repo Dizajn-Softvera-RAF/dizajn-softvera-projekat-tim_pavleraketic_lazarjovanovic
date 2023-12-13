@@ -27,8 +27,6 @@ public class ConnectState implements State {
     private Interclass i2;
     private ConnectPainter connectPainter;
     private Connection connection;
-    private Point pos1;
-    private Point pos2;
     List<ConnectPainter> connectPainterList = new ArrayList<>();
 
 
@@ -39,8 +37,6 @@ public class ConnectState implements State {
 
     @Override
     public void misPritisnut(int x, int y, DiagramView diagramView) {
-        pos1 = new Point(x,y);
-        pos2 = new Point(x,y);
         i1 = null;
         i2 = null;
 
@@ -48,31 +44,41 @@ public class ConnectState implements State {
             if(p.getDiagramElement() instanceof Interclass){
                 if(p.elementAt(x,y)){
                     i1 = (Interclass) p.getDiagramElement();
-                    i2 = (Interclass) p.getDiagramElement();
                     if(izabran.equals("Agregacija")){
-                        pos1.setLocation(i1.getX(),i1.getY());
-                        connection = new Agregacija("Agregacija",diagramView.getDiagram().getParent(),i1,i2,Color.black);
-                        connectPainter = new AgregacijaPainter(connection,pos1,pos2);
+
+                        connection = new Agregacija("Agregacija",diagramView.getDiagram().getParent(),i1,null,Color.black);
+                        connection.setOd(i1);
+                        connectPainter = new AgregacijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
                         diagramView.getConnectList().add(connectPainter);
+
+
                     } else if (izabran.equals("Generalizacija")) {
-                        pos1.setLocation(i1.getX(),i1.getY());
-                        connection = new Generalizacija("Generalizacija",diagramView.getDiagram().getParent(),i1,i2,Color.black);
-                        connectPainter = new GeneralizacijaPainter(connection,pos1,pos2);
+
+                        connection = new Generalizacija("Generalizacija",diagramView.getDiagram().getParent(),i1,null,Color.black);
+                        connection.setOd(i1);
+                        connectPainter = new GeneralizacijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
                         diagramView.getConnectList().add(connectPainter);
+
+
                     } else if (izabran.equals("Kompozicija")) {
-                        pos1.setLocation(i1.getX(),i1.getY());
-                        connection = new Kompozicija("Kompozicija",diagramView.getDiagram().getParent(),i1,i2,Color.black);
-                        connectPainter = new KompozicijaPainter(connection,pos1,pos2);
+
+                        connection = new Kompozicija("Kompozicija",diagramView.getDiagram().getParent(),i1,null,Color.black);
+                        connection.setOd(i1);
+                        connectPainter = new KompozicijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
                         diagramView.getConnectList().add(connectPainter);
+
+
                     } else if (izabran.equals("Zavisnost")) {
-                        pos1.setLocation(i1.getX(),i1.getY());
-                        connection = new Zavisnost("Zavisnost",diagramView.getDiagram().getParent(),i1,i2,Color.black);
-                        connectPainter = new ZavisnostPainter(connection,pos1,pos2);
+
+                        connection = new Zavisnost("Zavisnost",diagramView.getDiagram().getParent(),i1,null,Color.black);
+                        connection.setOd(i1);
+                        connectPainter = new ZavisnostPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
                         diagramView.getConnectList().add(connectPainter);
+
                     }
                 }
             }
@@ -86,7 +92,7 @@ public class ConnectState implements State {
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView) {
-        pos2.setLocation(x,y);
+        connectPainter.setPos2(new Point(x,y));
         diagramView.repaint();
     }
 
@@ -94,22 +100,29 @@ public class ConnectState implements State {
     public void misOtpusten(int x, int y, DiagramView diagramView) {
         if(i1 == null || i2 == null){
         }
-        pos2.setLocation(x,y);
+
+        connectPainter.setPos2(new Point(x,y));
 
         for(Painter p: diagramView.getPainters()){
             if(p.getDiagramElement() instanceof Interclass){
                 if(p.elementAt(x,y)){
                     Interclass interclass = (Interclass) p.getDiagramElement();
-                    pos2 = new Point(interclass.getX(),interclass.getY());
-                    connectPainter.setPos2(pos2);
-
-                    i2 = (Interclass) p.getDiagramElement();
-                    connection.setSecondSecond(i2);
-                    pos2 = new Point(i2.getX(),i2.getY());
-                    break;
+                    double minPath = Double.MAX_VALUE;
+                    for(Point point: connectPainter.getConnection().getOd().getPoints()){
+                        for(Point point1: interclass.getPoints()){
+                            double rastojanje = Math.sqrt((point1.y - point.y) * (point1.y - point.y) + (point1.x - point.x) * (point1.x - point.x));
+                            if(rastojanje<minPath){
+                                minPath = rastojanje;
+                                connectPainter.setPos1(point);
+                                connectPainter.setPos2(point1);
+                            }
+                        }
+                    }
+                    connection.setKa(interclass);
                 }
             }
         }
+
         for(ConnectPainter n: connectPainterList){
             diagramView.getPainters().add(n);
             diagramView.repaint();

@@ -23,6 +23,7 @@ public class ActionManager {
     private SelectStateAction selectStateAction;
     private ZoomInAction zoomInAction;
     private ZoomOutAction zoomOutAction;
+    private DuplicateAction duplicateAction;
 
 
 
@@ -42,6 +43,7 @@ public class ActionManager {
         this.selectStateAction = new SelectStateAction();
         this.zoomInAction = new ZoomInAction();
         this.zoomOutAction = new ZoomOutAction();
+        this.duplicateAction = new DuplicateAction();
 
     }
 
