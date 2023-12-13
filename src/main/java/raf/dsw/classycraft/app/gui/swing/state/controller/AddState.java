@@ -136,7 +136,7 @@ public class AddState implements State {
             novi = i;
         }
 
-        MainFrame.getInstance();
+        MainFrame.getInstance().getClassyTree().addDiagramChild(diagramView.getDiagram(), novi);
 
     }
 

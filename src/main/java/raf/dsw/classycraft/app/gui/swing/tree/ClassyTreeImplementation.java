@@ -6,10 +6,8 @@ import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.factory.FactoryUtils;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.factory.NodeFactory;
-import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Diagram;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.*;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Package;
-import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.Project;
-import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGenerator;
 import raf.dsw.classycraft.app.gui.swing.message.MessageGeneratorImplementation;
@@ -70,6 +68,28 @@ public class ClassyTreeImplementation implements ClassyTree {
     @Override
     public void editNode(ClassyTreeItem classyTreeItem) {
         SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
+    @Override
+    public void addDiagramChild(Diagram diagram, DiagramElement novi) {
+        ClassyTreeItem cti = getTreeItem(diagram);
+        ClassyTreeItem ctiChild = new ClassyTreeItem(novi);
+        cti.add(ctiChild);
+
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
+    private ClassyTreeItem getTreeItem(Diagram diagram) {
+        if (diagram == null) return null;
+        for (int i=0; i<treeView.getRowCount(); i++){
+            ClassyTreeItem cti = (ClassyTreeItem) treeView.getPathForRow(i).getLastPathComponent();
+            if (cti != null && cti.getClassyNode() == diagram){
+                System.out.println(cti);
+                return cti;
+            }
+        }
+        return null;
     }
 
 
