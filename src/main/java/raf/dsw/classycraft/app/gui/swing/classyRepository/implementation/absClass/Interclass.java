@@ -28,6 +28,7 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
     private List<ClassContent> content;
     private int maxWidth = 0;
     private List<Point> points;
+    private List<ConnectPainter> connectPainters;
 
 
     private int x;
@@ -50,6 +51,7 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
         content = new ArrayList<>();
         this.maxWidth = 0;
         points = new ArrayList<>();
+        connectPainters = new ArrayList<>();
 
 
         System.out.println(name);
@@ -84,10 +86,12 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         Interclass novi = (Interclass) super.clone();
-        List<Point> point1 = new ArrayList<>(getPoints());
-        List<ClassContent> content1 = new ArrayList<>(getContent());
-        novi.setY(getY() + 200);
-        novi.setX(getX() + 200);
+        novi.painter = null;
+        novi.points = new ArrayList<>(getPoints());
+        novi.content = new ArrayList<>(getContent());
+        novi.x = this.x + 100;
+        novi.y = this.y;
+
         return novi;
     }
 }

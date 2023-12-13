@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Interface extends Interclass {
 
-    List<ClassContent> content;
+
     public Interface(String name, ClassyNode parent, Painter painter, Color color, int x, int y) {
         super(name, parent, painter, color, x, y);
     }
@@ -22,7 +22,7 @@ public class Interface extends Interclass {
         super(aClass,diagram,null,null,x,y);
         this.setColor(new Color(93,217,119));
         this.setStrokeW(2);
-        content = new ArrayList<>();
+
     }
 
     @Override
@@ -45,8 +45,4 @@ public class Interface extends Interclass {
         super.napraviTacke();
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 }

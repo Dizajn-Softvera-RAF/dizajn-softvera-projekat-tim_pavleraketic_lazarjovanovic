@@ -29,9 +29,7 @@ public class DeleteState implements State {
                         if (p.getDiagramElement() instanceof Interclass) {
                             staSeBrise();
                             if (izabran.equals("Interclass")) {
-                                for(ConnectPainter cp: diagramView.getConnectList()){
-                                    diagramView.getPainters().remove(cp);
-                                }
+                                obrisiVezu((Interclass) p.getDiagramElement(),diagramView);
                                 diagramView.getPainters().remove(p);
                                 diagramView.repaint();
                             } else if (izabran.equals("ClassContent")) {
@@ -42,6 +40,8 @@ public class DeleteState implements State {
                         } else if (p.getDiagramElement() instanceof Connection) {
                             diagramView.getPainters().remove(p);
                             diagramView.getConnectList().remove(p);
+                            ((Connection) p.getDiagramElement()).getKa().getConnectPainters().remove(p);
+                            ((Connection) p.getDiagramElement()).getOd().getConnectPainters().remove(p);
                             diagramView.repaint();
                         }
                     }
@@ -49,9 +49,7 @@ public class DeleteState implements State {
             } else{
                 for(Painter p: diagramView.getClassSelectionModel().getSelected()){
                     if(p.getDiagramElement() instanceof Interclass){
-                        for(ConnectPainter cp: diagramView.getConnectList()){
-                            diagramView.getPainters().remove(cp);
-                        }
+                        obrisiVezu((Interclass) p.getDiagramElement(),diagramView);
                         diagramView.getPainters().remove(p);
                         diagramView.repaint();
                     } else if (p.getDiagramElement() instanceof Connection) {
@@ -122,4 +120,13 @@ public class DeleteState implements State {
         }
       return null;
     }
+
+    public void obrisiVezu(Interclass i, DiagramView diagramView){
+        for(ConnectPainter connectPainter: i.getConnectPainters()){
+            if(diagramView.getPainters().contains(connectPainter)){
+                diagramView.getPainters().remove(connectPainter);
+            }
+        }
+    }
+
 }

@@ -24,6 +24,7 @@ public class ActionManager {
     private ZoomInAction zoomInAction;
     private ZoomOutAction zoomOutAction;
     private DuplicateAction duplicateAction;
+    private EditInterclassAction editInterclassAction;
 
 
 
@@ -44,6 +45,7 @@ public class ActionManager {
         this.zoomInAction = new ZoomInAction();
         this.zoomOutAction = new ZoomOutAction();
         this.duplicateAction = new DuplicateAction();
+        this.editInterclassAction = new EditInterclassAction();
 
     }
 
