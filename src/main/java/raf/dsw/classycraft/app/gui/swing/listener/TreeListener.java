@@ -20,13 +20,20 @@ public class TreeListener extends MouseAdapter {
                 if (e.getClickCount() == 2) {
 
                     Package p = (Package) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
-                    PackageView pv = new PackageView(p);
-                    p.addSubscriber(pv);
-                    //p.getParent().addSubscriber(pv);
-                    try {
-                        p.notifySubscribers(p);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                    PackageView pv = null;
+                    if(p.getSubs() == null || p.getSubs().isEmpty()) {
+                        pv = new PackageView(p);
+                        p.addSubscriber(pv);
+
+
+                        //p.getParent().addSubscriber(pv);
+                        try {
+                            p.notifySubscribers(p);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    } else {
+                        pv = (PackageView) p.getSubs().get(0);
                     }
                     MainFrame.getInstance().reload(pv);
                 }

@@ -42,7 +42,7 @@ public class Package extends ClassyNodeComposite {
                 this.getChildren().add(project);
                 try {
                     System.out.println(project);
-                    notifySubscribers("child");
+                    notifySubscribers("promena");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -56,7 +56,7 @@ public class Package extends ClassyNodeComposite {
         if (this.getChildren().contains(diagram)) {
             this.getChildren().remove(diagram);
             try {
-                notifySubscribers("child");
+                notifySubscribers("promena");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -96,7 +96,7 @@ public class Package extends ClassyNodeComposite {
     public void notifySubscribers(Object notification) throws IOException {
         if (notification == null || subs.isEmpty()) return;
         for (Subscriber s : subs) {
-            s.update(this);
+            s.update(notification);
 
         }
     }
