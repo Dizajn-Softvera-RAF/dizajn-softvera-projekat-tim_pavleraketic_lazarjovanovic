@@ -136,6 +136,7 @@ public class DeleteState implements State {
         for(ConnectPainter connectPainter: i.getConnectPainters()){
             if(diagramView.getPainters().contains(connectPainter)){
                 diagramView.getPainters().remove(connectPainter);
+                MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),connectPainter.getDiagramElement());
             }
         }
     }

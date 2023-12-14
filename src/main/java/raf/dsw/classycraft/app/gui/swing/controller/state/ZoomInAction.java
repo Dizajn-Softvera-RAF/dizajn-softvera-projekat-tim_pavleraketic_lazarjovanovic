@@ -16,8 +16,8 @@ public class ZoomInAction extends AbscractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //System.out.println(MainFrame.getInstance().getPackageView().getJTabbedPane().getSelectedComponent());
-        //((DiagramView) MainFrame.getInstance().getPackageView().getJTabbedPane().getSelectedComponent()).zoomIn();
+        MainFrame.getInstance().getPackageView().startZoomInState();
+
     }
 
 }
