@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.state.controller;
 
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Connection;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Agregacija;
@@ -16,6 +17,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.connection.Generalizacija
 import raf.dsw.classycraft.app.gui.swing.state.painter.connection.KompozicijaPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.connection.ZavisnostPainter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +27,8 @@ import java.util.List;
 public class ConnectState implements State {
 
     private String izabran;
+    private String kardinalitet;
+    private String tip;
     private Interclass i1;
     private Interclass i2;
     private ConnectPainter connectPainter;
@@ -43,6 +47,7 @@ public class ConnectState implements State {
         i2 = null;
         boolean jeli = false;
 
+
         for(Painter p: diagramView.getPainters()){
             if(p.getDiagramElement() instanceof Interclass){
                 if(p.elementAt(x,y)){
@@ -52,7 +57,9 @@ public class ConnectState implements State {
                     i1 = (Interclass) p.getDiagramElement();
                     if(izabran.equals("Agregacija")){
 
+
                         connection = new Agregacija("Agregacija",diagramView.getDiagram().getParent(),i1,null,Color.black);
+
                         connection.setOd(i1);
                         connectPainter = new AgregacijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
@@ -73,7 +80,9 @@ public class ConnectState implements State {
 
                     } else if (izabran.equals("Kompozicija")) {
 
+
                         connection = new Kompozicija("Kompozicija",diagramView.getDiagram().getParent(),i1,null,Color.black);
+
                         connection.setOd(i1);
                         connectPainter = new KompozicijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
@@ -84,11 +93,13 @@ public class ConnectState implements State {
                     } else if (izabran.equals("Zavisnost")) {
 
                         connection = new Zavisnost("Zavisnost", diagramView.getDiagram().getParent(), i1, null, Color.black);
+
                         connection.setOd(i1);
                         connectPainter = new ZavisnostPainter(connection, new Point(x, y), new Point(x, y));
                         connectPainterList.add(connectPainter);
                         dodajUListu(i1, connectPainter);
                         diagramView.getConnectList().add(connectPainter);
+
                     }
 
 
@@ -112,6 +123,7 @@ public class ConnectState implements State {
             }
         }
         diagramView.repaint();
+
     }
 
     @Override
@@ -127,6 +139,7 @@ public class ConnectState implements State {
 
         connectPainter.setPos2(new Point(x,y));
         boolean jel = false;
+        DiagramElement novi = null;
 
         for(Painter p: diagramView.getPainters()){
             if(p.getDiagramElement() instanceof Interclass){
@@ -145,6 +158,7 @@ public class ConnectState implements State {
                     }
                     jel = true;
                     connection.setKa(interclass);
+                    novi = connection;
                     dodajUListu(interclass,connectPainter);
                 }
             }
@@ -170,7 +184,23 @@ public class ConnectState implements State {
         }
         connectPainterList.clear();
         diagramView.repaint();
-
+        MainFrame.getInstance().getClassyTree().addDiagramChild(diagramView.getDiagram(), novi);
+        if(connection instanceof Agregacija){
+            kardinalnost();
+            Agregacija a = (Agregacija) connection;
+            a.setKardinalitet(kardinalitet);
+            System.out.println("Kardinalitet: " + kardinalitet);
+        } else if (connection instanceof Kompozicija) {
+            kardinalnost();
+            Kompozicija k = (Kompozicija) connection;
+            k.setKardinalitet(kardinalitet);
+            System.out.println("Kardinalitet: " + kardinalitet);
+        } else if (connection instanceof Zavisnost) {
+            tipVeze();
+            Zavisnost z = (Zavisnost) connection;
+            z.setTip(tip);
+            System.out.println("Tip: " + tip);
+        }
     }
 
 
@@ -201,4 +231,37 @@ public class ConnectState implements State {
             i.getConnectPainters().add(connectPainter);
         }
     }
+
+    public void kardinalnost(){
+            String[] choices = {"0...1","0...*"};
+            Object selectedChoice = JOptionPane.showInputDialog(null,
+                    "Choose an option:", "Kardnialnost",
+                    JOptionPane.QUESTION_MESSAGE, null,
+                    choices,
+                    choices[0]);
+            if (selectedChoice == null) {
+                System.out.println("User canceled the input.");
+            } else if( selectedChoice.equals("0...1")){
+                kardinalitet = "0...1";
+            }else if( selectedChoice.equals("0...*")) {
+                kardinalitet = "0...*";
+            }
+    }
+
+    public void tipVeze(){
+        String[] choices = {"Call","Instantiate"};
+        Object selectedChoice = JOptionPane.showInputDialog(null,
+                "Choose an option:", "Kardnialnost",
+                JOptionPane.QUESTION_MESSAGE, null,
+                choices,
+                choices[0]);
+        if (selectedChoice == null) {
+            System.out.println("User canceled the input.");
+        } else if( selectedChoice.equals("Call")){
+            tip = "Call";
+        }else if( selectedChoice.equals("Instantiate")) {
+            tip = "Instantiate";
+        }
+    }
+
 }

@@ -44,6 +44,7 @@ public class DiagramView extends JPanel implements Subscriber {
 
     public DiagramView(Diagram diagram) {
 
+
         this.setLayout(new BorderLayout());
         setDiagram(diagram);
 
@@ -64,6 +65,7 @@ public class DiagramView extends JPanel implements Subscriber {
             painters.add(c.getPainter());
         }
         setDiagram(diagram);
+
 
 
     }
@@ -115,6 +117,7 @@ public class DiagramView extends JPanel implements Subscriber {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setTransform(transformation);
         if(painters.isEmpty()) return;
         for(Painter p : painters){
             p.draw(g2d);

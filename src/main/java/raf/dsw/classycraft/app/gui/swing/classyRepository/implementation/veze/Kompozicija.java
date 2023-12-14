@@ -13,6 +13,7 @@ import java.io.IOException;
 @Setter
 public class Kompozicija extends Connection {
 
+    private String kardinalitet;
 
     public Kompozicija(String name, ClassyNode parent, Interclass od, Interclass ka, Color color) {
         super(name, parent, od, ka, color);

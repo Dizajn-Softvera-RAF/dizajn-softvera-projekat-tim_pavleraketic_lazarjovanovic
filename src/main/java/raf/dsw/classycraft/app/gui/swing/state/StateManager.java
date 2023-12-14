@@ -13,6 +13,9 @@ public class StateManager {
         private DeleteState deleteState;
         private AddClassContentState addClassContentState;
         private DuplicateState duplicateState;
+        private EditClassContentState editClassContentState;
+        private ZoomInState zoomInState;
+        private ZoomOutState zoomOutState;
 
         public StateManager () {
             initialise();
@@ -26,6 +29,9 @@ public class StateManager {
             deleteState = new DeleteState();
             addClassContentState = new AddClassContentState();
             duplicateState = new DuplicateState();
+            editClassContentState = new EditClassContentState();
+            zoomInState = new ZoomInState();
+            zoomOutState = new ZoomOutState();
             state = selectState;
         }
 
@@ -42,9 +48,12 @@ public class StateManager {
     public void setDeleteState() {state = deleteState;}
 
     public void setSelectState() {state = selectState;}
+    public void setZoomInState() {state = zoomInState;}
+    public void setZoomOutState() {state = zoomOutState;}
 
     public void setConnectState() {state = connectionState;
-        connectionState.izaberi();}
+        connectionState.izaberi();
+        }
 
     public void setAddClassContentState(){state = addClassContentState;
             addClassContentState.izaberiTip();}
@@ -52,6 +61,10 @@ public class StateManager {
     public void setDuplicateState() {
         state = duplicateState;
     }
+    public void setEditClassContentState() {
+        state = editClassContentState;
+    }
+
 
     public State getCurrent() {
         return state;}

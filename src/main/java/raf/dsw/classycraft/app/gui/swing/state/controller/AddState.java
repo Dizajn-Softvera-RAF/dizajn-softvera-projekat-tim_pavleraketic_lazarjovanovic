@@ -62,11 +62,7 @@ public class AddState implements State {
             }
             else{
                 try {
-                    if(izaberiIme()!= null){
-                        c.setName(izaberiIme());
-                    } else{
-                        return;
-                    }
+                    c.setName(izaberiIme());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

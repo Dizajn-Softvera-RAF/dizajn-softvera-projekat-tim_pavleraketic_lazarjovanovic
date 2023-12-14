@@ -80,6 +80,35 @@ public class ClassyTreeImplementation implements ClassyTree {
         SwingUtilities.updateComponentTreeUI(treeView);
     }
 
+    public void removeDiagramChild(Diagram diagram, DiagramElement childToRemove) {
+
+        ClassyTreeItem parentTreeItem = getTreeItem(diagram);
+        ClassyTreeItem childTreeItem = findChildTreeItem(parentTreeItem, childToRemove);
+        if (childTreeItem != null) {
+            parentTreeItem.remove(childTreeItem);
+            SwingUtilities.updateComponentTreeUI(treeView);
+        }
+    }
+
+    @Override
+    public void updateTree() {
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
+    private ClassyTreeItem findChildTreeItem(ClassyTreeItem parent, DiagramElement child) {
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            Object childObject = parent.getChildAt(i);
+            if (childObject instanceof ClassyTreeItem) {
+                ClassyTreeItem childTreeItem = (ClassyTreeItem) childObject;
+                if (childTreeItem.getClassyNode().equals(child)) {
+                    return childTreeItem;
+                }
+            }
+        }
+        return null;
+    }
+
+
     private ClassyTreeItem getTreeItem(Diagram diagram) {
         if (diagram == null) return null;
         for (int i=0; i<treeView.getRowCount(); i++){
@@ -99,6 +128,7 @@ public class ClassyTreeImplementation implements ClassyTree {
             if(nodeFactory == null)return null;
             return nodeFactory.getClassyNode(parent);
     }
+
 
 
 

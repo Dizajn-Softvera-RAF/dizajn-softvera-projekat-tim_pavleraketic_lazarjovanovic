@@ -47,9 +47,9 @@ public class KompozicijaPainter extends ConnectPainter {
 
         double angle = Math.atan2(getPos2().y - getPos1().y, getPos2().x - getPos1().x);
         AffineTransform transform = AffineTransform.getTranslateInstance(getPos1().x, getPos1().y);
-        transform.rotate(angle + Math.toRadians(45)); // Rotate by 45 degrees
+        transform.rotate(angle + Math.toRadians(45));
 
-        // Define the square size (adjust as needed)
+
         int squareSize = 10;
 
         Rectangle2D square = new Rectangle2D.Double(-squareSize / 2.0, -squareSize / 2.0, squareSize, squareSize);
@@ -57,7 +57,7 @@ public class KompozicijaPainter extends ConnectPainter {
         Shape transformedSquare = transform.createTransformedShape(square);
         g.fill(transformedSquare);
 
-        drawArrowhead(g);
+        //drawArrowhead(g);
     }
 
     @Override

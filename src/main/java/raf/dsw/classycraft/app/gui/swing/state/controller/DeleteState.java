@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.state.controller;
 
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.ClassContent;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Connection;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
@@ -7,6 +8,7 @@ import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.ConnectPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
+import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
@@ -31,6 +33,8 @@ public class DeleteState implements State {
                             if (izabran.equals("Interclass")) {
                                 obrisiVezu((Interclass) p.getDiagramElement(),diagramView);
                                 diagramView.getPainters().remove(p);
+                                diagramView.getDiagram().removeChild(p.getDiagramElement());
+                                MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),p.getDiagramElement());
                                 diagramView.repaint();
                             } else if (izabran.equals("ClassContent")) {
                                 otvoriListu(p);
@@ -42,6 +46,8 @@ public class DeleteState implements State {
                             diagramView.getConnectList().remove(p);
                             ((Connection) p.getDiagramElement()).getKa().getConnectPainters().remove(p);
                             ((Connection) p.getDiagramElement()).getOd().getConnectPainters().remove(p);
+                            diagramView.getDiagram().removeChild(p.getDiagramElement());
+                            MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),p.getDiagramElement());
                             diagramView.repaint();
                         }
                     }
@@ -51,10 +57,14 @@ public class DeleteState implements State {
                     if(p.getDiagramElement() instanceof Interclass){
                         obrisiVezu((Interclass) p.getDiagramElement(),diagramView);
                         diagramView.getPainters().remove(p);
+                        diagramView.getDiagram().removeChild(p.getDiagramElement());
+                        MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),p.getDiagramElement());
                         diagramView.repaint();
                     } else if (p.getDiagramElement() instanceof Connection) {
                         diagramView.getPainters().remove(p);
                         diagramView.getConnectList().remove(p);
+                        diagramView.getDiagram().removeChild(p.getDiagramElement());
+                        MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),p.getDiagramElement());
                         diagramView.repaint();
                     }
 
@@ -68,6 +78,7 @@ public class DeleteState implements State {
     } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override
@@ -125,6 +136,7 @@ public class DeleteState implements State {
         for(ConnectPainter connectPainter: i.getConnectPainters()){
             if(diagramView.getPainters().contains(connectPainter)){
                 diagramView.getPainters().remove(connectPainter);
+                MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),connectPainter.getDiagramElement());
             }
         }
     }

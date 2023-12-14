@@ -27,7 +27,7 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
         } else if (((ClassyTreeItem)value).getClassyNode() instanceof Diagram) {
             imageURL = getClass().getResource("/images/diagram.png");
         }else if (((ClassyTreeItem)value).getClassyNode() instanceof DiagramElement) {
-            imageURL = getClass().getResource("/images/diagram.png");
+            imageURL = getClass().getResource("/images/element.png");
         }
 
         ImageIcon icon = null;

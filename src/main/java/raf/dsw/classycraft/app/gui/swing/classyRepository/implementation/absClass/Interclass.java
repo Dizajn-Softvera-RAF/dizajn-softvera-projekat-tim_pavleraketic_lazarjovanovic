@@ -9,6 +9,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.*;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.ClassPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.EnumPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.InterfacePainter;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
 import java.io.IOException;
@@ -89,7 +90,8 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
         novi.painter = null;
         novi.points = new ArrayList<>(getPoints());
         novi.content = new ArrayList<>(getContent());
-        novi.x = this.x + 100;
+        novi.connectPainters = new ArrayList<>();
+        novi.x = this.x + 120;
         novi.y = this.y;
 
         return novi;
