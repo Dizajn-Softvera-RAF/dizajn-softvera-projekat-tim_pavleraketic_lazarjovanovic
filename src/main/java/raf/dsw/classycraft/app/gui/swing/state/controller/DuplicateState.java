@@ -10,6 +10,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.ClassPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.EnumPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.InterfacePainter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.util.ConcurrentModificationException;
 
@@ -32,6 +33,7 @@ public class DuplicateState implements State {
                             cloned.setPainter(classPainter);
                             diagramView.getPainters().add(classPainter);
                             diagramView.getDiagram().addChild(cloned);
+                            MainFrame.getInstance().getClassyTree().addDiagramChild(diagramView.getDiagram(),cloned);
                             diagramView.repaint();
 
                         } else if (p.getDiagramElement() instanceof Enum) {
@@ -40,6 +42,7 @@ public class DuplicateState implements State {
                             cloned.setPainter(enumPainter);
                             diagramView.getPainters().add(enumPainter);
                             diagramView.getDiagram().addChild(cloned);
+                            MainFrame.getInstance().getClassyTree().addDiagramChild(diagramView.getDiagram(),cloned);
                             diagramView.repaint();
 
                         } else if (p.getDiagramElement() instanceof Interface) {
@@ -49,6 +52,7 @@ public class DuplicateState implements State {
                             cloned.setPainter(interfacePainter);
                             diagramView.getPainters().add(interfacePainter);
                             diagramView.getDiagram().addChild(cloned);
+                            MainFrame.getInstance().getClassyTree().addDiagramChild(diagramView.getDiagram(),cloned);
                             diagramView.repaint();
 
                         }

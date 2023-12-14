@@ -9,6 +9,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.*;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.ClassPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.EnumPainter;
 import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.InterfacePainter;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
 import java.io.IOException;
