@@ -27,6 +27,8 @@ import java.util.List;
 public class ConnectState implements State {
 
     private String izabran;
+    private String kardinalitet;
+    private String tip;
     private Interclass i1;
     private Interclass i2;
     private ConnectPainter connectPainter;
@@ -55,7 +57,9 @@ public class ConnectState implements State {
                     i1 = (Interclass) p.getDiagramElement();
                     if(izabran.equals("Agregacija")){
 
+
                         connection = new Agregacija("Agregacija",diagramView.getDiagram().getParent(),i1,null,Color.black);
+
                         connection.setOd(i1);
                         connectPainter = new AgregacijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
@@ -76,7 +80,9 @@ public class ConnectState implements State {
 
                     } else if (izabran.equals("Kompozicija")) {
 
+
                         connection = new Kompozicija("Kompozicija",diagramView.getDiagram().getParent(),i1,null,Color.black);
+
                         connection.setOd(i1);
                         connectPainter = new KompozicijaPainter(connection,new Point(x,y),new Point(x,y));
                         connectPainterList.add(connectPainter);
@@ -87,6 +93,7 @@ public class ConnectState implements State {
                     } else if (izabran.equals("Zavisnost")) {
 
                         connection = new Zavisnost("Zavisnost", diagramView.getDiagram().getParent(), i1, null, Color.black);
+
                         connection.setOd(i1);
                         connectPainter = new ZavisnostPainter(connection, new Point(x, y), new Point(x, y));
                         connectPainterList.add(connectPainter);
@@ -178,6 +185,22 @@ public class ConnectState implements State {
         connectPainterList.clear();
         diagramView.repaint();
         MainFrame.getInstance().getClassyTree().addDiagramChild(diagramView.getDiagram(), novi);
+        if(connection instanceof Agregacija){
+            kardinalnost();
+            Agregacija a = (Agregacija) connection;
+            a.setKardinalitet(kardinalitet);
+            System.out.println("Kardinalitet: " + kardinalitet);
+        } else if (connection instanceof Kompozicija) {
+            kardinalnost();
+            Kompozicija k = (Kompozicija) connection;
+            k.setKardinalitet(kardinalitet);
+            System.out.println("Kardinalitet: " + kardinalitet);
+        } else if (connection instanceof Zavisnost) {
+            tipVeze();
+            Zavisnost z = (Zavisnost) connection;
+            z.setTip(tip);
+            System.out.println("Tip: " + tip);
+        }
     }
 
 
@@ -208,4 +231,37 @@ public class ConnectState implements State {
             i.getConnectPainters().add(connectPainter);
         }
     }
+
+    public void kardinalnost(){
+            String[] choices = {"0...1","0...*"};
+            Object selectedChoice = JOptionPane.showInputDialog(null,
+                    "Choose an option:", "Kardnialnost",
+                    JOptionPane.QUESTION_MESSAGE, null,
+                    choices,
+                    choices[0]);
+            if (selectedChoice == null) {
+                System.out.println("User canceled the input.");
+            } else if( selectedChoice.equals("0...1")){
+                kardinalitet = "0...1";
+            }else if( selectedChoice.equals("0...*")) {
+                kardinalitet = "0...*";
+            }
+    }
+
+    public void tipVeze(){
+        String[] choices = {"Call","Instantiate"};
+        Object selectedChoice = JOptionPane.showInputDialog(null,
+                "Choose an option:", "Kardnialnost",
+                JOptionPane.QUESTION_MESSAGE, null,
+                choices,
+                choices[0]);
+        if (selectedChoice == null) {
+            System.out.println("User canceled the input.");
+        } else if( selectedChoice.equals("Call")){
+            tip = "Call";
+        }else if( selectedChoice.equals("Instantiate")) {
+            tip = "Instantiate";
+        }
+    }
+
 }

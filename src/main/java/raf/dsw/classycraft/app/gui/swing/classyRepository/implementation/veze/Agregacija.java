@@ -15,6 +15,8 @@ import java.io.IOException;
 public class Agregacija extends Connection {
 
 
+    private String kardinalitet; // 0...1     0...*
+
     public Agregacija(String name, ClassyNode parent, Interclass od, Interclass ka, Color color) {
         super(name, parent, od, ka, color);
         this.setColor(Color.black);

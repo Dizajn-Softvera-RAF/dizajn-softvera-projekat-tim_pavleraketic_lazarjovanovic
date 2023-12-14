@@ -1,12 +1,16 @@
 package raf.dsw.classycraft.app.gui.swing.state.controller;
 
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.ClassContent;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Connection;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.absClass.Interclass;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.classContent.Atribut;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.classContent.EnumElement;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.classContent.Metod;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Class;
 import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.klase.Enum;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Agregacija;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Kompozicija;
+import raf.dsw.classycraft.app.gui.swing.classyRepository.implementation.veze.Zavisnost;
 import raf.dsw.classycraft.app.gui.swing.message.EventType;
 import raf.dsw.classycraft.app.gui.swing.state.State;
 import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
@@ -23,28 +27,109 @@ public class EditClassContentState implements State {
     private String abst;
     private ClassContent classContent;
     private String vidljivost;
+    private String kardinalitet;
+    private String tipVeze;
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
-        for (Painter p : diagramView.getPainters()) {
-            if (p.elementAt(x, y)) {
-                if(p.getDiagramElement() instanceof Interclass){
-                    staSeMenja();
-                    if (izabran.equals("Interclass")) {
-                        Interclass i = (Interclass) p.getDiagramElement();
-                        if(i instanceof Class){
-                            isAbstract();
-                            if(abst.equals("Abs")){
+        if(diagramView.getClassSelectionModel().getSelected().isEmpty()) {
+            for (Painter p : diagramView.getPainters()) {
+                if (p.elementAt(x, y)) {
+                    if (p.getDiagramElement() instanceof Interclass) {
+                        staSeMenja();
+                        if (izabran.equals("Interclass")) {
+                            Interclass i = (Interclass) p.getDiagramElement();
+                            if (i instanceof Class) {
+                                isAbstract();
+                                if (abst.equals("Abs")) {
+                                    try {
+                                        izmenaImenaKlase(i);
+                                        i.setName(ime + " (A) ");
+                                        MainFrame.getInstance().getClassyTree().updateTree();
+                                        diagramView.repaint();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                } else {
+                                    try {
+                                        izmenaImenaKlase(i);
+                                        i.setName(ime);
+                                        MainFrame.getInstance().getClassyTree().updateTree();
+                                        diagramView.repaint();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            } else {
+                                izmenaImenaKlase(i);
                                 try {
-                                    izmenaImenaKlase(i);
-                                    i.setName(ime  + " (A) ");
+                                    i.setName(ime);
                                     MainFrame.getInstance().getClassyTree().updateTree();
                                     diagramView.repaint();
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
                             }
-                            else{
+                        } else if (izabran.equals("ClassContent")) {
+                            otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
+                            if (classContent instanceof EnumElement) {
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            } else if (classContent instanceof Atribut) {
+                                classContent.setVidljivost(vidljivost());
+                                classContent.setTip(tip(classContent));
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            } else if (classContent instanceof Metod) {
+                                classContent.setVidljivost(vidljivost());
+                                classContent.setTip(tip(classContent));
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            }
+                        }
+
+                    } else if (p.getDiagramElement() instanceof Connection) {
+                        Connection c = (Connection) p.getDiagramElement();
+                        if (c instanceof Agregacija) {
+                            promenaKardinalnosti(c);
+                            Agregacija a = (Agregacija) c;
+                            a.setKardinalitet(kardinalitet);
+                            System.out.println("Novi kardinalitet " + kardinalitet);
+                        } else if (c instanceof Kompozicija) {
+                            promenaKardinalnosti(c);
+                            Kompozicija k = (Kompozicija) c;
+                            k.setKardinalitet(kardinalitet);
+                            System.out.println("Novi kardinalitet " + kardinalitet);
+                        } else if (c instanceof Zavisnost) {
+                            promenaTipaVeze();
+                            Zavisnost z = (Zavisnost) c;
+                            z.setTip(tipVeze);
+                            System.out.println("Novi tip: " + tipVeze);
+                        }
+                    }
+                }
+            }
+        } else{
+            for(Painter p: diagramView.getClassSelectionModel().getSelected()) {
+                if(p.getDiagramElement() instanceof Interclass){
+                    staSeMenja();
+                    if (izabran.equals("Interclass")) {
+                        Interclass i = (Interclass) p.getDiagramElement();
+                        if (i instanceof Class) {
+                            isAbstract();
+                            if (abst.equals("Abs")) {
+                                try {
+                                    izmenaImenaKlase(i);
+                                    i.setName(ime + " (A) ");
+                                    MainFrame.getInstance().getClassyTree().updateTree();
+                                    diagramView.repaint();
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            } else {
                                 try {
                                     izmenaImenaKlase(i);
                                     i.setName(ime);
@@ -66,7 +151,7 @@ public class EditClassContentState implements State {
                         }
                     } else if (izabran.equals("ClassContent")) {
                         otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
-                        if(classContent instanceof EnumElement){
+                        if (classContent instanceof EnumElement) {
                             izmenaImenaClassContenta(classContent);
                             classContent.setIme(ime);
                             diagramView.repaint();
@@ -84,7 +169,24 @@ public class EditClassContentState implements State {
                             diagramView.repaint();
                         }
                     }
-
+                } else if (p.getDiagramElement() instanceof Connection) {
+                    Connection c = (Connection) p.getDiagramElement();
+                    if (c instanceof Agregacija) {
+                        promenaKardinalnosti(c);
+                        Agregacija a = (Agregacija) c;
+                        a.setKardinalitet(kardinalitet);
+                        System.out.println("Novi kardinalitet " + kardinalitet);
+                    } else if (c instanceof Kompozicija) {
+                        promenaKardinalnosti(c);
+                        Kompozicija k = (Kompozicija) c;
+                        k.setKardinalitet(kardinalitet);
+                        System.out.println("Novi kardinalitet " + kardinalitet);
+                    } else if (c instanceof Zavisnost) {
+                        promenaTipaVeze();
+                        Zavisnost z = (Zavisnost) c;
+                        z.setTip(tipVeze);
+                        System.out.println("Novi tip: " + tipVeze);
+                    }
                 }
             }
         }
@@ -198,6 +300,37 @@ public class EditClassContentState implements State {
         String tip = JOptionPane.showInputDialog(null,"Set type",classContent.getTip());
         if(tip == null) return null;
         return tip;
+    }
+
+    public void promenaKardinalnosti(Connection c){
+        String[] choices = {"0...1","0...*"};
+        Object selectedChoice = JOptionPane.showInputDialog(null,
+                "Choose an option:", "Kardnialnost",
+                JOptionPane.QUESTION_MESSAGE, null,
+                choices,
+                choices[0]);
+        if (selectedChoice == null) {
+            System.out.println("User canceled the input.");
+        } else if( selectedChoice.equals("0...1")){
+            kardinalitet = "0...1";
+        }else if( selectedChoice.equals("0...*")) {
+            kardinalitet = "0...*";
+        }
+    }
+    public void promenaTipaVeze(){
+        String[] choices = {"Call","Instantiate"};
+        Object selectedChoice = JOptionPane.showInputDialog(null,
+                "Choose an option:", "Kardnialnost",
+                JOptionPane.QUESTION_MESSAGE, null,
+                choices,
+                choices[0]);
+        if (selectedChoice == null) {
+            System.out.println("User canceled the input.");
+        } else if( selectedChoice.equals("Call")){
+            tipVeze = "Call";
+        }else if( selectedChoice.equals("Instantiate")) {
+            tipVeze = "Instantiate";
+        }
     }
 
 }

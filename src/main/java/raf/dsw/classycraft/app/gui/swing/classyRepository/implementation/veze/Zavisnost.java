@@ -13,7 +13,7 @@ import java.io.IOException;
 @Setter
 public class Zavisnost extends Connection {
 
-
+    private String tip; //call instantiate
     public Zavisnost(String name, ClassyNode parent, Interclass od, Interclass ka, Color color) {
         super(name, parent, od, ka, color);
         this.setColor(Color.black);

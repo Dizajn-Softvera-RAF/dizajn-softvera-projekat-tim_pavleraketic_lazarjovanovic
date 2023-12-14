@@ -46,10 +46,10 @@ public class AgregacijaPainter extends ConnectPainter {
 
 
         double angle = Math.atan2(getPos2().y - getPos1().y, getPos2().x - getPos1().x);
-        AffineTransform transform = AffineTransform.getTranslateInstance(getPos1().x, getPos1().y); // Change origin to Pos1
-        transform.rotate(angle + Math.toRadians(45)); // Rotate by 45 degrees
+        AffineTransform transform = AffineTransform.getTranslateInstance(getPos1().x, getPos1().y);
+        transform.rotate(angle + Math.toRadians(45));
 
-        // Define the square size (adjust as needed)
+
         int squareSize = 10;
 
         Rectangle2D square = new Rectangle2D.Double(-squareSize / 2.0, -squareSize / 2.0, squareSize, squareSize);
@@ -58,10 +58,10 @@ public class AgregacijaPainter extends ConnectPainter {
         g.setColor(Color.WHITE);
         g.fill(transformedSquare);
 
-        // Set the color for the outline (black)
+
         g.setColor(Color.BLACK);
         g.draw(transformedSquare);
-        drawArrowhead(g);
+        //drawArrowhead(g);
 
     }
 

@@ -57,10 +57,10 @@ public class GeneralizacijaPainter extends ConnectPainter {
         int[] xPoints = new int[] { getPos2().x, (int) x3, (int) x4 };
         int[] yPoints = new int[] { getPos2().y, (int) y3, (int) y4 };
 
-        g.setColor(Color.WHITE); // Set fill color to white
+        g.setColor(Color.WHITE);
         g.fillPolygon(xPoints, yPoints, 3);
 
-        g.setColor(Color.BLACK); // Set outline color to black
+        g.setColor(Color.BLACK);
         g.drawPolygon(xPoints, yPoints, 3);
 
 

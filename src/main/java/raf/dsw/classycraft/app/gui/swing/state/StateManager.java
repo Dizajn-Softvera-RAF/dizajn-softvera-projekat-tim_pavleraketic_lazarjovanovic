@@ -52,7 +52,8 @@ public class StateManager {
     public void setZoomOutState() {state = zoomOutState;}
 
     public void setConnectState() {state = connectionState;
-        connectionState.izaberi();}
+        connectionState.izaberi();
+        }
 
     public void setAddClassContentState(){state = addClassContentState;
             addClassContentState.izaberiTip();}
