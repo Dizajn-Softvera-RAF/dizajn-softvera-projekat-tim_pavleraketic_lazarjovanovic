@@ -5,11 +5,10 @@ import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
+
 @Setter
-public class MouseController implements MouseListener, MouseMotionListener {
+public class MouseController implements MouseListener, MouseMotionListener{
 
     private DiagramView diagramView;
     @Override
@@ -60,4 +59,5 @@ public class MouseController implements MouseListener, MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
 
     }
+
 }

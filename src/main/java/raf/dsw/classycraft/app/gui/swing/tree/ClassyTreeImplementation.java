@@ -90,6 +90,11 @@ public class ClassyTreeImplementation implements ClassyTree {
         }
     }
 
+    @Override
+    public void updateTree() {
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
     private ClassyTreeItem findChildTreeItem(ClassyTreeItem parent, DiagramElement child) {
         for (int i = 0; i < parent.getChildCount(); i++) {
             Object childObject = parent.getChildAt(i);
@@ -123,6 +128,7 @@ public class ClassyTreeImplementation implements ClassyTree {
             if(nodeFactory == null)return null;
             return nodeFactory.getClassyNode(parent);
     }
+
 
 
 
