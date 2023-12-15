@@ -96,6 +96,7 @@ public class PackageView extends JPanel implements Subscriber {
             tabs.add(d);
 
             for(DiagramView tab : tabs){
+
                 jTabbedPane.add(tab.getDiagram().getName(),tab);
             }
         }

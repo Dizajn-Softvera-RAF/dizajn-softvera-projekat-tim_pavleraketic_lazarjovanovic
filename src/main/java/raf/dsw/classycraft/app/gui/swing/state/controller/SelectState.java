@@ -28,6 +28,7 @@ public class SelectState implements State {
 
     @Override
     public void misPritisnut(int x, int y, DiagramView diagramView) {
+
         //diagramView = (DiagramView) packageView.getJTabbedPane().getSelectedComponent();
 
         if(!(diagramView.getClassSelectionModel().getSelected().isEmpty())){
@@ -65,6 +66,7 @@ public class SelectState implements State {
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView)  {
+
 
         if(!(diagramView.getClassSelectionModel().getSelected().isEmpty())) {
             try {

@@ -14,6 +14,7 @@ import raf.dsw.classycraft.app.gui.swing.view.controller.MouseController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,6 @@ public class DiagramView extends JPanel implements Subscriber {
 
         this.setLayout(new BorderLayout());
         setDiagram(diagram);
-
         this.mc = new MouseController();
         mc.setDiagramView(this);
         addMouseListener(mc);
@@ -86,6 +86,17 @@ public class DiagramView extends JPanel implements Subscriber {
         scalingf *= 0.8;
         if(scalingf < 0.4) scalingf = 0.4;
         setUpTransformation();
+    }
+
+    public Point getOriginalCoordinates(Point scaledPoint){
+        try {
+            AffineTransform inverseTransform = transformation.createInverse();
+            Point originalPoint = new Point();
+            inverseTransform.transform(scaledPoint,originalPoint);
+            return originalPoint;
+        } catch (NoninvertibleTransformException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

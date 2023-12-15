@@ -10,6 +10,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.Painter;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AddClassContentState implements State {
 

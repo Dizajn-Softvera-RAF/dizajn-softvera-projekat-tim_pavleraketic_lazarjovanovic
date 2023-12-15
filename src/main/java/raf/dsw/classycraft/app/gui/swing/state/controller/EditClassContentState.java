@@ -18,6 +18,7 @@ import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class EditClassContentState implements State {
@@ -32,6 +33,7 @@ public class EditClassContentState implements State {
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
+
         if(diagramView.getClassSelectionModel().getSelected().isEmpty()) {
             for (Painter p : diagramView.getPainters()) {
                 if (p.elementAt(x, y)) {
