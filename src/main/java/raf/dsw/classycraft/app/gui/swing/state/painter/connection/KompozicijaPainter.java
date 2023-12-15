@@ -62,7 +62,7 @@ public class KompozicijaPainter extends ConnectPainter {
 
     @Override
     public boolean elementAt(int x, int y) {
-        return getShape().contains(x,y);
+        return super.elementAt(x, y);
     }
 
     private void drawArrowhead(Graphics2D g) {

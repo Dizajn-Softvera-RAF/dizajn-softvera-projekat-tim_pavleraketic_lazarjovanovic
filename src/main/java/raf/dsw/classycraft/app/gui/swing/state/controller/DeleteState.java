@@ -63,6 +63,8 @@ public class DeleteState implements State {
                     } else if (p.getDiagramElement() instanceof Connection) {
                         diagramView.getPainters().remove(p);
                         diagramView.getConnectList().remove(p);
+                        ((Connection) p.getDiagramElement()).getKa().getConnectPainters().remove(p);
+                        ((Connection) p.getDiagramElement()).getOd().getConnectPainters().remove(p);
                         diagramView.getDiagram().removeChild(p.getDiagramElement());
                         MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),p.getDiagramElement());
                         diagramView.repaint();
