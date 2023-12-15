@@ -42,8 +42,9 @@ public class ConnectState implements State {
     }
 
     @Override
-    public void misPritisnut(int x, int y, DiagramView diagramView) {
-
+    public void misPritisnut(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         i1 = null;
         i2 = null;
         boolean jeli = false;
@@ -128,15 +129,17 @@ public class ConnectState implements State {
     }
 
     @Override
-    public void misPovucen(int x, int y, DiagramView diagramView) {
-
+    public void misPovucen(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         connectPainter.setPos2(new Point(x,y));
         diagramView.repaint();
     }
 
     @Override
-    public void misOtpusten(int x, int y, DiagramView diagramView) {
-
+    public void misOtpusten(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         if(i1 == null || i2 == null){
         }
 

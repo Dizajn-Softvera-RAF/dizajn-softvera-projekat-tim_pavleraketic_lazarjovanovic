@@ -21,8 +21,9 @@ public class DuplicateState implements State {
 
 
     @Override
-    public void misKliknut(int x, int y, DiagramView diagramView) {
-
+    public void misKliknut(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         try {
             for (Painter p : diagramView.getPainters()) {
                 if (p.elementAt(x, y)) {

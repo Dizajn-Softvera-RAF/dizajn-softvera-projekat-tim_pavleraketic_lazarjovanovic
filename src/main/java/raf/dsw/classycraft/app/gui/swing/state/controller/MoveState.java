@@ -28,8 +28,9 @@ public class MoveState implements State {
     }
 
     @Override
-    public void misPritisnut(int x, int y, DiagramView diagramView) {
-
+    public void misPritisnut(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         painters.clear();
         for (Painter p : diagramView.getPainters()) {
             if (p.getDiagramElement() instanceof Interclass) {
@@ -54,8 +55,9 @@ public class MoveState implements State {
     }
 
     @Override
-    public void misPovucen(int x, int y, DiagramView diagramView) {
-
+    public void misPovucen(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         if (flag == 1) {
             for (Painter p : diagramView.getPainters()) {
                 if (p.getDiagramElement() instanceof Interclass) {
@@ -78,7 +80,9 @@ public class MoveState implements State {
 
 
     @Override
-    public void misOtpusten(int x, int y, DiagramView diagramView) {
+    public void misOtpusten(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         if (flag == 1) {
             for (Painter p : painters) {
                 Interclass i1 = (Interclass) p.getDiagramElement();

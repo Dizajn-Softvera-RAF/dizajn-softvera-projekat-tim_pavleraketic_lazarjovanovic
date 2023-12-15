@@ -18,8 +18,9 @@ public class AddClassContentState implements State {
     private String vidljivost;
 
     @Override
-    public void misKliknut(int x, int y, DiagramView diagramView) {
-
+    public void misKliknut(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         if (izabran.equals("Attribute")) {
             for (Painter p : diagramView.getPainters()) {
                 if (p.elementAt(x, y)) {

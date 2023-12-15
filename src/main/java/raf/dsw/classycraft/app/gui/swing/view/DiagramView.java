@@ -131,7 +131,7 @@ public class DiagramView extends JPanel implements Subscriber {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.setTransform(transformation);
+        g2d.transform(transformation);
         if(painters.isEmpty()) return;
         for(Painter p : painters){
             p.draw(g2d);

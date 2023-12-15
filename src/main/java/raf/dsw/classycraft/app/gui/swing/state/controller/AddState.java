@@ -32,8 +32,9 @@ public class AddState implements State {
 
 
     @Override
-    public void misKliknut(int x, int y, DiagramView diagramView) {
-
+    public void misKliknut(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         System.out.println("clik");
         DiagramElement novi = null;
         if(izabran.equals("Class")) {

@@ -27,8 +27,9 @@ public class SelectState implements State {
     }
 
     @Override
-    public void misPritisnut(int x, int y, DiagramView diagramView) {
-
+    public void misPritisnut(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         //diagramView = (DiagramView) packageView.getJTabbedPane().getSelectedComponent();
 
         if(!(diagramView.getClassSelectionModel().getSelected().isEmpty())){
@@ -65,9 +66,10 @@ public class SelectState implements State {
     }
 
     @Override
-    public void misPovucen(int x, int y, DiagramView diagramView)  {
+    public void misPovucen(int xx, int yy, DiagramView diagramView)  {
 
-
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         if(!(diagramView.getClassSelectionModel().getSelected().isEmpty())) {
             try {
                 diagramView.getClassSelectionModel().clearList();
@@ -101,8 +103,9 @@ public class SelectState implements State {
     }
 
     @Override
-    public void misOtpusten(int x, int y, DiagramView diagramView) {
-
+    public void misOtpusten(int xx, int yy, DiagramView diagramView) {
+        int x = diagramView.getOriginalCoordinates(new Point(xx,yy)).x;
+        int y = diagramView.getOriginalCoordinates(new Point(xx,yy)).y;
         for (Painter n : nova) {
             diagramView.getPainters().remove(n);
             msp = new MultiSelectionPainter();
