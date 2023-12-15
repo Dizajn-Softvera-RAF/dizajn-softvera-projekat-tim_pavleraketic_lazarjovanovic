@@ -39,8 +39,9 @@ public class MoveState implements State {
                         x1 = xPrim = x;
                         y1 = yPrim = y;
                         flag = 1;
-                        originalX = i.getX();
-                        originalY = i.getY();
+                        i.setPocetnoX(i.getX());
+                        i.setPocetnoY(i.getY());
+                        //originalY = i.getY();
                         break;
                     } else {
                         flag = 0;
@@ -89,8 +90,9 @@ public class MoveState implements State {
                                 if (!p1.equals(p)) {
 //                                    ((Interclass) p.getDiagramElement()).setX(originalX);
 //                                    ((Interclass) p.getDiagramElement()).setY(originalY);
-                                    i1.setX(originalX);
-                                    i1.setY(originalY);
+                                    i1.setX(i1.getPocetnoX());
+                                    i1.setY(i1.getPocetnoY());
+
                                     diagramView.repaint();
                                 }
                             }
