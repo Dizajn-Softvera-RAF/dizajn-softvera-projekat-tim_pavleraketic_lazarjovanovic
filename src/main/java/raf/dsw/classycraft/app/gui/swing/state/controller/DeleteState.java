@@ -13,6 +13,7 @@ import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -24,6 +25,7 @@ public class DeleteState implements State {
     
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
+
         try {
             if(diagramView.getClassSelectionModel().getSelected().isEmpty()){
                 for (Painter p : diagramView.getPainters()) {
@@ -37,9 +39,12 @@ public class DeleteState implements State {
                                 MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),p.getDiagramElement());
                                 diagramView.repaint();
                             } else if (izabran.equals("ClassContent")) {
-                                otvoriListu(p);
-                                ((Interclass) p.getDiagramElement()).getContent().remove(ime);
-                                diagramView.repaint();
+                                if(!((Interclass) p.getDiagramElement()).getContent().isEmpty()) {
+                                    otvoriListu(p);
+                                    ((Interclass) p.getDiagramElement()).getContent().remove(ime);
+                                    diagramView.repaint();
+                                }
+                                return;
                             }
                         } else if (p.getDiagramElement() instanceof Connection) {
                             diagramView.getPainters().remove(p);
@@ -63,6 +68,8 @@ public class DeleteState implements State {
                     } else if (p.getDiagramElement() instanceof Connection) {
                         diagramView.getPainters().remove(p);
                         diagramView.getConnectList().remove(p);
+                        ((Connection) p.getDiagramElement()).getKa().getConnectPainters().remove(p);
+                        ((Connection) p.getDiagramElement()).getOd().getConnectPainters().remove(p);
                         diagramView.getDiagram().removeChild(p.getDiagramElement());
                         MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),p.getDiagramElement());
                         diagramView.repaint();

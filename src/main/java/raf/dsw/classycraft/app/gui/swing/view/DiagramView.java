@@ -14,6 +14,7 @@ import raf.dsw.classycraft.app.gui.swing.view.controller.MouseController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class DiagramView extends JPanel implements Subscriber {
     private List<Painter> selected;
     private ClassSelectionModel classSelectionModel;
     List<ConnectPainter> connectList = new ArrayList<>();
+    private JViewport viewport=new JViewport();
 
 
     double translateX = 0;
@@ -45,13 +47,13 @@ public class DiagramView extends JPanel implements Subscriber {
     public DiagramView(Diagram diagram) {
 
 
-        this.setLayout(new BorderLayout());
+        //this.setLayout(new BorderLayout());
         setDiagram(diagram);
-
         this.mc = new MouseController();
         mc.setDiagramView(this);
         addMouseListener(mc);
         addMouseMotionListener(mc);
+            this.setPreferredSize(new Dimension(2000,2000));
 
         classSelectionModel = new ClassSelectionModel();
         classSelectionModel.addSubscriber(this);
@@ -71,6 +73,7 @@ public class DiagramView extends JPanel implements Subscriber {
     }
 
     private void setUpTransformation(){
+        transformation.setToIdentity();
         transformation.setToScale(scalingf,scalingf);
         transformation.translate(translateX,translateY);
         repaint();
@@ -86,6 +89,17 @@ public class DiagramView extends JPanel implements Subscriber {
         scalingf *= 0.8;
         if(scalingf < 0.4) scalingf = 0.4;
         setUpTransformation();
+    }
+
+    public Point getOriginalCoordinates(Point scaledPoint){
+        try {
+            AffineTransform inverseTransform = transformation.createInverse();
+            Point originalPoint = new Point();
+            inverseTransform.transform(scaledPoint,originalPoint);
+            return originalPoint;
+        } catch (NoninvertibleTransformException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -117,7 +131,7 @@ public class DiagramView extends JPanel implements Subscriber {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setTransform(transformation);
+        //g2d.setTransform(transformation);
         if(painters.isEmpty()) return;
         for(Painter p : painters){
             p.draw(g2d);

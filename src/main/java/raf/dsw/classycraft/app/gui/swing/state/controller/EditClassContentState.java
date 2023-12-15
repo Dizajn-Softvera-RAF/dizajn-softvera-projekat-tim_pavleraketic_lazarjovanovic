@@ -18,6 +18,7 @@ import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class EditClassContentState implements State {
@@ -32,6 +33,7 @@ public class EditClassContentState implements State {
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
+
         if(diagramView.getClassSelectionModel().getSelected().isEmpty()) {
             for (Painter p : diagramView.getPainters()) {
                 if (p.elementAt(x, y)) {
@@ -71,23 +73,25 @@ public class EditClassContentState implements State {
                                 }
                             }
                         } else if (izabran.equals("ClassContent")) {
-                            otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
-                            if (classContent instanceof EnumElement) {
-                                izmenaImenaClassContenta(classContent);
-                                classContent.setIme(ime);
-                                diagramView.repaint();
-                            } else if (classContent instanceof Atribut) {
-                                classContent.setVidljivost(vidljivost());
-                                classContent.setTip(tip(classContent));
-                                izmenaImenaClassContenta(classContent);
-                                classContent.setIme(ime);
-                                diagramView.repaint();
-                            } else if (classContent instanceof Metod) {
-                                classContent.setVidljivost(vidljivost());
-                                classContent.setTip(tip(classContent));
-                                izmenaImenaClassContenta(classContent);
-                                classContent.setIme(ime);
-                                diagramView.repaint();
+                            if(!((Interclass) p.getDiagramElement()).getContent().isEmpty()) {
+                                otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
+                                if (classContent instanceof EnumElement) {
+                                    izmenaImenaClassContenta(classContent);
+                                    classContent.setIme(ime);
+                                    diagramView.repaint();
+                                } else if (classContent instanceof Atribut) {
+                                    classContent.setVidljivost(vidljivost());
+                                    classContent.setTip(tip(classContent));
+                                    izmenaImenaClassContenta(classContent);
+                                    classContent.setIme(ime);
+                                    diagramView.repaint();
+                                } else if (classContent instanceof Metod) {
+                                    classContent.setVidljivost(vidljivost());
+                                    classContent.setTip(tip(classContent));
+                                    izmenaImenaClassContenta(classContent);
+                                    classContent.setIme(ime);
+                                    diagramView.repaint();
+                                }
                             }
                         }
 
@@ -150,23 +154,25 @@ public class EditClassContentState implements State {
                             }
                         }
                     } else if (izabran.equals("ClassContent")) {
-                        otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
-                        if (classContent instanceof EnumElement) {
-                            izmenaImenaClassContenta(classContent);
-                            classContent.setIme(ime);
-                            diagramView.repaint();
-                        } else if (classContent instanceof Atribut) {
-                            classContent.setVidljivost(vidljivost());
-                            classContent.setTip(tip(classContent));
-                            izmenaImenaClassContenta(classContent);
-                            classContent.setIme(ime);
-                            diagramView.repaint();
-                        } else if (classContent instanceof Metod) {
-                            classContent.setVidljivost(vidljivost());
-                            classContent.setTip(tip(classContent));
-                            izmenaImenaClassContenta(classContent);
-                            classContent.setIme(ime);
-                            diagramView.repaint();
+                        if(!((Interclass) p.getDiagramElement()).getContent().isEmpty()) {
+                            otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
+                            if (classContent instanceof EnumElement) {
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            } else if (classContent instanceof Atribut) {
+                                classContent.setVidljivost(vidljivost());
+                                classContent.setTip(tip(classContent));
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            } else if (classContent instanceof Metod) {
+                                classContent.setVidljivost(vidljivost());
+                                classContent.setTip(tip(classContent));
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            }
                         }
                     }
                 } else if (p.getDiagramElement() instanceof Connection) {

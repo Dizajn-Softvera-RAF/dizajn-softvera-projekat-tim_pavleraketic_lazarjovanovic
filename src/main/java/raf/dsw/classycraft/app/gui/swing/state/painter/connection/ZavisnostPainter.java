@@ -47,7 +47,7 @@ public class ZavisnostPainter extends ConnectPainter {
 
     @Override
     public boolean elementAt(int x, int y) {
-        return false;
+        return super.elementAt(x, y);
     }
 
     private void drawArrowhead(Graphics2D g) {

@@ -30,5 +30,8 @@ public abstract class ConnectPainter extends Painter {
 
 
     @Override
-    public abstract boolean elementAt(int x, int y);
+    public  boolean elementAt(int x, int y){
+        double distance = ((Line2D)getShape()).ptSegDist(x,y);
+        return distance<=3.0;
+    }
 }

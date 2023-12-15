@@ -33,6 +33,7 @@ public class AddState implements State {
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
+
         System.out.println("clik");
         DiagramElement novi = null;
         if(izabran.equals("Class")) {

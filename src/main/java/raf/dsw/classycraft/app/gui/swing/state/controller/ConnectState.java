@@ -43,6 +43,7 @@ public class ConnectState implements State {
 
     @Override
     public void misPritisnut(int x, int y, DiagramView diagramView) {
+
         i1 = null;
         i2 = null;
         boolean jeli = false;
@@ -128,12 +129,14 @@ public class ConnectState implements State {
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView) {
+
         connectPainter.setPos2(new Point(x,y));
         diagramView.repaint();
     }
 
     @Override
     public void misOtpusten(int x, int y, DiagramView diagramView) {
+
         if(i1 == null || i2 == null){
         }
 

@@ -37,6 +37,9 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
     private int width;
     private int height;
 
+    private int pocetnoX;
+    private int pocetnoY;
+
 
 
 
@@ -45,6 +48,8 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
 
         this.x = x;
         this.y = y;
+        this.setPocetnoY(y);
+        this.setPocetnoX(x);
         this.width = 150;
         this.height = 180;
         this.color = defaultColor;
@@ -91,7 +96,7 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
         novi.points = new ArrayList<>(getPoints());
         novi.content = new ArrayList<>(getContent());
         novi.connectPainters = new ArrayList<>();
-        novi.x = this.x + 120;
+        novi.x = this.x + this.getWidth() + 10;
         novi.y = this.y;
 
         return novi;

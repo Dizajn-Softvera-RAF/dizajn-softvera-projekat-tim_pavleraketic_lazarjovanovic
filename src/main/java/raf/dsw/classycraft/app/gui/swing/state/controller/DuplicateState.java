@@ -12,6 +12,7 @@ import raf.dsw.classycraft.app.gui.swing.state.painter.interclass.InterfacePaint
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
+import java.awt.*;
 import java.util.ConcurrentModificationException;
 
 public class DuplicateState implements State {
@@ -21,6 +22,7 @@ public class DuplicateState implements State {
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
+
         try {
             for (Painter p : diagramView.getPainters()) {
                 if (p.elementAt(x, y)) {

@@ -29,6 +29,7 @@ public class MoveState implements State {
 
     @Override
     public void misPritisnut(int x, int y, DiagramView diagramView) {
+
         painters.clear();
         for (Painter p : diagramView.getPainters()) {
             if (p.getDiagramElement() instanceof Interclass) {
@@ -38,8 +39,9 @@ public class MoveState implements State {
                         x1 = xPrim = x;
                         y1 = yPrim = y;
                         flag = 1;
-                        originalX = i.getX();
-                        originalY = i.getY();
+                        i.setPocetnoX(i.getX());
+                        i.setPocetnoY(i.getY());
+                        //originalY = i.getY();
                         break;
                     } else {
                         flag = 0;
@@ -53,6 +55,7 @@ public class MoveState implements State {
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView) {
+
         if (flag == 1) {
             for (Painter p : diagramView.getPainters()) {
                 if (p.getDiagramElement() instanceof Interclass) {
@@ -82,14 +85,19 @@ public class MoveState implements State {
                 for (Painter p1 : diagramView.getPainters()) {
                     if (p1.getDiagramElement() instanceof Interclass) {
                         Interclass i2 = (Interclass) p.getDiagramElement();
-                        if (p1.elementAt(x, y) || p1.getShape().intersects(i1.getX(),i1.getY(),i1.getWidth(),i1.getHeight())) {
-                            if(!p1.equals(p)){
-                                ((Interclass) p.getDiagramElement()).setX(originalX);
-                                ((Interclass) p.getDiagramElement()).setY(originalY);
-                                diagramView.repaint();
+                        if(!painters.contains(p1)) {
+                            if (p1.elementAt(x, y) || p1.getShape().intersects(i1.getX(), i1.getY(), i1.getWidth(), i1.getHeight())) {
+                                if (!p1.equals(p)) {
+//                                    ((Interclass) p.getDiagramElement()).setX(originalX);
+//                                    ((Interclass) p.getDiagramElement()).setY(originalY);
+                                    i1.setX(i1.getPocetnoX());
+                                    i1.setY(i1.getPocetnoY());
+
+                                    diagramView.repaint();
+                                }
                             }
+                            diagramView.repaint();
                         }
-                        diagramView.repaint();
                     }
 
                 }
