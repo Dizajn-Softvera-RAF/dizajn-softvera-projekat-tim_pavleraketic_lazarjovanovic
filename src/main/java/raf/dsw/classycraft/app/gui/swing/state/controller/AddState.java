@@ -58,6 +58,7 @@ public class AddState implements State {
             if(abst.equals("Abs")){
                 try {
                     c.setName( izaberiIme() + " (A) ");
+                    c.setAbst(true);
                     } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -65,6 +66,7 @@ public class AddState implements State {
             else{
                 try {
                     c.setName(izaberiIme());
+                    c.setAbst(false);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

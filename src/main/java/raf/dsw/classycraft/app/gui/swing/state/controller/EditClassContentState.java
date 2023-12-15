@@ -44,10 +44,12 @@ public class EditClassContentState implements State {
                             Interclass i = (Interclass) p.getDiagramElement();
                             if (i instanceof Class) {
                                 isAbstract();
+
                                 if (abst.equals("Abs")) {
                                     try {
                                         izmenaImenaKlase(i);
-                                        i.setName(ime + " (A) ");
+                                        i.setName(ime + " (A)");
+                                        ((Class) i).setAbst(true);
                                         MainFrame.getInstance().getClassyTree().updateTree();
                                         diagramView.repaint();
                                     } catch (IOException e) {
@@ -57,6 +59,7 @@ public class EditClassContentState implements State {
                                     try {
                                         izmenaImenaKlase(i);
                                         i.setName(ime);
+                                        ((Class) i).setAbst(false);
                                         MainFrame.getInstance().getClassyTree().updateTree();
                                         diagramView.repaint();
                                     } catch (IOException e) {
@@ -233,7 +236,7 @@ public class EditClassContentState implements State {
         }
     }
     public void izmenaImenaKlase(Interclass i){
-        ime = JOptionPane.showInputDialog(null,"Set new name",i.getName());
+        ime = JOptionPane.showInputDialog(null,"Set new name","New name");
         if(ime == null) return;
         return;
     }

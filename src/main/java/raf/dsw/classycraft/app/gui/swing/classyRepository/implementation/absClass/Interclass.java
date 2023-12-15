@@ -101,4 +101,6 @@ public abstract class Interclass extends DiagramElement implements Cloneable {
 
         return novi;
     }
+
+
 }

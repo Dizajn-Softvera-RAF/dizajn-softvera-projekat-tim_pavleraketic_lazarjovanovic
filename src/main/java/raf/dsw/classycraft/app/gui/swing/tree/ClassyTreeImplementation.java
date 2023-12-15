@@ -100,6 +100,9 @@ public class ClassyTreeImplementation implements ClassyTree {
     }
 
     private ClassyTreeItem findChildTreeItem(ClassyTreeItem parent, DiagramElement child) {
+//        if(!(parent.getClassyNode() instanceof Diagram)){
+//            MainFrame.getInstance().getMessageGenerator().generateMessage(EventType.COMPONENT_NOT_SELECTED);
+//        }
         for (int i = 0; i < parent.getChildCount(); i++) {
             Object childObject = parent.getChildAt(i);
             if (childObject instanceof ClassyTreeItem) {

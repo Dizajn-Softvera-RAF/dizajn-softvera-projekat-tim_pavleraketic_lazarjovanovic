@@ -19,7 +19,7 @@ import java.util.List;
 public class Class extends Interclass {
 
 
-
+    private Boolean abst = false;
 
     public Class(String name, ClassyNode parent, Painter painter, Color color, int x, int y) {
         super(name, parent, painter, color, x, y);
