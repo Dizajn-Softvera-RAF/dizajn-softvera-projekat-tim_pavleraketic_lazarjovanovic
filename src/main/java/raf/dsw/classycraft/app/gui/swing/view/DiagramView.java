@@ -31,6 +31,7 @@ public class DiagramView extends JPanel implements Subscriber {
     private List<Painter> selected;
     private ClassSelectionModel classSelectionModel;
     List<ConnectPainter> connectList = new ArrayList<>();
+    private JViewport viewport=new JViewport();
 
 
     double translateX = 0;
@@ -46,12 +47,13 @@ public class DiagramView extends JPanel implements Subscriber {
     public DiagramView(Diagram diagram) {
 
 
-        this.setLayout(new BorderLayout());
+        //this.setLayout(new BorderLayout());
         setDiagram(diagram);
         this.mc = new MouseController();
         mc.setDiagramView(this);
         addMouseListener(mc);
         addMouseMotionListener(mc);
+            this.setPreferredSize(new Dimension(2000,2000));
 
         classSelectionModel = new ClassSelectionModel();
         classSelectionModel.addSubscriber(this);

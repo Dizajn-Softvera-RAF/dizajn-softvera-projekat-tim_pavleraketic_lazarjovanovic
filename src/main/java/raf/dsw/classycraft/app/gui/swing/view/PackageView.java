@@ -29,7 +29,8 @@ public class PackageView extends JPanel implements Subscriber {
     private Map<Diagram,DiagramView> diagramMap;
     private StateManager stateManager;
 
-
+    private JScrollPane jScrollPane;
+    private JViewport jViewport;
 
 
     public PackageView(Package paket){
@@ -96,8 +97,16 @@ public class PackageView extends JPanel implements Subscriber {
             tabs.add(d);
 
             for(DiagramView tab : tabs){
+                jScrollPane = new JScrollPane(tab);
+                jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-                jTabbedPane.add(tab.getDiagram().getName(),tab);
+                jViewport=jScrollPane.getViewport();
+                jScrollPane.setViewportView(tab);
+                tab.setViewport(jViewport);
+
+
+                jTabbedPane.add(tab.getDiagram().getName(),jScrollPane);
             }
         }
 

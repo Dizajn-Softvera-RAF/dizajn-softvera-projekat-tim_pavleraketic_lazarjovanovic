@@ -74,10 +74,14 @@ public class ClassyTreeImplementation implements ClassyTree {
     public void addDiagramChild(Diagram diagram, DiagramElement novi) {
         ClassyTreeItem cti = getTreeItem(diagram);
         ClassyTreeItem ctiChild = new ClassyTreeItem(novi);
-        cti.add(ctiChild);
+        try {
+            cti.add(ctiChild);
+            treeView.expandPath(treeView.getSelectionPath());
+            SwingUtilities.updateComponentTreeUI(treeView);
+        } catch (NullPointerException e){
+            return;
+        }
 
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
     }
 
     public void removeDiagramChild(Diagram diagram, DiagramElement childToRemove) {
