@@ -87,8 +87,10 @@ public class MoveState implements State {
                         if(!painters.contains(p1)) {
                             if (p1.elementAt(x, y) || p1.getShape().intersects(i1.getX(), i1.getY(), i1.getWidth(), i1.getHeight())) {
                                 if (!p1.equals(p)) {
-                                    ((Interclass) p.getDiagramElement()).setX(originalX);
-                                    ((Interclass) p.getDiagramElement()).setY(originalY);
+//                                    ((Interclass) p.getDiagramElement()).setX(originalX);
+//                                    ((Interclass) p.getDiagramElement()).setY(originalY);
+                                    i1.setX(originalX);
+                                    i1.setY(originalY);
                                     diagramView.repaint();
                                 }
                             }
