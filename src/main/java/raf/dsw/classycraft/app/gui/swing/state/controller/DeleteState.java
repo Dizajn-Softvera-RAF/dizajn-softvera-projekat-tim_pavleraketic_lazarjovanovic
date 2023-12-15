@@ -39,9 +39,12 @@ public class DeleteState implements State {
                                 MainFrame.getInstance().getClassyTree().removeDiagramChild(diagramView.getDiagram(),p.getDiagramElement());
                                 diagramView.repaint();
                             } else if (izabran.equals("ClassContent")) {
-                                otvoriListu(p);
-                                ((Interclass) p.getDiagramElement()).getContent().remove(ime);
-                                diagramView.repaint();
+                                if(!((Interclass) p.getDiagramElement()).getContent().isEmpty()) {
+                                    otvoriListu(p);
+                                    ((Interclass) p.getDiagramElement()).getContent().remove(ime);
+                                    diagramView.repaint();
+                                }
+                                return;
                             }
                         } else if (p.getDiagramElement() instanceof Connection) {
                             diagramView.getPainters().remove(p);

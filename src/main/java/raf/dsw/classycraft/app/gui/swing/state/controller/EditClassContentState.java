@@ -73,23 +73,25 @@ public class EditClassContentState implements State {
                                 }
                             }
                         } else if (izabran.equals("ClassContent")) {
-                            otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
-                            if (classContent instanceof EnumElement) {
-                                izmenaImenaClassContenta(classContent);
-                                classContent.setIme(ime);
-                                diagramView.repaint();
-                            } else if (classContent instanceof Atribut) {
-                                classContent.setVidljivost(vidljivost());
-                                classContent.setTip(tip(classContent));
-                                izmenaImenaClassContenta(classContent);
-                                classContent.setIme(ime);
-                                diagramView.repaint();
-                            } else if (classContent instanceof Metod) {
-                                classContent.setVidljivost(vidljivost());
-                                classContent.setTip(tip(classContent));
-                                izmenaImenaClassContenta(classContent);
-                                classContent.setIme(ime);
-                                diagramView.repaint();
+                            if(!((Interclass) p.getDiagramElement()).getContent().isEmpty()) {
+                                otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
+                                if (classContent instanceof EnumElement) {
+                                    izmenaImenaClassContenta(classContent);
+                                    classContent.setIme(ime);
+                                    diagramView.repaint();
+                                } else if (classContent instanceof Atribut) {
+                                    classContent.setVidljivost(vidljivost());
+                                    classContent.setTip(tip(classContent));
+                                    izmenaImenaClassContenta(classContent);
+                                    classContent.setIme(ime);
+                                    diagramView.repaint();
+                                } else if (classContent instanceof Metod) {
+                                    classContent.setVidljivost(vidljivost());
+                                    classContent.setTip(tip(classContent));
+                                    izmenaImenaClassContenta(classContent);
+                                    classContent.setIme(ime);
+                                    diagramView.repaint();
+                                }
                             }
                         }
 
@@ -152,23 +154,25 @@ public class EditClassContentState implements State {
                             }
                         }
                     } else if (izabran.equals("ClassContent")) {
-                        otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
-                        if (classContent instanceof EnumElement) {
-                            izmenaImenaClassContenta(classContent);
-                            classContent.setIme(ime);
-                            diagramView.repaint();
-                        } else if (classContent instanceof Atribut) {
-                            classContent.setVidljivost(vidljivost());
-                            classContent.setTip(tip(classContent));
-                            izmenaImenaClassContenta(classContent);
-                            classContent.setIme(ime);
-                            diagramView.repaint();
-                        } else if (classContent instanceof Metod) {
-                            classContent.setVidljivost(vidljivost());
-                            classContent.setTip(tip(classContent));
-                            izmenaImenaClassContenta(classContent);
-                            classContent.setIme(ime);
-                            diagramView.repaint();
+                        if(!((Interclass) p.getDiagramElement()).getContent().isEmpty()) {
+                            otvoriListu(((Interclass) p.getDiagramElement()).getPainter());
+                            if (classContent instanceof EnumElement) {
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            } else if (classContent instanceof Atribut) {
+                                classContent.setVidljivost(vidljivost());
+                                classContent.setTip(tip(classContent));
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            } else if (classContent instanceof Metod) {
+                                classContent.setVidljivost(vidljivost());
+                                classContent.setTip(tip(classContent));
+                                izmenaImenaClassContenta(classContent);
+                                classContent.setIme(ime);
+                                diagramView.repaint();
+                            }
                         }
                     }
                 } else if (p.getDiagramElement() instanceof Connection) {
