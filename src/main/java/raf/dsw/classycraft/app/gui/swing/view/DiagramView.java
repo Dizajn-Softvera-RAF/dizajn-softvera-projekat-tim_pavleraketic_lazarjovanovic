@@ -73,6 +73,7 @@ public class DiagramView extends JPanel implements Subscriber {
     }
 
     private void setUpTransformation(){
+        transformation.setToIdentity();
         transformation.setToScale(scalingf,scalingf);
         transformation.translate(translateX,translateY);
         repaint();
